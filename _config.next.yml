@@ -1,0 +1,173 @@
+# ---------------------------------------------------------------
+# 方案设置
+# ---------------------------------------------------------------
+
+# 方案
+scheme: Gemini
+
+# 深色模式
+darkmode: true
+
+# ---------------------------------------------------------------
+# 站点信息设置
+# ---------------------------------------------------------------
+
+favicon:
+  small: /images/favicon-16x16.png
+  medium: /images/favicon-32x32.png
+  apple_touch_icon: /images/apple-touch-icon.png
+  safari_pinned_tab: /images/logo.svg
+
+# ---------------------------------------------------------------
+# 菜单设置
+# ---------------------------------------------------------------
+
+menu:
+  categories: /categories/ || far fa-th
+  tags: /tags/ || far fa-tags
+  archives: /archives/ || far fa-archive
+  about: /about/ || far fa-user
+
+# ---------------------------------------------------------------
+# 侧边栏设置
+# 参见：https://mopsite.github.io/next/theme-settings/sidebar/
+# ---------------------------------------------------------------
+
+# 侧边栏头像
+avatar:
+  # 设置链接以替换默认图像
+  url: /images/avatar.jpg
+  # 如果为 true，头像将显示为圆形
+  rounded: true
+
+# 社交链接
+# 格式：`Key: permalink || icon`
+# Key 是显示在作者后面的链接标签
+# `||` 前面的值是目标链接，`||` 后面的值是 FontAwesome 图标名称。
+social:
+  QQ: http://wpa.qq.com/msgrd?v=3&uin=37662788&site=qq&menu=yes || far fa-comment
+  E-Mail: mailto:37662788@qq.com || far fa-envelope
+  Github: https://github.com/mopsite || fab fa-github
+  CodePen: https://codepen.io/mop233 || fab fa-codepen
+  ZCool: https://www.zcool.com.cn/u/15088128 || far fa-palette
+
+social_icons:
+  icons_only: true
+  transition: true
+
+# ---------------------------------------------------------------
+# 页脚设置
+# 参见：https://mopsite.github.io/next/theme-settings/footer/
+# ---------------------------------------------------------------
+
+footer:
+  # 建站年份，如果不设置，则只显示当前年份
+  since: 2021
+
+  # 年份和版权之间的图标
+  icon:
+    # 如果想要动画图标，设置为true
+    animated: true
+
+  # 是否显示强力驱动
+  powered: false
+
+# ---------------------------------------------------------------
+# 文章设置
+# 参见：https://mopsite.github.io/next/theme-settings/posts/
+# ---------------------------------------------------------------
+
+# 文章底部的标签使用图标代替 # 符号
+tag_icon: true
+
+# ---------------------------------------------------------------
+# 自定义页面设置
+# 参见：https://mopsite.github.io/next/theme-settings/custom-pages/
+# ---------------------------------------------------------------
+
+# 标签页的标签云设置
+tagcloud:
+  min: 18 # 以 px 为单位的最小字号
+
+# ---------------------------------------------------------------
+# 其他设置
+# 参见：https://mopsite.github.io/next/theme-settings/miscellaneous/
+# ---------------------------------------------------------------
+
+codeblock:
+  # 代码块高亮主题
+  # 所有可用的主题：https://theme-next.js.org/highlight/
+  theme:
+    light: agate
+    dark: agate
+  # 代码块复制按钮
+  copy_button:
+    enable: true
+    # 可用值：default | flat | mac
+    style: mac
+
+back2top:
+  # 返回顶部按钮中显示滚动百分比
+  scrollpercent: true
+
+# 阅读进度条
+reading_progress:
+  enable: true
+  # 可用值：top | bottom
+  position: bottom
+
+# ---------------------------------------------------------------
+# 第三方插件和服务设置
+# 参见：https://mopsite.github.io/next/third-party-services/
+# 更多插件：https://github.com/next-theme/awesome-next
+# 你可能需要安装相应的依赖包
+# ---------------------------------------------------------------
+
+# 数学公式渲染
+
+math:
+  mathjax:
+    enable: true
+
+# 为你的网站提供快速浏览
+# 更多信息：https://github.com/next-theme/pjax
+pjax: true
+
+# FancyBox 是一款用来缩放图片的工具
+# 更多信息：https://fancyapps.com/fancybox/
+fancybox: true
+
+# 盘古之白，用于在中英文之间自动插入空格
+# 更多信息：https://github.com/vinta/pangu.js
+pangu: true
+
+# 快速链接
+# 更多信息：https://getquick.link
+quicklink:
+  enable: true
+
+# ---------------------------------------------------------------
+# 搜索服务
+# ---------------------------------------------------------------
+
+# 本地搜索
+# 依赖包：https://github.com/next-theme/hexo-generator-searchdb
+# 参见：https://mopsite.github.io/next/third-party-services/local-search/
+
+local_search:
+  enable: true
+
+# ---------------------------------------------------------------
+# 标签插件设置
+# 参见：https://mopsite.github.io/next/tag-plugins/
+# ---------------------------------------------------------------
+
+# 便签标签
+note:
+  # 便签标签样式值
+  style: flat
+  icons: true
+
+# Mermaid tag
+mermaid:
+  enable: true
