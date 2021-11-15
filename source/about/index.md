@@ -10,9 +10,9 @@ date: 2021-11-02 14:07:14
   address: "湖北省武汉市",
   education: "本科 / 湖北工业大学",
   major: "英语",
-  Gitee: "https://gitee.com/mopsite",
   skills: ["HTML", "CSS", "JavaScript", "jQuery", "Vue", "Git", "PhotoShop", "Illustrator"],
-  blog: "https://mopsite.gitee.io",
+  blog: "https://20s.win",
+  Github: "https://github.com/mopsite",
   Email: "37662788@qq.com",
   descritpion: "知识改变命运，奋斗成就人生"
 }
