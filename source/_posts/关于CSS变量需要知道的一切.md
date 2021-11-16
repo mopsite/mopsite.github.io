@@ -23,31 +23,21 @@ tags: CSS
 
   今天你可能已经在构建自己的可变组件了，无论你是在使用 React、Angular 或者 Vue，CSS 变量都能使这个过程简介许多。
 
-  {%asset_image 01.gif%}
-
   点此查看 [示例 1](https://megaminx.gitee.io/css-variables/demo1.html)。
 
 - 例 2：带有 CSS 变量的主题样式
 
   你可能已经在别处看到这样的用法。我接下来要展示的是 CSS 变量如何使创建站点级别的主题样式更简便。
 
-  {%asset_image 02.gif%}
-
   点此查看 [示例 2](https://megaminx.gitee.io/css-variables/demo2.html)。
 
 - 例 3：创建 CSS 变量盒
 
-  嗯，这是最后一个例子。请忽略这个名字，我想不到更好的了……
-
-  {%asset_image 03.gif%}
+  嗯，这是最后一个例子。请忽略这个名字，我想不到更好的了……点此查看 [示例 3](https://megaminx.gitee.io/css-variables/demo3.html)。
 
   注意这些盒子的颜色是可以动态更新的，盒子容器也是可以 3D 旋转的。
 
-  {%asset_image 04.gif%}
-
   这个例子让我们看到如何使用 JavaScript 更新 CSS 变量，并展示出一个很好的交互效果。
-
-  点此查看 [示例 3](https://megaminx.gitee.io/css-variables/demo3.html)。
 
 ### 为何变量如此重要
 
@@ -370,9 +360,7 @@ div {
 
 假设你需要创建两个不同的按钮。基本样式相同，只有一点小小的区别。
 
-{%asset_image 01.gif%}
-
-在这个例子里，不同的属性只有 background-color 和 border-color。那怎样处理这种情况呢？下面是一种典型的解决方案：
+在这个 [示例](https://megaminx.gitee.io/css-variables/demo1.html) 里，不同的属性只有 background-color 和 border-color。那怎样处理这种情况呢？下面是一种典型的解决方案：
 
 创建一个基类，比如`.btn`，然后加上其他的不同类，例如：
 
@@ -449,11 +437,7 @@ div {
 
 我想你肯定遇到过这样的情况：有主题的网站可以让用户有自己定制的感觉，就像是由他们来控制一样。
 
-下面这个例子就是我们要做的：
-
-{%asset_image 02.gif%}
-
-那么 CSS 变量是如何让这件事变得简单一点的呢？让我们一起来看看。
+那么，这个 [示例](https://megaminx.gitee.io/css-variables/demo3.html) 中，CSS 变量是如何让这件事变得简单一点的呢？让我们一起来看看。
 
 在这之前，我想提醒你，这个例子非常重要。在这个例子里，我会介绍如何使用 JavaScript 更新 CSS 变量。超有趣！你肯定会喜欢的。
 
@@ -461,15 +445,9 @@ div {
 
   CSS 变量的美妙是它们的互动性。一旦它们的值发生了变化，对应 CSS 的属性也会相应的进行更新。
 
-  下图从概念上解释了在本例中这个过程是如何发生的。
-
-  {%asset_image 05.png%}
-
   所以，我们需要增加一些 JavaScript 来监听点击事件。在这个例子里，背景颜色和文字颜色是基于 CSS 变量的。当你点击任何一个按钮时，它们就将对应的 CSS 变量设置成另一种颜色。于是，页面的背景色也更新了。
 
   这就是所有的内容了。哦，还有一件事。当我说把 CSS 变量设置成另一个值的时候，这又是怎样做到的呢？
-
-  {%asset_image 06.png%}
 
   把变量设置成 inline。即便是设置成 inline style 中，CSS 变量也会生效。和 JavaScript 一起，我们就可以控制整个 root 文档，这样也就能设置 CSS 变量的值了。理解了么？
 
@@ -553,15 +531,7 @@ div {
 
 #### 创建 CSS 变量盒
 
-假如你忘了，那再提一下，我们要做的例子是这样的：
-
-{%asset_image 03.gif%}
-
-请记住，盒子的颜色是动态变化的，盒子可以根据用户的输入进行 3D 旋转：
-
-{%asset_image 04.gif%}
-
-这是使用 CSS 变量和 JavaScript 共同创造出的一个既有交互性又很美妙的例子。我们一起看看怎么做的。
+这个 [示例](https://megaminx.gitee.io/css-variables/demo3.html) 是使用 CSS 变量和 JavaScript 共同创造出的一个既有交互性又很美妙的例子。我们一起看看怎么做的。
 
 - 代码片段
 
@@ -572,8 +542,6 @@ div {
   2. 一个容器来显示说明部分
 
   3. 一个部分用来列出不同的盒子和每一种输入
-
-  {%asset_image 07.png%}
 
   代码部分很简单，下面就是：
 
@@ -618,8 +586,6 @@ div {
   4. 或许应该提一下，第一个输入框的默认值是红色。
 
   理解了页面的结构，接下来我们看一下页面样式。
-
-  {%asset_image 08.png%}
 
   1. 首先把`.slider`和`.instructions`的元素移出文档流，进行绝对定位。
 
