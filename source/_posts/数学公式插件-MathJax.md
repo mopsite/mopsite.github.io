@@ -25,7 +25,7 @@ MathJax 是模块化的，所以仅在需要时才加载它的组件，同时也
 要使用 MathJax，你不需要安装，只需在你的页面中引入下面这段话即可：
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mopsite/asset/mathjax/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/mathjax/tex-chtml.js"></script>
 ```
 
 然后，你需要添加一些配置脚本：
@@ -50,7 +50,7 @@ MathJax 是模块化的，所以仅在需要时才加载它的组件，同时也
     }
   };
 </script>
-<script src="https://cdn.jsdelivr.net/gh/mopsite/asset/mathjax/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/mathjax/tex-chtml.js"></script>
 ```
 
 因为在很多支持数学公式的 Markdown 编辑器中使用`$...$`作为行内公式的标识，使用`$$...$$`整行公式（块级）的标识。而 MathJax 默认在 HTML 文档中不使用`$...$`作为行内公式的标识，而是使用`\(...\)`来包裹行内公式。该配置脚本的作用是，将`$...$`和`\(...\)`同时作为行内公式的表示，二选一即可。

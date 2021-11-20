@@ -30,7 +30,7 @@ Mermaid 目前支持的图形有：
 想要在你的页面中使用 Mermaid，只需要以 CDN 的方式在页面中引入下面这句话即可：
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mopsite/asset/mermaid.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/mermaid.js"></script>
 ```
 
 然后在 HTML 标签中使用`class=mermaid`类名来绘制图表：
@@ -51,7 +51,7 @@ Mermaid 目前支持的图形有：
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script src="https://cdn.jsdelivr.net/gh/mopsite/asset/mermaid.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/mermaid.js"></script>
 </head>
 <body>
   <div class="mermaid">

@@ -1240,7 +1240,7 @@ footer {
 上面的代码列表已经解释的很清楚了。至于图标设置，我用了热门的 [Font Awesome](https://mopsite.gitee.io/fontawesome) 库，你只需要使用 CDN 引入在文档的`<head>`部分中引入下面这句话：
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mopsite/asset/fontawesome/css/all.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xlovet/asset/css/fontawesome/v5/all.css">
 ```
 
 这样用你想要的图标就简单到只需添加一个 CSS 类即可。这就是我在 aside 标记中所做的事情。
