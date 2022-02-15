@@ -849,6 +849,10 @@
 <p>表格里的值是由语言配置决定的，并且可以自定义输出内容。</p>
 <p>你也可以通过第二个参数传入指定日历输出格式。将字符放在方括号中，即可原样返回而不被格式化替换（例如，<code>[Today]</code>）。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().calendar(<span class="literal">null</span>, &#123;</span><br><span class="line">  <span class="attr">sameDay</span>: <span class="string">&#x27;[Today at] h:mm A&#x27;</span>, <span class="comment">// The same day (Today at 2:30 AM)</span></span><br><span class="line">  <span class="attr">nextDay</span>: <span class="string">&#x27;[Tomorrow]&#x27;</span>, <span class="comment">// The next day (Tomorrow at 2:30 AM)</span></span><br><span class="line">  <span class="attr">nextWeek</span>: <span class="string">&#x27;dddd&#x27;</span>, <span class="comment">// The next week (Sunday at 2:30 AM)</span></span><br><span class="line">  <span class="attr">lastDay</span>: <span class="string">&#x27;[Yesterday]&#x27;</span>, <span class="comment">// The day before (Yesterday at 2:30 AM)</span></span><br><span class="line">  <span class="attr">lastWeek</span>: <span class="string">&#x27;[Last] dddd&#x27;</span>, <span class="comment">// Last week (Last Monday at 2:30 AM)</span></span><br><span class="line">  <span class="attr">sameElse</span>: <span class="string">&#x27;DD/MM/YYYY&#x27;</span> <span class="comment">// Everything else (7/10/2011)</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="difference">Difference</h4>
+<p>返回指定单位下两个日期时间之间的差异。</p>
+<p>要获得以毫秒为单位的差异，请使用<code>dayjs#diff</code>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date1 = dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> date2 = dayjs(<span class="string">&#x27;2018-06-05&#x27;</span>)</span><br><span class="line">date1.diff(date2) <span class="comment">// 20214000000 默认单位是毫秒</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>前端</category>
