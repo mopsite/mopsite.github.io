@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mopsite.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Day.js 是一个轻量的处理时间和日期的 JavaScript 库。其大小仅 2KB，运行时能执行更少的 JavaScript，无论下载还是解析，都可以为你留出更多的时间。 所有的 API 操作都将返回一个新的 Dayjs 对象。这种设计能避免 bug 产生，节约调试时间。 另外，Day.js 对国际化支持良好。但除非手动加载，多国语言默认是不会被打包到工程里的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day.js-处理时间和日期的JS库">
+<meta property="og:url" content="https://mopsite.github.io/20220113/Day-js-%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F%E7%9A%84JS%E5%BA%93/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="Day.js 是一个轻量的处理时间和日期的 JavaScript 库。其大小仅 2KB，运行时能执行更少的 JavaScript，无论下载还是解析，都可以为你留出更多的时间。 所有的 API 操作都将返回一个新的 Dayjs 对象。这种设计能避免 bug 产生，节约调试时间。 另外，Day.js 对国际化支持良好。但除非手动加载，多国语言默认是不会被打包到工程里的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-13T12:15:52.000Z">
+<meta property="article:modified_time" content="2022-02-14T09:55:59.815Z">
+<meta property="article:author" content="猛吃雪糕">
+<meta property="article:tag" content="JS库">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mopsite.github.io/20220113/Day-js-%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F%E7%9A%84JS%E5%BA%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mopsite.github.io/20220113/Day-js-%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F%E7%9A%84JS%E5%BA%93/","path":"20220113/Day-js-处理时间和日期的JS库/","title":"Day.js-处理时间和日期的JS库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Day.js-处理时间和日期的JS库 | Hello World</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hello World</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="far fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="far fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="far fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="far fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="far fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#node.js"><span class="nav-number">1.1.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.3.</span> <span class="nav-text">下载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4"><span class="nav-number">2.1.</span> <span class="nav-text">当前时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2-%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">字符串 + 格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unix-%E6%97%B6%E9%97%B4%E6%88%B3%E6%AF%AB%E7%A7%92"><span class="nav-number">2.4.</span> <span class="nav-text">Unix 时间戳（毫秒）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unix-%E6%97%B6%E9%97%B4%E6%88%B3%E7%A7%92"><span class="nav-number">2.5.</span> <span class="nav-text">Unix 时间戳（秒）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#date-%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.6.</span> <span class="nav-text">Date 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.7.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">2.8.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#utc"><span class="nav-number">2.9.</span> <span class="nav-text">UTC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dayjs-%E5%A4%8D%E5%88%B6"><span class="nav-number">2.10.</span> <span class="nav-text">Dayjs 复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">2.11.</span> <span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%80%BC%E8%B5%8B%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">取值&#x2F;赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#millisecond"><span class="nav-number">3.1.</span> <span class="nav-text">Millisecond</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#second"><span class="nav-number">3.2.</span> <span class="nav-text">Second</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#minute"><span class="nav-number">3.3.</span> <span class="nav-text">Minute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hour"><span class="nav-number">3.4.</span> <span class="nav-text">Hour</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#day-of-month"><span class="nav-number">3.5.</span> <span class="nav-text">Day of Month</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#day-of-week"><span class="nav-number">3.6.</span> <span class="nav-text">Day of Week</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#day-of-week-locale-aware"><span class="nav-number">3.7.</span> <span class="nav-text">Day of Week (Locale Aware)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iso-day-of-week"><span class="nav-number">3.8.</span> <span class="nav-text">ISO Day of Week</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#day-of-year"><span class="nav-number">3.9.</span> <span class="nav-text">Day of Year</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#week-of-year"><span class="nav-number">3.10.</span> <span class="nav-text">Week of Year</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#week-of-year-iso"><span class="nav-number">3.11.</span> <span class="nav-text">Week of Year （ISO）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#month"><span class="nav-number">3.12.</span> <span class="nav-text">Month</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#quarter"><span class="nav-number">3.13.</span> <span class="nav-text">Quarter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#year"><span class="nav-number">3.14.</span> <span class="nav-text">Year</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#week-year"><span class="nav-number">3.15.</span> <span class="nav-text">Week Year</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#week-year-iso"><span class="nav-number">3.16.</span> <span class="nav-text">Week Year (ISO)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#weeks-in-year-iso"><span class="nav-number">3.17.</span> <span class="nav-text">Weeks In Year (ISO)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get"><span class="nav-number">3.18.</span> <span class="nav-text">Get</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set"><span class="nav-number">3.19.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#maximumminimum"><span class="nav-number">3.20.</span> <span class="nav-text">Maximum&#x2F;Minimum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#addsubtract"><span class="nav-number">4.1.</span> <span class="nav-text">Add&#x2F;Subtract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#startend-of-time"><span class="nav-number">4.2.</span> <span class="nav-text">Start&#x2F;End of Time</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#local"><span class="nav-number">4.3.</span> <span class="nav-text">Local</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#utc-1"><span class="nav-number">4.4.</span> <span class="nav-text">UTC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#utc-offset"><span class="nav-number">4.5.</span> <span class="nav-text">UTC offset</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">显示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fortmat"><span class="nav-number">5.1.</span> <span class="nav-text">Fortmat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#time-fromto-now"><span class="nav-number">5.2.</span> <span class="nav-text">Time from&#x2F;to now</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#time-fromto-x"><span class="nav-number">5.3.</span> <span class="nav-text">Time from&#x2F;to X</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#calendar-time"><span class="nav-number">5.4.</span> <span class="nav-text">Calendar Time</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="猛吃雪糕"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">猛吃雪糕</p>
+  <div class="site-description" itemprop="description">帅到无边心是岸，拽临绝顶我为峰</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=37662788&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;37662788&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="far fa-comment fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:37662788@qq.com" title="E-Mail → mailto:37662788@qq.com" rel="noopener" target="_blank"><i class="far fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/mopsite" title="Github → https:&#x2F;&#x2F;github.com&#x2F;mopsite" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/mop233" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;mop233" rel="noopener" target="_blank"><i class="fab fa-codepen fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zcool.com.cn/u/15088128" title="ZCool → https:&#x2F;&#x2F;www.zcool.com.cn&#x2F;u&#x2F;15088128" rel="noopener" target="_blank"><i class="far fa-palette fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mopsite.github.io/20220113/Day-js-%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F%E7%9A%84JS%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="猛吃雪糕">
+      <meta itemprop="description" content="帅到无边心是岸，拽临绝顶我为峰">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day.js-处理时间和日期的JS库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-13 20:15:52" itemprop="dateCreated datePublished" datetime="2022-01-13T20:15:52+08:00">2022-01-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-02-14 17:55:59" itemprop="dateModified" datetime="2022-02-14T17:55:59+08:00">2022-02-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Day.js 是一个轻量的处理时间和日期的 JavaScript 库。其大小仅 2KB，运行时能执行更少的 JavaScript，无论下载还是解析，都可以为你留出更多的时间。</p>
+<p>所有的 API 操作都将返回一个新的 Dayjs 对象。这种设计能避免 bug 产生，节约调试时间。</p>
+<p>另外，Day.js 对国际化支持良好。但除非手动加载，多国语言默认是不会被打包到工程里的。</p>
+<span id="more"></span>
+<h3 id="安装">安装</h3>
+<p>Day.js 可以运行在浏览器和 Node.js 中。本文中所有的代码都可以在这两种环境中正常运行。</p>
+<h4 id="node.js">Node.js</h4>
+<p>要在你的 Node.js 项目中使用 Day.js，只需使用 NPM 安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install days</span><br></pre></td></tr></table></figure>
+<p>然后在项目代码中引入即可：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> dayjs = <span class="built_in">require</span>(<span class="string">&#x27;dayjs&#x27;</span>);</span><br><span class="line">dayjs().format();</span><br></pre></td></tr></table></figure>
+<h4 id="浏览器">浏览器</h4>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;path/to/dayjs/dayjs.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  dayjs().format();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>Day.js 同步更新在这些 CDN 上 <a target="_blank" rel="noopener" href="https://cdnjs.com/libraries/dayjs">cdnjs.com</a>、<a target="_blank" rel="noopener" href="https://unpkg.com/dayjs">unpkg</a> 和 <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/npm/dayjs">jsDelivr</a>。</p>
+</div>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/dayjs/dayjs.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  dayjs().format();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="下载">下载</h4>
+<p>访问 https://www.jsdelivr.com/package/npm/dayjs 下载最新版本的 Day.js。</p>
+<p>访问 https://github.com/iamkun/dayjs/releases 查看 Day.js 的已发布版本和源代码。</p>
+<h3 id="解析">解析</h3>
+<p>Day.js 并没有对原生 <code>Date.prototype</code> 做任何修改，而是给 <code>Date</code> 对象做了一层封装。使用支持的数据格式调用 <code>dayjs()</code> 即可取到这个封装的对象。</p>
+<p>Day.js 对象是不可变的，所有的 API 操作都将返回一个全新的实例。</p>
+<h4 id="当前时间">当前时间</h4>
+<p>直接调用 <code>dayjs()</code> 将返回一个包含当前日期和时间的 Day.js 对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> now = dayjs();</span><br></pre></td></tr></table></figure>
+<p>等同于 <code>daynjs(new Date())</code> 的调用。</p>
+<p>当没有传入参数时，参数默认值是 undefined，所以调用 <code>dayjs(undefined)</code> 就相当于调用 <code>dayjs()</code>。</p>
+<p>Day.js 将 <code>dayjs(null)</code> 视为无效的输入。</p>
+<h4 id="字符串">字符串</h4>
+<p>解析传入的 ISO 8601 格式的字符串并返回一个 Day.js 对象实例。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2022-01-14T16:00:00.000Z&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>为了保证结果一致，当解析除了 ISO 8601 格式以外的字符串时，你应该使用 String + Format。</p>
+</div>
+<h4 id="字符串-格式">字符串 + 格式</h4>
+<p>如果知道输入字符串的格式，你可以用它来解析日期。</p>
+<div class="note warning"><p>使用本功能需先配置 CustomParseFormat 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(customParseFormat);</span><br><span class="line">dayjs(<span class="string">&quot;12-25-1995&quot;</span>, <span class="string">&quot;MM-DD-YYYY&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>如果想解析包含本地化语言的日期字符串，可以传入第三个参数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&quot;dayjs/locale/zh-cn&quot;</span>);</span><br><span class="line">dayjs(<span class="string">&quot;2018 三月 15&quot;</span>, <span class="string">&quot;YYYY MMMM DD&quot;</span>, <span class="string">&quot;zh-cn&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>最后一个参数可传入布尔值来启用严格解析模式。严格解析要求格式和输入内容完全匹配，包括分隔符。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&quot;1970-00-00&quot;</span>, <span class="string">&quot;YYYY-MM-DD&quot;</span>).isValid(); <span class="comment">// true</span></span><br><span class="line">dayjs(<span class="string">&quot;1970-00-00&quot;</span>, <span class="string">&quot;YYYY-MM-DD&quot;</span>, <span class="literal">true</span>).isValid(); <span class="comment">// false</span></span><br><span class="line">dayjs(<span class="string">&quot;1970-00-00&quot;</span>, <span class="string">&quot;YYYY-MM-DD&quot;</span>, <span class="string">&quot;es&quot;</span>, <span class="literal">true</span>).isValid(); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>如果你不知道输入字符串的确切格式，但知道它可能是几种中的一种，可以使用数组传入多个格式。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&quot;12-25-2001&quot;</span>, [<span class="string">&quot;YYYY&quot;</span>, <span class="string">&quot;YYYY-MM-DD&quot;</span>], <span class="string">&quot;es&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>支持的解析占位符列表</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>输入</th>
+<th>例子</th>
+<th>详情</th>
+<th>输入</th>
+<th>例子</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>YY</td>
+<td>18</td>
+<td>两位数的年份</td>
+<td>YYYY</td>
+<td>2018</td>
+<td>四位数的年份</td>
+</tr>
+<tr class="even">
+<td>M</td>
+<td>1-12</td>
+<td>月份，从 1 开始</td>
+<td>MM</td>
+<td>01-12</td>
+<td>月份，两位数</td>
+</tr>
+<tr class="odd">
+<td>MMM</td>
+<td>Jan-Dec</td>
+<td>缩写的月份名称</td>
+<td>MMMM</td>
+<td>January-December</td>
+<td>完整的月份名称</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>1-31</td>
+<td>月份里的一天</td>
+<td>DD</td>
+<td>01-31</td>
+<td>月份里的一天，两位数</td>
+</tr>
+<tr class="odd">
+<td>H</td>
+<td>0-23</td>
+<td>小时</td>
+<td>HH</td>
+<td>00-23</td>
+<td>小时，两位数</td>
+</tr>
+<tr class="even">
+<td>h</td>
+<td>1-12</td>
+<td>小时，12 小时制</td>
+<td>hh</td>
+<td>01-12</td>
+<td>小时，12 小时制，两位数</td>
+</tr>
+<tr class="odd">
+<td>m</td>
+<td>0-59</td>
+<td>分钟</td>
+<td>mm</td>
+<td>00-50</td>
+<td>分钟，两位数</td>
+</tr>
+<tr class="even">
+<td>s</td>
+<td>0-59</td>
+<td>秒</td>
+<td>ss</td>
+<td>00-59</td>
+<td>秒，两位数</td>
+</tr>
+<tr class="odd">
+<td>S</td>
+<td>0-9</td>
+<td>毫秒，一位数</td>
+<td>SS</td>
+<td>00-99</td>
+<td>毫秒，两位数</td>
+</tr>
+<tr class="even">
+<td>SSS</td>
+<td>000-999</td>
+<td>毫秒，三位数</td>
+<td>Do</td>
+<td>1st ... 31st</td>
+<td>带序数词的月份里的一天</td>
+</tr>
+<tr class="odd">
+<td>Z</td>
+<td>-05:00</td>
+<td>UTC 的偏移量</td>
+<td>ZZ</td>
+<td>-0500</td>
+<td>UTC 的偏移量，两位数</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td>AM PM</td>
+<td>上午下午，大写</td>
+<td>a</td>
+<td>am pm</td>
+<td>上午下午，小写</td>
+</tr>
+</tbody>
+</table>
+<h4 id="unix-时间戳毫秒">Unix 时间戳（毫秒）</h4>
+<p>解析传入的一个 Unix 时间戳（13 位数字，从 1970 年 1 月 1 日 UTC 午夜开始所经过的毫秒数）创建一个 Day.js 对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="number">1318781876406</span>)</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>传入的参数必须是 <strong>number</strong>。</p>
+</div>
+<h4 id="unix-时间戳秒">Unix 时间戳（秒）</h4>
+<p>解析传入的一个 Unix 时间戳（10 位数字，从 1970 年 1 月 1 日 UTC 午夜开始所经过的秒数）创建一个 Day.js 对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.unix(<span class="number">1318781876</span>)</span><br></pre></td></tr></table></figure>
+<p>这个方法是用<code>dayjs(timestamp * 1000)</code>实现的，所以传入时间戳里的小数点后面的秒也会被解析。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.unix(<span class="number">1318781876.721</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="date-对象">Date 对象</h4>
+<p>使用原生 JavaScript <code>Date</code> 对象创建一个 Day.js 对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2018</span>, <span class="number">8</span>, <span class="number">18</span>)</span><br><span class="line"><span class="keyword">var</span> day = dayjs(d)</span><br></pre></td></tr></table></figure>
+<p>这将克隆 Date 对象。对传入的 Date 对象做进一步更改不会影响 Day.js 对象，反之亦然。</p>
+<h4 id="对象">对象</h4>
+<p>你可以传入包含单位和数值的一个对象来创建 Day.js 对象。</p>
+<div class="note warning"><p>使用本功能需先配置 ObjectSupport 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(objectSupport)</span><br><span class="line">dayjs(&#123; <span class="attr">hour</span>: <span class="number">15</span>, <span class="attr">minute</span>: <span class="number">10</span> &#125;);</span><br><span class="line">dayjs.utc(&#123; <span class="attr">y</span>: <span class="number">2010</span>, <span class="attr">M</span>: <span class="number">3</span>, <span class="attr">d</span>: <span class="number">5</span>, <span class="attr">h</span>: <span class="number">15</span>, <span class="attr">m</span>: <span class="number">10</span>, <span class="attr">s</span>: <span class="number">3</span>, <span class="attr">ms</span>: <span class="number">123</span> &#125;);</span><br><span class="line">dayjs(&#123; <span class="attr">year</span>: <span class="number">2010</span>, <span class="attr">month</span>: <span class="number">3</span>, <span class="attr">day</span>: <span class="number">5</span>, <span class="attr">hour</span>: <span class="number">15</span>, <span class="attr">minute</span>: <span class="number">10</span>, <span class="attr">second</span>: <span class="number">3</span>, <span class="attr">millisecond</span>: <span class="number">123</span> &#125;);</span><br><span class="line">dayjs(&#123; <span class="attr">years</span>: <span class="number">2010</span>, <span class="attr">months</span>: <span class="number">3</span>, <span class="attr">date</span>: <span class="number">5</span>, <span class="attr">hours</span>: <span class="number">15</span>, <span class="attr">minutes</span>: <span class="number">10</span>, <span class="attr">seconds</span>: <span class="number">3</span>, <span class="attr">milliseconds</span>: <span class="number">123</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p><code>day</code> 和 <code>date</code> 都表示月份里的日期。</p>
+<p><code>dayjs(&#123;&#125;)</code> 返回当前时间。</p>
+<p>注意类似 <code>new Date(year, month, date)</code>，月份从 0 开始计算。</p>
+<h4 id="数组">数组</h4>
+<p>你可以传入一个数组来创建一个 Dayjs 对象，数组的结构和 <code>new Date()</code> 十分类似。</p>
+<div class="note warning"><p>使用本功能需先配置 ArraySupport 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(arraySupport)</span><br><span class="line">dayjs([<span class="number">2010</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">50</span>, <span class="number">125</span>]); <span class="comment">// February 14th, 3:25:50.125 PM</span></span><br><span class="line">dayjs.utc([<span class="number">2010</span>, <span class="number">1</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">50</span>, <span class="number">125</span>]);</span><br><span class="line">dayjs([<span class="number">2010</span>]); <span class="comment">// January 1st</span></span><br><span class="line">dayjs([<span class="number">2010</span>, <span class="number">6</span>]); <span class="comment">// July 1st</span></span><br><span class="line">dayjs([<span class="number">2010</span>, <span class="number">6</span>, <span class="number">10</span>]); <span class="comment">// July 10th</span></span><br></pre></td></tr></table></figure>
+<p><code>dayjs(&#123;&#125;)</code> 返回当前时间。</p>
+<p>注意类似 <code>new Date(year, month, date)</code>，月份从 0 开始计算。</p>
+<h4 id="utc">UTC</h4>
+<p>默认情况下，Day.js 会把时间解析成本地时间。</p>
+<p>如果想使用 UTC 时间，你可以调用<code>dayjs.utc()</code>而不是<code>dayjs()</code>。</p>
+<p>在 UTC 模式下，所有显示方法将会显示 UTC 时间而非本地时间。</p>
+<div class="note warning"><p>使用本功能需先配置 UTC 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(utc)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认是当地时间</span></span><br><span class="line">dayjs().format() <span class="comment">// 2019-03-06T08:00:00+08:00</span></span><br><span class="line"><span class="comment">// UTC 时间</span></span><br><span class="line">dayjs.utc().format() <span class="comment">// 2019-03-06T00:00:00Z</span></span><br></pre></td></tr></table></figure>
+<p>此外，在 UTC 模式下，所有 getters 和 setters 将使用<code>Date#getUTC*</code>和<code>Date#setUTC*</code>方法而不是<code>Date#get*</code>和<code>Date#set*</code>方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.utc().seconds(<span class="number">30</span>).valueOf() <span class="comment">// =&gt; new Date().setUTCSeconds(30)</span></span><br><span class="line">dayjs.utc().seconds() <span class="comment">// =&gt; new Date().getUTCSeconds()</span></span><br></pre></td></tr></table></figure>
+<p>要在本地时间和 UTC 时间之间切换，你可以使用<code>dayjs#utc</code>或<code>dayjs#local</code>。</p>
+<h4 id="dayjs-复制">Dayjs 复制</h4>
+<p>所有的 Day.js 对象都是<strong>不可变的</strong>。但如果有必要，使用<code>dayjs#clone</code>可以复制出一个当前对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = dayjs()</span><br><span class="line"><span class="keyword">var</span> b = a.clone()</span><br><span class="line"><span class="comment">// a 和 b 是两个独立的 Day.js 对象</span></span><br></pre></td></tr></table></figure>
+<p>在<code>dayjs()</code>里传入一个 Day.js 对象也会返回一个复制的对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = dayjs()</span><br><span class="line"><span class="keyword">var</span> b = dayjs(a)</span><br></pre></td></tr></table></figure>
+<h4 id="验证">验证</h4>
+<p>检测当前 Day.js 对象是否是一个有效的时间，返回 boolean。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().isValid()</span><br></pre></td></tr></table></figure>
+<h3 id="取值赋值">取值/赋值</h3>
+<p>在设计上 Day.js 的 getter 和 setter 使用了相同的 API，也就是说，不传参数调用方法即为 getter，调用并传入参数为 setter。</p>
+<p>这些 API 调用了对应原生 Date 对象的方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().second(<span class="number">30</span>).valueOf() <span class="comment">// =&gt; new Date().setSeconds(30)</span></span><br><span class="line">dayjs().second() <span class="comment">// =&gt; new Date().getSeconds()</span></span><br></pre></td></tr></table></figure>
+<p>如果你处于 UTC 模式，将会调用对应的 UTC 方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.utc().second(<span class="number">30</span>).valueOf() <span class="comment">// =&gt; new Date().setUTCSeconds(30)</span></span><br><span class="line">dayjs.utc().second() <span class="comment">// =&gt; new Date().getUTCSeconds()</span></span><br></pre></td></tr></table></figure>
+<h4 id="millisecond">Millisecond</h4>
+<p>获取或设置毫秒。</p>
+<p>传入 0 到 999 的数字。如果超出这个范围，它会进位到秒。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().millisecond()</span><br><span class="line">dayjs().millisecond(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="second">Second</h4>
+<p>获取或设置秒。</p>
+<p>传入 0 到 59 的数字。如果超出这个范围，它会进位到分钟。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().second()</span><br><span class="line">dayjs().second(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="minute">Minute</h4>
+<p>获取或设置分钟。</p>
+<p>传入 0 到 59 的数字。如果超出这个范围，它会进位到小时。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().minute()</span><br><span class="line">dayjs().minute(<span class="number">59</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="hour">Hour</h4>
+<p>获取或设置小时。</p>
+<p>传入 0 到 23 的数字。如果超出这个范围，它会进位到天数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().hour()</span><br><span class="line">dayjs().hour(<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="day-of-month">Day of Month</h4>
+<p>获取或设置月份里的日期。</p>
+<p>接受 1 到 31 的数字。如果超出这个范围，它会进位到月份。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().date()</span><br><span class="line">dayjs().date(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p><code>dayjs#date</code>是该月的日期。<code>dayjs#day</code>是星期几。</p>
+</div>
+<h4 id="day-of-week">Day of Week</h4>
+<p>获取或设置星期几。</p>
+<p>传入 number 从 0（星期天）到 6（星期六）。如果超出这个范围，它会进位到其他周。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().day()</span><br><span class="line">dayjs().day(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="day-of-week-locale-aware">Day of Week (Locale Aware)</h4>
+<p>根据本地化配置获取或设置星期几。</p>
+<div class="note warning"><p>使用本功能需先配置 Weekday 插件，才能正常运行。</p>
+</div>
+<p>如果本地化配置了星期天为一周的第一天，<code>dayjs().weekday(0)</code>将返回星期天。如果星期一是一周的第一天，<code>dayjs().weekday(0)</code>将返回星期一。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(weekday)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当星期天是一周的第一天</span></span><br><span class="line">dayjs().weekday(-<span class="number">7</span>); <span class="comment">// 上个星期天</span></span><br><span class="line">dayjs().weekday(<span class="number">7</span>); <span class="comment">// 下个星期天</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当星期一是一周的第一天</span></span><br><span class="line">dayjs().weekday(-<span class="number">7</span>); <span class="comment">// 上个星期一</span></span><br><span class="line">dayjs().weekday(<span class="number">7</span>); <span class="comment">// 下个星期一</span></span><br></pre></td></tr></table></figure>
+<h4 id="iso-day-of-week">ISO Day of Week</h4>
+<p>获取或设置 ISO 星期几，其中 1 是星期一，7 是星期日。</p>
+<div class="note warning"><p>使用本功能需先配置 IsoWeek 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(isoWeek)</span><br><span class="line"></span><br><span class="line">dayjs().isoWeekday()</span><br><span class="line">dayjs().isoWeekday(<span class="number">1</span>) <span class="comment">// Monday</span></span><br></pre></td></tr></table></figure>
+<h4 id="day-of-year">Day of Year</h4>
+<p>获取或设置年份里第几天。</p>
+<p>传入 1 到 366 的数字。如果超出这个范围，它会进位到下一年。</p>
+<div class="note warning"><p>使用本功能需先配置 DayOfYear 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(dayOfYear)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2010-01-01&#x27;</span>).dayOfYear() <span class="comment">// 1</span></span><br><span class="line">dayjs(<span class="string">&#x27;2010-01-01&#x27;</span>).dayOfYear(<span class="number">365</span>) <span class="comment">// 2010-12-31</span></span><br></pre></td></tr></table></figure>
+<h4 id="week-of-year">Week of Year</h4>
+<p>获取或设置年份里第几周。</p>
+<div class="note warning"><p>使用本功能需先配置 WeekOfYear 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(weekOfYear)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2018-06-27&#x27;</span>).week() <span class="comment">// 26</span></span><br><span class="line">dayjs(<span class="string">&#x27;2018-06-27&#x27;</span>).week(<span class="number">5</span>) <span class="comment">// 设置周</span></span><br></pre></td></tr></table></figure>
+<h4 id="week-of-year-iso">Week of Year （ISO）</h4>
+<p>获取或设置年份的 ISO 星期。</p>
+<div class="note warning"><p>使用本功能需先配置 IsoWeek 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(isoWeek)</span><br><span class="line"></span><br><span class="line">dayjs().isoWeek()</span><br><span class="line">dayjs().isoWeek(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="month">Month</h4>
+<p>获取或设置月份。</p>
+<p>传入 0 到 11 的 number。如果超出这个范围，它会进位到年份。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().month()</span><br><span class="line">dayjs().month(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>月份是从 0 开始计算的，即 1 月是 0。</p>
+</div>
+<h4 id="quarter">Quarter</h4>
+<p>获取或设置季度。</p>
+<div class="note warning"><p>使用本功能需先配置 QuarterOfYear 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(quarterOfYear)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2010-04-01&#x27;</span>).quarter() <span class="comment">// 2</span></span><br><span class="line">dayjs(<span class="string">&#x27;2010-04-01&#x27;</span>).quarter(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="year">Year</h4>
+<p>获取或设置年份。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().year()</span><br><span class="line">dayjs().year(<span class="number">2000</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="week-year">Week Year</h4>
+<p>获取基于当前语言配置的按周计算的年份。</p>
+<div class="note warning"><p>使用本功能需先配置 WeekYear 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(weekYear)</span><br><span class="line">dayjs.extend(weekOfYear)</span><br><span class="line"></span><br><span class="line">dayjs().weekYear()</span><br></pre></td></tr></table></figure>
+<h4 id="week-year-iso">Week Year (ISO)</h4>
+<p>获取 ISO 周年。</p>
+<div class="note warning"><p>使用本功能需先配置 IsoWeek 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(isoWeek)</span><br><span class="line"></span><br><span class="line">dayjs().isoWeekYear()</span><br></pre></td></tr></table></figure>
+<h4 id="weeks-in-year-iso">Weeks In Year (ISO)</h4>
+<p>获取当前年份的周数，根据 ISO weeks 的定义。</p>
+<div class="note warning"><p>使用本功能需先配置 IsoWeekInYear 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(isoWeeksInYear)</span><br><span class="line">dayjs.extend(isLeapYear)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2004-01-01&#x27;</span>).isoWeekInYear() <span class="comment">//53</span></span><br><span class="line">dayjs(<span class="string">&#x27;2005-01-01&#x27;</span>).isoWeekInYear() <span class="comment">//52</span></span><br></pre></td></tr></table></figure>
+<h4 id="get">Get</h4>
+<p>从 Day.js 对象中获取相应信息的 getter。可以理解为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().get(unit) === dayjs()[unit]()</span><br></pre></td></tr></table></figure>
+<p>各个传入的单位对大小写不敏感，支持缩写和复数。请注意，缩写是区分大小写的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().get(<span class="string">&#x27;year&#x27;</span>)</span><br><span class="line">dayjs().get(<span class="string">&#x27;month&#x27;</span>) <span class="comment">// start 0</span></span><br><span class="line">dayjs().get(<span class="string">&#x27;date&#x27;</span>)</span><br><span class="line">dayjs().get(<span class="string">&#x27;hour&#x27;</span>)</span><br><span class="line">dayjs().get(<span class="string">&#x27;minute&#x27;</span>)</span><br><span class="line">dayjs().get(<span class="string">&#x27;second&#x27;</span>)</span><br><span class="line">dayjs().get(<span class="string">&#x27;millisecond&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>支持的单位列表</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">单位</th>
+<th style="text-align: center;">缩写</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">date</td>
+<td style="text-align: center;">D</td>
+<td>月份里的日期</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">day</td>
+<td style="text-align: center;">d</td>
+<td>星期几（星期天 0，星期六 6）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">month</td>
+<td style="text-align: center;">M</td>
+<td>月份（一月 0，十二月 11）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">year</td>
+<td style="text-align: center;">y</td>
+<td>年份</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">hour</td>
+<td style="text-align: center;">h</td>
+<td>小时</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">minute</td>
+<td style="text-align: center;">m</td>
+<td>分钟</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">second</td>
+<td style="text-align: center;">s</td>
+<td>秒</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">millisecond</td>
+<td style="text-align: center;">ms</td>
+<td>毫秒</td>
+</tr>
+</tbody>
+</table>
+<h4 id="set">Set</h4>
+<p>通用的 setter，两个参数分别是要更新的单位和数值，调用后会返回一个修改后的新实例。可以理解为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().set(unit, value) === dayjs()[unit](value)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().set(<span class="string">&#x27;date&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">dayjs().set(<span class="string">&#x27;month&#x27;</span>, <span class="number">3</span>) <span class="comment">// 四月</span></span><br><span class="line">dayjs().set(<span class="string">&#x27;second&#x27;</span>, <span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="maximumminimum">Maximum/Minimum</h4>
+<p>返回传入的 Day.js 实例中的最大/小的（即最靠近未来/过去的）。它接受传入多个 Day.js 实例或一个数组。</p>
+<div class="note warning"><p>使用本功能需先配置 MinMax 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(minMax)</span><br><span class="line"></span><br><span class="line">dayjs.max(dayjs(), dayjs(<span class="string">&#x27;2018-01-01&#x27;</span>), dayjs(<span class="string">&#x27;2019-01-01&#x27;</span>))</span><br><span class="line">dayjs.max([dayjs(), dayjs(<span class="string">&#x27;2018-01-01&#x27;</span>), dayjs(<span class="string">&#x27;2019-01-01&#x27;</span>)])</span><br><span class="line"></span><br><span class="line">dayjs.min(dayjs(), dayjs(<span class="string">&#x27;2018-01-01&#x27;</span>), dayjs(<span class="string">&#x27;2019-01-01&#x27;</span>))</span><br><span class="line">dayjs.min([dayjs(), dayjs(<span class="string">&#x27;2018-01-01&#x27;</span>), dayjs(<span class="string">&#x27;2019-01-01&#x27;</span>)])</span><br></pre></td></tr></table></figure>
+<h3 id="操作">操作</h3>
+<p>你可能需要一些方法来操作 Day.js 对象。</p>
+<p>Day.js 支持像这样的链式调用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).add(<span class="number">1</span>, <span class="string">&#x27;day&#x27;</span>).subtract(<span class="number">1</span>, <span class="string">&#x27;year&#x27;</span>).year(<span class="number">2009</span>).toString()</span><br></pre></td></tr></table></figure>
+<h4 id="addsubtract">Add/Subtract</h4>
+<p>返回增加/减去一定时间的复制的 Day.js 对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().add(<span class="number">7</span>, <span class="string">&#x27;day&#x27;</span>)</span><br><span class="line">dayjs().subtract(<span class="number">7</span>, <span class="string">&#x27;year&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>各个传入的单位对大小写不敏感，支持缩写和复数。请注意，缩写是区分大小写的。</p>
+<p><strong>支持的单位列表</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">单位</th>
+<th style="text-align: center;">缩写</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">day</td>
+<td style="text-align: center;">d</td>
+<td>星期几（星期天 0，星期六 6）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">week</td>
+<td style="text-align: center;">w</td>
+<td>一年中的第几周</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">month</td>
+<td style="text-align: center;">M</td>
+<td>月份（一月 0，十二月 11）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">quarter</td>
+<td style="text-align: center;">0</td>
+<td>季度（依赖 QuarterOfYear 插件）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">year</td>
+<td style="text-align: center;">y</td>
+<td>年份</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">hour</td>
+<td style="text-align: center;">h</td>
+<td>小时</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">minute</td>
+<td style="text-align: center;">m</td>
+<td>分钟</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">second</td>
+<td style="text-align: center;">s</td>
+<td>秒</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">millisecond</td>
+<td style="text-align: center;">ms</td>
+<td>毫秒</td>
+</tr>
+</tbody>
+</table>
+<p>或者，也可以给 Day.js 对象增加一个持续时间。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().add(dayjs.duration(&#123;<span class="string">&#x27;days&#x27;</span> : <span class="number">1</span>&#125;))</span><br></pre></td></tr></table></figure>
+<h4 id="startend-of-time">Start/End of Time</h4>
+<p>返回复制的 Day.js 对象，并设置到一个时间的开始/末尾。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().startOf(<span class="string">&#x27;year&#x27;</span>)</span><br><span class="line">dayjs().endOf(<span class="string">&#x27;month&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>各个传入的单位对大小写不敏感，支持缩写和复数。</p>
+<p><strong>支持的单位列表</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">单位</th>
+<th style="text-align: center;">缩写</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">year</td>
+<td style="text-align: center;">y</td>
+<td>今年 1 月 1 日上午 00:00</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">quarter</td>
+<td style="text-align: center;">Q</td>
+<td>本季度第一个月 1 日上午 00:00（依赖 QuarterOfYear 插件）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">month</td>
+<td style="text-align: center;">M</td>
+<td>本月 1 日上午 00:00</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">week</td>
+<td style="text-align: center;">w</td>
+<td>本周的第一天上午 00:00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">isoWeek</td>
+<td style="text-align: center;"></td>
+<td>本周的第一天上午 00:00（根据 ISO 8601，依赖 IsoWeek 插件）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">date</td>
+<td style="text-align: center;">D</td>
+<td>当天 00:00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">day</td>
+<td style="text-align: center;">d</td>
+<td>当天 00:00</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">hour</td>
+<td style="text-align: center;">h</td>
+<td>当前时间，0 分、0 秒、0 毫秒</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">minute</td>
+<td style="text-align: center;">m</td>
+<td>当前时间，0 秒、0 毫秒</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">second</td>
+<td style="text-align: center;">s</td>
+<td>当前时间，0 毫秒</td>
+</tr>
+</tbody>
+</table>
+<h4 id="local">Local</h4>
+<p>返回一个在当前时区模式下的 Day.js 对象。</p>
+<div class="note warning"><p>使用本功能需先配置 UTC 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(utc)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = dayjs.utc()</span><br><span class="line">a.format() <span class="comment">// 2019-03-06T00:00:00Z</span></span><br><span class="line">a.local().format() <span class="comment">// 2019-03-06T08:00:00+08:00</span></span><br></pre></td></tr></table></figure>
+<h4 id="utc-1">UTC</h4>
+<p>返回一个在 UTC 模式下的 Day.js 对象。</p>
+<div class="note warning"><p>使用本功能需先配置 UTC 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(utc)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = dayjs.utc()</span><br><span class="line">a.format() <span class="comment">// 2019-03-06T08:00:00+08:00</span></span><br><span class="line">a.utc().format() <span class="comment">// 2019-03-06T00:00:00Z</span></span><br></pre></td></tr></table></figure>
+<p>传入 true 将只改变 UTC 模式而不改变本地时间。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2016-05-03 22:15:01&#x27;</span>).utc(<span class="literal">true</span>).format()</span><br><span class="line"><span class="comment">// 2016-05-03T22:15:01Z</span></span><br></pre></td></tr></table></figure>
+<h4 id="utc-offset">UTC offset</h4>
+<p>获取 UTC 偏移量（分钟）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().utcOffset()</span><br></pre></td></tr></table></figure>
+<p>也可以传入分钟来得到一个更改 UTC 偏移量的新实例。请注意，一旦你设置了 UTC 偏移量，它将保持固定，不会自动改变（即没有 DST 夏令时变更）。</p>
+<div class="note warning"><p>使用本功能需先配置 UTC 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extent(utc)</span><br><span class="line"></span><br><span class="line">dayjs().utcOffset(<span class="number">120</span>)</span><br></pre></td></tr></table></figure>
+<p>如果输入在 -16 到 16 之间，会将你的输入理解为小时数而非分钟。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 以下两种写法是等效的</span></span><br><span class="line">dayjs().utcOffset(<span class="number">8</span>) <span class="comment">// 设置小时偏移量</span></span><br><span class="line">dayjs().utcOffset(<span class="number">480</span>) <span class="comment">// 设置分钟偏移量（8 * 60）</span></span><br></pre></td></tr></table></figure>
+<p>第二个参数传入 true 可以值改变偏移量而保持本地时间不变。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.utc(<span class="string">&#x27;2000-01-01T06:01:02Z&#x27;</span>).utcOffset(<span class="number">1</span>, <span class="literal">true</span>).format()</span><br><span class="line"><span class="comment">// 2000-01-01T06:01:02+01:00</span></span><br></pre></td></tr></table></figure>
+<h3 id="显示">显示</h3>
+<p>当解析和操作完成后，你需要一些方式来展示 Day.js 对象。</p>
+<h4 id="fortmat">Fortmat</h4>
+<p>根据传入的占位符返回格式化后的日期。</p>
+<p>将字符放在方括号中，即可原样返回而不被格式化替换（例如<code>[MM]</code>）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().format()</span><br><span class="line"><span class="comment">// 默认返回的是 ISO8601 格式字符串 2020-04-02T08:02:17-05:00</span></span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).format(<span class="string">&#x27;[YYYYescape] YYYY-MMTHH:mm:ssZ[Z]&#x27;</span>)</span><br><span class="line"><span class="comment">// YYYYescape 2019-01-25T00:00:00-02:00Z</span></span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).format(<span class="string">&#x27;DD/MM/YYYY&#x27;</span>)</span><br><span class="line"><span class="comment">// 25/01/2019</span></span><br></pre></td></tr></table></figure>
+<p><strong>支持的格式化占位符列表</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">占位符</th>
+<th style="text-align: center;">输出</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">YY</td>
+<td style="text-align: center;">18</td>
+<td>两位数的年份</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">YYYY</td>
+<td style="text-align: center;">2018</td>
+<td>四位数的年份</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">1-12</td>
+<td>月份，从 1 开始</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">MM</td>
+<td style="text-align: center;">01-12</td>
+<td>月份，两位数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">MMM</td>
+<td style="text-align: center;">Jan-Dec</td>
+<td>缩写的月份名称</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">MMMM</td>
+<td style="text-align: center;">January-December</td>
+<td>完整的月份名称</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">1-31</td>
+<td>月份里的一天</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">DD</td>
+<td style="text-align: center;">01-31</td>
+<td>月份里的一天，两位数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">d</td>
+<td style="text-align: center;">0-6</td>
+<td>一周中的一天，星期天是 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">dd</td>
+<td style="text-align: center;">Su-Sa</td>
+<td>最简写的星期几</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">ddd</td>
+<td style="text-align: center;">Sun-Sat</td>
+<td>简写的星期几</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">dddd</td>
+<td style="text-align: center;">Sunday-Saturday</td>
+<td>星期几</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">H</td>
+<td style="text-align: center;">0-23</td>
+<td>小时</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">HH</td>
+<td style="text-align: center;">00-23</td>
+<td>小时，两位数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">1-12</td>
+<td>小时，12 小时制</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">hh</td>
+<td style="text-align: center;">01-12</td>
+<td>小时，12 小时制，两位数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">0-59</td>
+<td>分钟</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;">00-59</td>
+<td>分钟，两位数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">s</td>
+<td style="text-align: center;">0-59</td>
+<td>秒</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">ss</td>
+<td style="text-align: center;">00-59</td>
+<td>秒，两位数</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">SSS</td>
+<td style="text-align: center;">000-999</td>
+<td>毫秒，三位数</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Z</td>
+<td style="text-align: center;">+05:00</td>
+<td>UTC 的偏移量，±HH:mm</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">ZZ</td>
+<td style="text-align: center;">+0500</td>
+<td>UTC 的偏移量，±HHmm</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">AM PM</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">am pm</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>更多可用格式<code>Q Do k X x ...</code>请使用 AdvancedFormat 插件。</p>
+<p>在不同的本地化配置下，有一些不同的本地化格式可以使用。</p>
+<div class="note warning"><p>使用本功能需先配置 LocalizedFormat 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(LocalizedFormat)</span><br><span class="line">dayjs().format(<span class="string">&#x27;L LT&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>支持的本地化格式列表</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">占位符</th>
+<th>英语语言</th>
+<th>示例输出</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">LT</td>
+<td>h:mm A</td>
+<td>8:02 PM</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LTS</td>
+<td>h:mm:ss A</td>
+<td>8:02:18 PM</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">L</td>
+<td>MM/DD/YYY</td>
+<td>08/16/2018</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LL</td>
+<td>MMMM D, YYYY</td>
+<td>August 16, 2018</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">LLL</td>
+<td>MMMM D, YYYY h:mm A</td>
+<td>August 16, 2018 8:02 PM</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LLLL</td>
+<td>dddd, MMMM D, YYYY h:mm A</td>
+<td>Thursday, August 16, 2018 8:02 PM</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">l</td>
+<td>M/D/YYYY</td>
+<td>8/16/2018</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">ll</td>
+<td>MMM D, YYYY</td>
+<td>Aug 16, 2018</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">lll</td>
+<td>MMM D, YYYY h:mm A</td>
+<td>Aug 16, 2018 8:02 PM</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">llll</td>
+<td>ddd, MMM D, YYYY h:mm A</td>
+<td>Thu, Aug 16, 2018 8:02 PM</td>
+</tr>
+</tbody>
+</table>
+<h4 id="time-fromto-now">Time from/to now</h4>
+<p>返回现在到当前实例或当前实例到现在的相对时间。</p>
+<div class="note warning"><p>使用本功能需先配置 RelativeTime 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(relativeTime)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).fromNow() <span class="comment">// 22 年前</span></span><br><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).toNow() <span class="comment">// 22 年后</span></span><br></pre></td></tr></table></figure>
+<p>如果传入 true，则可以获得不带后缀的值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(relativeTime)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).fromNow(<span class="literal">true</span>) <span class="comment">// 22 年</span></span><br><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).toNow(<span class="literal">true</span>) <span class="comment">// 22 年</span></span><br></pre></td></tr></table></figure>
+<p><strong>时间范围划分标准</strong></p>
+<p>表格里的值是由语言配置决定的，并且可以自定义输出内容。时间会舍入到最接近的秒数。</p>
+<table>
+<thead>
+<tr class="header">
+<th>范围</th>
+<th style="text-align: center;">键值</th>
+<th>示例输出</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 到 44 秒</td>
+<td style="text-align: center;">s</td>
+<td>几秒前</td>
+</tr>
+<tr class="even">
+<td>45 到 89 秒</td>
+<td style="text-align: center;">m</td>
+<td>1分钟前</td>
+</tr>
+<tr class="odd">
+<td>90 秒 到 44 分</td>
+<td style="text-align: center;">mm</td>
+<td>2 分钟前...44 分钟前</td>
+</tr>
+<tr class="even">
+<td>45 到 89 分</td>
+<td style="text-align: center;">h</td>
+<td>1 小时前</td>
+</tr>
+<tr class="odd">
+<td>90 分 到 21 小时</td>
+<td style="text-align: center;">hh</td>
+<td>2 小时前...21 小时前</td>
+</tr>
+<tr class="even">
+<td>22 到 35 小时</td>
+<td style="text-align: center;">d</td>
+<td>1 天前</td>
+</tr>
+<tr class="odd">
+<td>36 小时到 25 天</td>
+<td style="text-align: center;">dd</td>
+<td>2 天前...25 天前</td>
+</tr>
+<tr class="even">
+<td>26 到 45 天</td>
+<td style="text-align: center;">M</td>
+<td>1 个月前</td>
+</tr>
+<tr class="odd">
+<td>46 天到 10 月</td>
+<td style="text-align: center;">MM</td>
+<td>2 个月前...10 个月前</td>
+</tr>
+<tr class="even">
+<td>11 月到 17 月</td>
+<td style="text-align: center;">y</td>
+<td>1 年前</td>
+</tr>
+<tr class="odd">
+<td>18 月以上</td>
+<td style="text-align: center;">yy</td>
+<td>2 年前...20 年前</td>
+</tr>
+</tbody>
+</table>
+<h4 id="time-fromto-x">Time from/to X</h4>
+<p>返回 X 到当前实例或当前实例到 X 的相对时间。</p>
+<div class="note warning"><p>使用本功能需先配置 RelativeTime 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(relativeTime)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = dayjs(<span class="string">&#x27;2000-01-01&#x27;</span>)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).from(a) <span class="comment">// 1 年前</span></span><br><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).to(a) <span class="comment">// 1 年后</span></span><br></pre></td></tr></table></figure>
+<p>如果传入 true，则可以获得不带后缀的值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).from(a, <span class="literal">true</span>) <span class="comment">// 1 年</span></span><br><span class="line">dayjs(<span class="string">&#x27;1999-01-01&#x27;</span>).to(a, <span class="literal">true</span>) <span class="comment">// 1 年</span></span><br></pre></td></tr></table></figure>
+<h4 id="calendar-time">Calendar Time</h4>
+<p>日历时间显示了距离给定时间（默认为现在）的相对时间，但与<code>dayjs#fromnow</code>略有不同。</p>
+<div class="note warning"><p>使用本功能需先配置 Calendar 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(calendar)</span><br><span class="line"></span><br><span class="line">dayjs().calendar()</span><br><span class="line">dayjs().calendar(dayjs(<span class="string">&#x27;2008-01-01&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr class="header">
+<th>键值</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>上个星期（lastWeek）</td>
+<td>上星期一 2:30</td>
+</tr>
+<tr class="even">
+<td>前一天（lastDay）</td>
+<td>昨天 2:30</td>
+</tr>
+<tr class="odd">
+<td>同一天（sameDay）</td>
+<td>今天 2:30</td>
+</tr>
+<tr class="even">
+<td>下一天（nextDay）</td>
+<td>明天 2:30</td>
+</tr>
+<tr class="odd">
+<td>下个星期（nextWeek）</td>
+<td>星期日 2:30</td>
+</tr>
+<tr class="even">
+<td>其他（sameElse）</td>
+<td>7/10/2011</td>
+</tr>
+</tbody>
+</table>
+<p>表格里的值是由语言配置决定的，并且可以自定义输出内容。</p>
+<p>你也可以通过第二个参数传入指定日历输出格式。将字符放在方括号中，即可原样返回而不被格式化替换（例如，<code>[Today]</code>）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs().calendar(<span class="literal">null</span>, &#123;</span><br><span class="line">  <span class="attr">sameDay</span>: <span class="string">&#x27;[Today at] h:mm A&#x27;</span>, <span class="comment">// The same day (Today at 2:30 AM)</span></span><br><span class="line">  <span class="attr">nextDay</span>: <span class="string">&#x27;[Tomorrow]&#x27;</span>, <span class="comment">// The next day (Tomorrow at 2:30 AM)</span></span><br><span class="line">  <span class="attr">nextWeek</span>: <span class="string">&#x27;dddd&#x27;</span>, <span class="comment">// The next week (Sunday at 2:30 AM)</span></span><br><span class="line">  <span class="attr">lastDay</span>: <span class="string">&#x27;[Yesterday]&#x27;</span>, <span class="comment">// The day before (Yesterday at 2:30 AM)</span></span><br><span class="line">  <span class="attr">lastWeek</span>: <span class="string">&#x27;[Last] dddd&#x27;</span>, <span class="comment">// Last week (Last Monday at 2:30 AM)</span></span><br><span class="line">  <span class="attr">sameElse</span>: <span class="string">&#x27;DD/MM/YYYY&#x27;</span> <span class="comment">// Everything else (7/10/2011)</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JS%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> JS库</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20211115/%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7-Prettier/" rel="prev" title="代码格式化工具-Prettier">
+                  <i class="fa fa-chevron-left"></i> 代码格式化工具-Prettier
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">猛吃雪糕</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.2/dist/mermaid.min.js","integrity":"sha256-UIQPVkGifpwMvDH5yGgORJ9sSTDq38zz6BGU6dNaKhM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://mopsite.github.io/20220113/Day-js-%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F%E7%9A%84JS%E5%BA%93/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/fontawesome.js"></script>
+</body>
+</html>

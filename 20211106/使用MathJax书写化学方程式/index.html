@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mopsite.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="在MathJax中有一款工具可以用来轻松编写化学方程式，那就是 mhchem。MathJax 默认会启用该工具。 在写化学式时，需要用\ce&amp;#123;&amp;#125;把化学式或方程式包裹起来。比如在写硫酸时，需要这样写\ce&amp;#123;H2SO4&amp;#125;：\(\ce{H2SO4}\)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用MathJax书写化学方程式">
+<meta property="og:url" content="https://mopsite.github.io/20211106/%E4%BD%BF%E7%94%A8MathJax%E4%B9%A6%E5%86%99%E5%8C%96%E5%AD%A6%E6%96%B9%E7%A8%8B%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="在MathJax中有一款工具可以用来轻松编写化学方程式，那就是 mhchem。MathJax 默认会启用该工具。 在写化学式时，需要用\ce&amp;#123;&amp;#125;把化学式或方程式包裹起来。比如在写硫酸时，需要这样写\ce&amp;#123;H2SO4&amp;#125;：\(\ce{H2SO4}\)。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-06T06:44:15.000Z">
+<meta property="article:modified_time" content="2021-11-15T17:53:56.938Z">
+<meta property="article:author" content="猛吃雪糕">
+<meta property="article:tag" content="mathjax">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mopsite.github.io/20211106/%E4%BD%BF%E7%94%A8MathJax%E4%B9%A6%E5%86%99%E5%8C%96%E5%AD%A6%E6%96%B9%E7%A8%8B%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mopsite.github.io/20211106/%E4%BD%BF%E7%94%A8MathJax%E4%B9%A6%E5%86%99%E5%8C%96%E5%AD%A6%E6%96%B9%E7%A8%8B%E5%BC%8F/","path":"20211106/使用MathJax书写化学方程式/","title":"使用MathJax书写化学方程式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用MathJax书写化学方程式 | Hello World</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hello World</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="far fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="far fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="far fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="far fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="far fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E6%9C%BA%E7%89%A9"><span class="nav-number">1.</span> <span class="nav-text">无机物</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E4%B8%8B%E6%A0%87%E7%94%B5%E8%8D%B7%E6%95%B0%E6%B0%A7%E5%8C%96%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">整数：下标、电荷数、氧化数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%95%B0%E4%B8%8B%E6%A0%87"><span class="nav-number">1.2.</span> <span class="nav-text">分数下标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%86%E6%8B%AC%E5%8F%B7%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%A4%A7%E6%8B%AC%E5%8F%B7"><span class="nav-number">1.3.</span> <span class="nav-text">圆括号、方括号、大括号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E6%A0%87%E4%B8%8E%E4%B8%8B%E6%A0%87%E5%90%8C%E4%BD%8D%E7%B4%A0%E5%88%86%E5%AD%90%E7%A6%BB%E5%AD%90"><span class="nav-number">1.4.</span> <span class="nav-text">上标与下标：同位素、分子离子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%86%E7%82%B9%E8%87%AA%E7%94%B1%E5%9F%BA%E6%B0%B4%E5%90%88%E7%89%A9"><span class="nav-number">1.5.</span> <span class="nav-text">圆点：自由基、水合物</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%9C%BA%E7%89%A9"><span class="nav-number">2.</span> <span class="nav-text">有机物</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%96%E5%AD%A6%E9%94%AE"><span class="nav-number">2.1.</span> <span class="nav-text">化学键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%9C%E4%BD%93cis-%E5%92%8C-trans"><span class="nav-number">2.2.</span> <span class="nav-text">斜体：cis 和 trans</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.3.</span> <span class="nav-text">进一步学习</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%96%E5%AD%A6%E6%96%B9%E7%A8%8B%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">化学方程式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%8F%8D%E5%BA%94%E6%96%B9%E5%90%91"><span class="nav-number">3.1.</span> <span class="nav-text">箭头：反应方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E6%B2%89%E6%B7%80%E4%B8%8E%E6%B0%94%E4%BD%93"><span class="nav-number">3.2.</span> <span class="nav-text">箭头：沉淀与气体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E5%AE%B9"><span class="nav-number">4.</span> <span class="nav-text">其他内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E4%B8%8B%E6%96%B9%E6%B7%BB%E5%8A%A0%E6%A0%87%E6%B3%A8"><span class="nav-number">4.1.</span> <span class="nav-text">文字下方添加标注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E7%9A%84%E5%A4%9A%E8%A1%8C%E5%8F%8D%E5%BA%94%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">连续的多行反应式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="猛吃雪糕"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">猛吃雪糕</p>
+  <div class="site-description" itemprop="description">帅到无边心是岸，拽临绝顶我为峰</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=37662788&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;37662788&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="far fa-comment fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:37662788@qq.com" title="E-Mail → mailto:37662788@qq.com" rel="noopener" target="_blank"><i class="far fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/mopsite" title="Github → https:&#x2F;&#x2F;github.com&#x2F;mopsite" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/mop233" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;mop233" rel="noopener" target="_blank"><i class="fab fa-codepen fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zcool.com.cn/u/15088128" title="ZCool → https:&#x2F;&#x2F;www.zcool.com.cn&#x2F;u&#x2F;15088128" rel="noopener" target="_blank"><i class="far fa-palette fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mopsite.github.io/20211106/%E4%BD%BF%E7%94%A8MathJax%E4%B9%A6%E5%86%99%E5%8C%96%E5%AD%A6%E6%96%B9%E7%A8%8B%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="猛吃雪糕">
+      <meta itemprop="description" content="帅到无边心是岸，拽临绝顶我为峰">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用MathJax书写化学方程式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-06 14:44:15" itemprop="dateCreated datePublished" datetime="2021-11-06T14:44:15+08:00">2021-11-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-16 01:53:56" itemprop="dateModified" datetime="2021-11-16T01:53:56+08:00">2021-11-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%92%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">排版</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在<a href="/20211104/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E4%BB%B6-MathJax/" title="MathJax">MathJax</a>中有一款工具可以用来轻松编写化学方程式，那就是 mhchem。MathJax 默认会启用该工具。</p>
+<p>在写化学式时，需要用<code>\ce&#123;&#125;</code>把化学式或方程式包裹起来。比如在写硫酸时，需要这样写<code>\ce&#123;H2SO4&#125;</code>：<span class="math inline">\(\ce{H2SO4}\)</span>。</p>
+<span id="more"></span>
+<h3 id="无机物">无机物</h3>
+<h4 id="整数下标电荷数氧化数">整数：下标、电荷数、氧化数</h4>
+<p><code>\ce&#123;CO2&#125;</code>：<span class="math inline">\(\ce{CO2}\)</span>、<code>\ce&#123;H+&#125;</code>：<span class="math inline">\(\ce{H+}\)</span>、<code>\ce&#123;Cl-&#125;</code>：<span class="math inline">\(\ce{Cl-}\)</span>、<code>\ce&#123;Cu^2+&#125;</code>：<span class="math inline">\(\ce{Cu^2+}\)</span> 等等。</p>
+<div class="note danger"><p>其中，二价铜离子的表示中如果不加<code>^</code>，会显示为<code>\ce{Cu2+}</code>：<span class="math inline">\(\ce{Cu2+}\)</span>。</p>
+</div>
+<p>氧化数的表示为二价铁<code>\ce&#123;Fe^&#123;II&#125;&#125;</code>：<span class="math inline">\(\ce{Fe^{II}}\)</span>、四价铅<code>\ce&#123;Pb^&#123;IV&#125;&#125;</code>：<span class="math inline">\(\ce{Pb^{IV}}\)</span> 等等。</p>
+<h4 id="分数下标">分数下标</h4>
+<p>和<span class="math inline">\(LaTeX\)</span>普通的假如数学表达式的语法一样，如<code>\ce&#123;Fe(CN)_&#123;\frac62&#125;&#125;</code>：<span class="math inline">\(\ce{Fe(CN)_{\frac62}}\)</span>。</p>
+<h4 id="圆括号方括号大括号">圆括号、方括号、大括号</h4>
+<p>圆括号<code>\ce&#123;(NH4)2S&#125;</code>：<span class="math inline">\(\ce{(NH4)2S}\)</span>、方括号<code>\ce&#123;[AgCl2]-&#125;</code>：<span class="math inline">\(\ce{[AgCl2]-}\)</span>、大括号<code>\ce&#123;[\&#123;(X2)3\&#125;2]^3+&#125;</code>：<span class="math inline">\(\ce{[\{(X2)3\}2]^3+}\)</span>。</p>
+<div class="note warning"><p>和圆括号及方括号相比，大括号之前需要加入转义符，否则不会被显示出来。</p>
+</div>
+<h4 id="上标与下标同位素分子离子">上标与下标：同位素、分子离子</h4>
+<p><code>\ce&#123;^&#123;227&#125;_&#123;90&#125;Th+&#125;</code>：<span class="math inline">\(\ce{^{227}_{90}Th+}\)</span>、<code>\ce&#123;H^2+&#125;</code>：<span class="math inline">\(\ce{H^2+}\)</span>。</p>
+<h4 id="圆点自由基水合物">圆点：自由基、水合物</h4>
+<p>自由基<code>\ce&#123;Cl*&#125;</code>：<span class="math inline">\(\ce{Cl*}\)</span>、<code>\ce&#123;*CH3&#125;</code>：<span class="math inline">\(\ce{*CH3}\)</span>，水合物<code>\ce&#123;KCr(SO4)2*12H2O&#125;</code>：<span class="math inline">\(\ce{KCr(SO4)2*12H2O}\)</span>。</p>
+<h3 id="有机物">有机物</h3>
+<h4 id="化学键">化学键</h4>
+<p>单键<code>\ce&#123;CH3-CHO&#125;</code>：<span class="math inline">\(\ce{CH3-CHO}\)</span>、双键<code>\ce&#123;CH2=CH2&#125;</code>：<span class="math inline">\(\ce{CH2=CH2}\)</span>、三键<code>\ce&#123;CH#CH&#125;</code>：<span class="math inline">\(\ce{CH#CH}\)</span>。</p>
+<p>其他化学键有<code>\ce&#123;A\bond&#123;~&#125;B\bond&#123;~-&#125;C&#125;</code>：<span class="math inline">\(\ce{A\bond{~}B\bond{~-}C}\)</span>、<code>\ce&#123;A\bond&#123;~--&#125;B\bond&#123;~=&#125;C\bond&#123;-~-&#125;D&#125;</code>：<span class="math inline">\(\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D}\)</span>、<code>\ce&#123;A\bond&#123;...&#125;B\bond&#123;....&#125;C&#125;</code>：<span class="math inline">\(\ce{A\bond{...}B\bond{....}C}\)</span>。</p>
+<h4 id="斜体cis-和-trans">斜体：cis 和 trans</h4>
+<p>有机化学中用来表示顺反异构的 cis 与 trans 通常都写成斜体。数学公式中的字母会被写成斜体，所以只需包裹一对<code>$</code>即可，如<code>\ce&#123;$cis$&#123;-&#125;CH3CH-CHCH3&#125;</code>：<span class="math display">\[\ce{$cis${-}CH3CH-CHCH3}\]</span></p>
+<h4 id="进一步学习">进一步学习</h4>
+<p>有机化合物的表示方法不止结构简式。如果需要在文章中插入有机物的结构式或者键线式，mhchem 包就不够用了，这时需要 chemfig 包。但是 chemfig 这个包的学习会比较痛苦，而且效果未必尽如人意。因此如果遇到太复杂的结构式，更有效的方法是用化学绘图软件画出结构式保存成图片，然后使用插入图片的方法来添加到文档中。</p>
+<h3 id="化学方程式">化学方程式</h3>
+<h4 id="箭头反应方向">箭头：反应方向</h4>
+<p>可以打正向、可逆、正逆反应程度不同类型的箭头，如<code>\ce&#123;-&gt;&#125;</code>：<span class="math inline">\(\ce{-&gt;}\)</span>，<code>\ce&#123;&lt;=&gt;&#125;</code>：<span class="math inline">\(\ce{&lt;=&gt;}\)</span>、<code>\ce&#123;&lt;=&gt;&gt;&#125;</code>：<span class="math inline">\(\ce{&lt;=&gt;&gt;}\)</span>、<code>\ce&#123;&lt;&lt;=&gt;&#125;</code>：<span class="math inline">\(\ce{&lt;&lt;=&gt;}\)</span>。</p>
+<p>还可以方便地添加反应条件：</p>
+<div class="tabs" id="mhchem1"><ul class="nav-tabs"><li class="tab active"><a href="#mhchem1-1">效果</a></li><li class="tab"><a href="#mhchem1-2">代码</a></li></ul><div class="tab-content"><div class="tab-pane active" id="mhchem1-1"><p><span class="math display">\[
+\ce{2H2 + O2 -&gt;[\Delta] H2O}
+\]</span></p>
+<p><span class="math display">\[
+\ce{N2 + H2 -&gt;[{催化剂}][{高温高压}] NH3}
+\]</span></p></div><div class="tab-pane" id="mhchem1-2"><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\ce&#123;2H2 + O2 -&gt;[\Delta] H2O&#125;</span><br><span class="line">$$</span><br><span class="line"></span><br><span class="line">$$</span><br><span class="line">\ce&#123;N2 + H2 -&gt;[&#123;催化剂&#125;][&#123;高温高压&#125;] NH3&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></div></div></div>
+<h4 id="箭头沉淀与气体">箭头：沉淀与气体</h4>
+<p><code>\ce&#123;Ca(OH)2 + CO2 = CaCO3 v + H2O&#125;</code>：<span class="math inline">\(\ce{Ca(OH)2 + CO2 = CaCO3 v + H2O}\)</span></p>
+<p><code>\ce&#123;Fe + 2H+ = H2 ^ + Fe^2+&#125;</code>：<span class="math inline">\(\ce{Fe + 2H+ = H2 ^ + Fe^2+}\)</span></p>
+<h3 id="其他内容">其他内容</h3>
+<h4 id="文字下方添加标注">文字下方添加标注</h4>
+<p>同素异形体和同分异构体的存在使我们有时候需要在化学式的下方添加说明：<span class="math inline">\(\underset{\text{葡萄糖}}{\ce{C6H1206}}\)</span>，实现这个效果我们要写的代码是<code>\underset&#123;\text&#123;葡萄糖&#125;&#125;&#123;\ce&#123;C6H1206&#125;&#125;</code>。</p>
+<h4 id="连续的多行反应式">连续的多行反应式</h4>
+<p>首先需要使用<code>\begin&#123;align*&#125;...\end&#123;align*&#125;</code>引入 align 环境。</p>
+<p>每一行的开始加<code>&amp;</code>符号，结尾加换行符<code>\\</code>。</p>
+<div class="tabs" id="mhchem2"><ul class="nav-tabs"><li class="tab active"><a href="#mhchem2-1">效果</a></li><li class="tab"><a href="#mhchem2-2">代码</a></li></ul><div class="tab-content"><div class="tab-pane active" id="mhchem2-1"><p><span class="math display">\[
+\begin{align*}
+&amp; \ce{CO2 + 3H2 &lt;=&gt; CH3OH + H2O} \\
+&amp; \ce{CO2 + H2 &lt;=&gt; CO + H2O} \\
+&amp; \ce{CO + 2H2 &lt;=&gt; CH3OH} \\
+&amp; \ce{CH3OH &lt;=&gt; CH3OCH3 + H2O}
+\end{align*}
+\]</span></p></div><div class="tab-pane" id="mhchem2-2"><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align*&#125;</span><br><span class="line">&amp; \ce&#123;CO2 + 3H2 &lt;=&gt; CH3OH + H2O&#125; \\</span><br><span class="line">&amp; \ce&#123;CO2 + H2 &lt;=&gt; CO + H2O&#125; \\</span><br><span class="line">&amp; \ce&#123;CO + 2H2 &lt;=&gt; CH3OH&#125; \\</span><br><span class="line">&amp; \ce&#123;CH3OH &lt;=&gt; CH3OCH3 + H2O&#125;</span><br><span class="line">\end&#123;align*&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></div></div></div>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mathjax/" rel="tag"><i class="fa fa-tag"></i> mathjax</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20211104/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E4%BB%B6-MathJax/" rel="prev" title="数学公式插件-MathJax">
+                  <i class="fa fa-chevron-left"></i> 数学公式插件-MathJax
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20211106/%E7%90%86%E8%A7%A3Flexbox-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87/" rel="next" title="理解Flexbox-你需要知道的一切">
+                  理解Flexbox-你需要知道的一切 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">猛吃雪糕</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.2/dist/mermaid.min.js","integrity":"sha256-UIQPVkGifpwMvDH5yGgORJ9sSTDq38zz6BGU6dNaKhM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://mopsite.github.io/20211106/%E4%BD%BF%E7%94%A8MathJax%E4%B9%A6%E5%86%99%E5%8C%96%E5%AD%A6%E6%96%B9%E7%A8%8B%E5%BC%8F/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/fontawesome.js"></script>
+</body>
+</html>

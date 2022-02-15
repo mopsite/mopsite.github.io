@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mopsite.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Mermaid 是一个基于 JavaScript 的图表绘制工具，通过解析类 Markdown 的文本语法来实现图表的创建和动态修改。Mermaid 诞生的主要目的是让文档的更新能够及时更上开发进度。 通过 Mermaid，我们不用专门的流图工具（例如微软的 Visio），我们需要编辑的只是文本，因此不少现成的 Markdown 编辑器都可以用上。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="绘图插件-Mermaid">
+<meta property="og:url" content="https://mopsite.github.io/20211103/%E7%BB%98%E5%9B%BE%E6%8F%92%E4%BB%B6-Mermaid/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="Mermaid 是一个基于 JavaScript 的图表绘制工具，通过解析类 Markdown 的文本语法来实现图表的创建和动态修改。Mermaid 诞生的主要目的是让文档的更新能够及时更上开发进度。 通过 Mermaid，我们不用专门的流图工具（例如微软的 Visio），我们需要编辑的只是文本，因此不少现成的 Markdown 编辑器都可以用上。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-03T14:24:56.000Z">
+<meta property="article:modified_time" content="2021-11-20T02:47:21.208Z">
+<meta property="article:author" content="猛吃雪糕">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="插件">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mopsite.github.io/20211103/%E7%BB%98%E5%9B%BE%E6%8F%92%E4%BB%B6-Mermaid/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mopsite.github.io/20211103/%E7%BB%98%E5%9B%BE%E6%8F%92%E4%BB%B6-Mermaid/","path":"20211103/绘图插件-Mermaid/","title":"绘图插件-Mermaid"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>绘图插件-Mermaid | Hello World</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hello World</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="far fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="far fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="far fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="far fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="far fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">开始使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">流程图语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E4%B8%8E%E5%BD%A2%E7%8A%B6"><span class="nav-number">2.1.</span> <span class="nav-text">节点与形状</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%96%B9%E5%90%91"><span class="nav-number">2.2.</span> <span class="nav-text">流程方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.</span> <span class="nav-text">节点连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">特殊用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE"><span class="nav-number">2.5.</span> <span class="nav-text">子图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E5%BC%8F%E5%92%8C%E7%B1%BB"><span class="nav-number">2.6.</span> <span class="nav-text">样式和类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%9B%BE%E5%BD%A2%E5%B1%95%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">其他图形展示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="nav-number">3.1.</span> <span class="nav-text">时序图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%98%E7%89%B9%E5%9B%BE"><span class="nav-number">3.2.</span> <span class="nav-text">甘特图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%9B%BE"><span class="nav-number">3.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E7%A8%8B%E5%9B%BE"><span class="nav-number">3.4.</span> <span class="nav-text">行程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-number">3.5.</span> <span class="nav-text">饼图</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="猛吃雪糕"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">猛吃雪糕</p>
+  <div class="site-description" itemprop="description">帅到无边心是岸，拽临绝顶我为峰</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=37662788&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;37662788&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="far fa-comment fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:37662788@qq.com" title="E-Mail → mailto:37662788@qq.com" rel="noopener" target="_blank"><i class="far fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/mopsite" title="Github → https:&#x2F;&#x2F;github.com&#x2F;mopsite" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/mop233" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;mop233" rel="noopener" target="_blank"><i class="fab fa-codepen fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zcool.com.cn/u/15088128" title="ZCool → https:&#x2F;&#x2F;www.zcool.com.cn&#x2F;u&#x2F;15088128" rel="noopener" target="_blank"><i class="far fa-palette fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mopsite.github.io/20211103/%E7%BB%98%E5%9B%BE%E6%8F%92%E4%BB%B6-Mermaid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="猛吃雪糕">
+      <meta itemprop="description" content="帅到无边心是岸，拽临绝顶我为峰">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          绘图插件-Mermaid
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-03 22:24:56" itemprop="dateCreated datePublished" datetime="2021-11-03T22:24:56+08:00">2021-11-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-20 10:47:21" itemprop="dateModified" datetime="2021-11-20T10:47:21+08:00">2021-11-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%92%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">排版</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Mermaid 是一个基于 JavaScript 的图表绘制工具，通过解析类 Markdown 的文本语法来实现图表的创建和动态修改。Mermaid 诞生的主要目的是让文档的更新能够及时更上开发进度。</p>
+<p>通过 Mermaid，我们不用专门的流图工具（例如微软的 Visio），我们需要编辑的只是文本，因此不少现成的 Markdown 编辑器都可以用上。</p>
+<span id="more"></span>
+<p>Mermaid 目前支持的图形有：</p>
+<ul>
+<li>流程图（Flowchart）</li>
+<li>时序图（Sequence Diagram）</li>
+<li>甘特图（Gantt Diagram）</li>
+<li>类图（Class Diagram）</li>
+<li>状态图（State Diagram）</li>
+<li>饼图（Pie Chart）</li>
+<li>行程图（User Journey）</li>
+</ul>
+<p>这里只简单介绍流程图的绘制方法。如果你想绘制更多其他图形，请查看 <a target="_blank" rel="noopener" href="https://mermaid-js.github.io/">Mermaid 官方文档</a>。</p>
+<h3 id="开始使用">开始使用</h3>
+<p>想要在你的页面中使用 Mermaid，只需要以 CDN 的方式在页面中引入下面这句话即可：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/xlovet/asset/js/mermaid.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在 HTML 标签中使用<code>class=mermaid</code>类名来绘制图表：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mermaid&quot;</span>&gt;</span></span><br><span class="line">  graph LR</span><br><span class="line">    A --- B</span><br><span class="line">    B --&gt; C</span><br><span class="line">    B --&gt; D</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一个简单的完整 HTML 页面示例如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/xlovet/asset/js/mermaid.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mermaid&quot;</span>&gt;</span></span><br><span class="line">  flowchart LR</span><br><span class="line">    A --- B</span><br><span class="line">    B --&gt; C</span><br><span class="line">    B --&gt; D</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="流程图语法">流程图语法</h3>
+<p>所有流程图都由节点、形状及边框、箭头和线条组成。Mermaid 代码定义了这些节点和边框的生成及交互方式。</p>
+<p>它可以容纳不同的箭头类型、多向箭头以及与子图的连接。</p>
+<div class="note danger"><p>请不要使用 end 作为流程图的节点，任何类似于 End 或者 END 的单词都会中断流程图。</p>
+</div>
+<h4 id="节点与形状">节点与形状</h4>
+<ul>
+<li><p>默认节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id
+</pre>
+<div class="note info"><p>id 是显示在框中的内容。</p>
+</div></li>
+<li><p>文本节点</p>
+<p>也可以在框中设置与 id 不同的文本。如果多次设置同一个 id 的文本，将显示最后一次的设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1[This is the text in the box]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1[This is the text in the box]
+</pre></li>
+<li><p>圆角形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1(This is the text in the box)</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1(This is the text in the box)
+</pre></li>
+<li><p>操场形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1([This is the text in the box])</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1([This is the text in the box])
+</pre></li>
+<li><p>子程序形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1[[This is the text in the box]]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1[[This is the text in the box]]
+</pre></li>
+<li><p>圆柱形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1[(Database)]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1[(Database)]
+</pre></li>
+<li><p>圆形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1((This is the text in the circle))</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1((This is the text in the circle))
+</pre></li>
+<li><p>不对称形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1&gt;This is the text in the box]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1&gt;This is the text in the box]
+</pre></li>
+<li><p>菱形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1&#123;This is the text in the box&#125;</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1{This is the text in the box}
+</pre></li>
+<li><p>平行四边形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1[/This is the text in the box/]</span><br><span class="line">  id2[\This is the text in the box\]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+graph
+id1[&#x2F;This is the text in the box&#x2F;]
+id2[\This is the text in the box\]
+</pre></li>
+<li><p>梯形节点</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1[/Christmas\]</span><br><span class="line">  id2[\Christmas/]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+graph
+id1[&#x2F;Christmas\]
+id2[\Christmas&#x2F;]
+</pre></li>
+</ul>
+<h4 id="流程方向">流程方向</h4>
+<p>流程图的方向有以下几种：</p>
+<ul>
+<li>TB：从上到下（top to bottom）</li>
+<li>TD：和 TB 形同（top to down）</li>
+<li>BT：从下到上（bottom to top）</li>
+<li>RL：从右到左（right to left）</li>
+<li>LR：从左到右（left to right）</li>
+</ul>
+<p>下面声明了一个从左到右（LR）的流程图：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A --&gt; B</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A --&gt; B
+</pre>
+<div class="note info"><p>如果不声明方向，默认上到下。</p>
+</div>
+<h4 id="节点连接">节点连接</h4>
+<p>节点可以通过连接线与边框相接。连接线有多种形状，而且可以在连接线中加入标签。</p>
+<ul>
+<li><p>箭头连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A --&gt; B</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A --&gt; B
+</pre></li>
+<li><p>开放连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A --- B</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A --- B
+</pre></li>
+<li><p>标签连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A --This is the text--- B</span><br><span class="line">  C ---|This is the text| D</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A --This is the text--- B
+C ---|This is the text| D
+</pre></li>
+<li><p>箭头标签连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A --text--&gt; B --&gt;|text| C</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A --text--&gt; B --&gt;|text| C
+</pre></li>
+<li><p>虚线（点划线）连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A -.-&gt; B -.- C</span><br><span class="line">  D -.text.-&gt; E -.text.- F</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A -.-&gt; B -.- C
+D -.text.-&gt; E -.text.- F
+</pre></li>
+<li><p>粗实线连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A ==&gt; B ==text==&gt; C</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A &#x3D;&#x3D;&gt; B &#x3D;&#x3D;text&#x3D;&#x3D;&#x3D;&gt; C
+</pre></li>
+<li><p>新类型箭头连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A --o B --x C</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A --o B --x C
+</pre></li>
+<li><p>双向箭头连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A o--o B &lt;--&gt; C x--x D</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A o--o B &lt;--&gt; C x--x D
+</pre></li>
+<li><p>连接链</p>
+<p>可以将多个连接写入同一行，形成一条链。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A -- text --&gt; B -- text2 --&gt; C</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A -- text --&gt; B -- text2 --&gt; C
+</pre>
+<p>也可以在同一行中声明多个节点连接。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A --&gt; B &amp; C --&gt; D</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A --&gt; B &amp; C --&gt; D
+</pre>
+<p>或像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart TB</span><br><span class="line">  A &amp; B --&gt; C &amp; D</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart TB
+A &amp; B --&gt; C &amp; D
+</pre></li>
+<li><p>连接长度</p>
+<p>流程图中的每个节点最终都会被渲染成一个等级。默认情况下，连接可以跨越任意数量的等级，你可以通过在连接中添加额外的短横线<code>-</code>来使某个连接比其他连接更长。</p>
+<p>在下面的示例中，从节点 B 到节点 E的连接中添加了两个额外的<code>-</code>，因此它比常规连接多跨越两个等级，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">  A[Start] --&gt; B&#123;Is it?&#125;;</span><br><span class="line">  B --&gt;|Yes| C[OK];</span><br><span class="line">  C --&gt; D[Rethink];</span><br><span class="line">  D --&gt; B;</span><br><span class="line">  B ----&gt;|No| E[End];</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart TD
+A[Start] --&gt; B{Is it?};
+B --&gt;|Yes| C[OK];
+C --&gt; D[Rethink];
+D --&gt; B;
+B ----&gt;|No| E[End];
+</pre>
+<p>当标签写在连接线中间的时候，必须在标签右侧的连接线中添加额外的<code>-</code>，下面的示例等效于上图。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">  A[Start] --&gt; B&#123;Is it?&#125;;</span><br><span class="line">  B --Yes--&gt; C[OK];</span><br><span class="line">  C --&gt; D[Rethink];</span><br><span class="line">  D --&gt; B;</span><br><span class="line">  B --No----&gt; E[End];</span><br></pre></td></tr></table></figure>
+<p>对于虚线或粗实线连接，要使用<code>.</code>或<code>=</code>作为额外添加的符号。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">长度</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">普通连接</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;">----</td>
+<td style="text-align: center;">-----</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">箭头连接</td>
+<td style="text-align: center;">--&gt;</td>
+<td style="text-align: center;">---&gt;</td>
+<td style="text-align: center;">----&gt;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">粗实线连接</td>
+<td style="text-align: center;">===</td>
+<td style="text-align: center;">====</td>
+<td style="text-align: center;">=====</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">粗实线箭头连接</td>
+<td style="text-align: center;">==&gt;</td>
+<td style="text-align: center;">===&gt;</td>
+<td style="text-align: center;">====&gt;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">虚线连接</td>
+<td style="text-align: center;">-.-</td>
+<td style="text-align: center;">-..-</td>
+<td style="text-align: center;">-...-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">虚线箭头连接</td>
+<td style="text-align: center;">-.-&gt;</td>
+<td style="text-align: center;">-..-&gt;</td>
+<td style="text-align: center;">-...-&gt;</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<h4 id="特殊用法">特殊用法</h4>
+<ul>
+<li><p>引号</p>
+<p>可以将文本放入引号内以呈现更复杂的文字。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart</span><br><span class="line">  id1[&quot;This is the text in the box&quot;]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart
+id1[&quot;This is the text in the box&quot;]
+</pre></li>
+<li><p>字符实体</p>
+<p>可以在文本中使用字符实体编码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[&quot;A double quote: #quot;&quot;]--&gt;B[&quot;A dec char: #9829;&quot;]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A[&quot;A double quote: #quot;&quot;]--&gt;B[&quot;A dec char: #9829;&quot;]
+</pre></li>
+<li><p>FontAwesome</p>
+<p>如果想加入来自 FontAwesome 的图标字体，需要引入 FontAwesome 样式，<a target="_blank" rel="noopener" href="https://mopsite.gitee.io/fontawesome">点此</a> 查看引入详情。</p>
+<p>图标属于复杂字符，需要放入引号内显示，通过<code>fa:icon-name</code>访问。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">graph TD</span><br><span class="line">B[&quot;fab:fa-twitter for peace&quot;]</span><br><span class="line">B--&gt;C[&quot;far:fa-ban forbidden&quot;]</span><br><span class="line">B--&gt;D[&quot;far:fa-heart&quot;]</span><br><span class="line">B--&gt;E[&quot;A far:fa-camera perhaps?&quot;]</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+B[&quot;fab:fa-twitter for peace&quot;]
+B--&gt;C[&quot;far:fa-ban forbidden&quot;]
+B--&gt;D[&quot;far:fa-heart&quot;]
+B--&gt;E[&quot;A far:fa-camera perhaps?&quot;]
+classDef default fill:#666;
+</pre></li>
+</ul>
+<h4 id="子图">子图</h4>
+<p>子图的语法格式为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">subgraph title</span><br><span class="line">    graph definition</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart TB</span><br><span class="line">  c1--&gt;a2</span><br><span class="line">  subgraph one</span><br><span class="line">  a1--&gt;a2</span><br><span class="line">  end</span><br><span class="line">  subgraph two</span><br><span class="line">  b1--&gt;b2</span><br><span class="line">  end</span><br><span class="line">  subgraph three</span><br><span class="line">  c1--&gt;c2</span><br><span class="line">  end</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart TB
+c1--&gt;a2
+subgraph one
+a1--&gt;a2
+end
+subgraph two
+b1--&gt;b2
+end
+subgraph three
+c1--&gt;c2
+end
+</pre>
+<p>可以设置子图之间的连接。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart TB</span><br><span class="line">  c1--&gt;a2</span><br><span class="line">  subgraph one</span><br><span class="line">  a1--&gt;a2</span><br><span class="line">  end</span><br><span class="line">  subgraph two</span><br><span class="line">  b1--&gt;b2</span><br><span class="line">  end</span><br><span class="line">  subgraph three</span><br><span class="line">  c1--&gt;c2</span><br><span class="line">  end</span><br><span class="line">  one --&gt; two</span><br><span class="line">  three --&gt; two</span><br><span class="line">  two --&gt; c2</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart TB
+c1--&gt;a2
+subgraph one
+a1--&gt;a2
+end
+subgraph two
+b1--&gt;b2
+end
+subgraph three
+c1--&gt;c2
+end
+one --&gt; two
+three --&gt; two
+two --&gt; c2
+</pre>
+<p>还可以通过方向语句设置子图的呈现方向。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  subgraph TOP</span><br><span class="line">    direction TB</span><br><span class="line">    subgraph B1</span><br><span class="line">        direction RL</span><br><span class="line">        i1 --&gt;f1</span><br><span class="line">    end</span><br><span class="line">    subgraph B2</span><br><span class="line">        direction BT</span><br><span class="line">        i2 --&gt;f2</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line">  A --&gt; TOP --&gt; B</span><br><span class="line">  B1 --&gt; B2</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+subgraph TOP
+  direction TB
+  subgraph B1
+      direction RL
+      i1 --&gt;f1
+  end
+  subgraph B2
+      direction BT
+      i2 --&gt;f2
+  end
+end
+A --&gt; TOP --&gt; B
+B1 --&gt; B2
+</pre>
+<h4 id="样式和类">样式和类</h4>
+<ul>
+<li><p>连接样式</p>
+<p>可以给连接修改样式。由于连接没有 id，所以需要使用连接的索引号（从 0 开始）。下面的例子中，使用的连接索引号为 1 ，因此为第二个连接添加了样式。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A--&gt;B--text--&gt;C--&gt;D</span><br><span class="line">  linkStyle 1 stroke:#ff3,stroke-width:4px,color:red;</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A--&gt;B--text--&gt;C--&gt;D
+linkStyle 1 stroke:#ff3,stroke-width:4px,color:red;
+</pre></li>
+<li><p>节点样式</p>
+<p>可以为节点应用特定样式，例如较粗的边框或不同的背景色。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  id1(Start)--&gt;id2(Stop)</span><br><span class="line">  style id1 fill:#f9f,stroke:#333,stroke-width:4px</span><br><span class="line">  style id2 fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+id1(Start)--&gt;id2(Stop)
+style id1 fill:#f9f,stroke:#333,stroke-width:4px
+style id2 fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+</pre></li>
+<li><p>类样式</p>
+<p>比每次都定义样式更方便的是定义一个类样式，并将这个类添加到需要修改的节点上。</p>
+<p>类定义类似如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">classDef className fill:#f9f,stroke:#333,stroke-width:4px;</span><br></pre></td></tr></table></figure>
+<p>将类添加到节点的操作如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class nodeId1 className;</span><br></pre></td></tr></table></figure>
+<p>也可以在一个语句中将类添加到多个节点：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class nodeId1,nodeId2 className;</span><br></pre></td></tr></table></figure>
+<p>添加类的一种更简短的形式是使用<code>:::</code>运算符将类名附加到节点后面：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">  A:::someclass --&gt; B</span><br><span class="line">  classDef someclass fill:#f96;</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+flowchart LR
+A:::someclass --&gt; B
+classDef someclass fill:#f96;
+</pre>
+<p>如果一个类被命名为 default，它将被应用到所有没有特定类样式的节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">classDef default fill:#f9f,stroke:#333,stroke-width:4px;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="其他图形展示">其他图形展示</h3>
+<p>除了流程图，Mermaid 还可以绘制多种其他类型的图形。详情查看 <a target="_blank" rel="noopener" href="https://mermaid-js.github.io/">Mermaid 官方文档</a>。</p>
+<h4 id="时序图">时序图</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">  participant Alice</span><br><span class="line">  participant Bob</span><br><span class="line">  Alice-&gt;&gt;John: Hello John, how are you?</span><br><span class="line">  loop Healthcheck</span><br><span class="line">      John-&gt;&gt;John: Fight against hypochondria</span><br><span class="line">  end</span><br><span class="line">  Note right of John: Rational thoughts &lt;br/&gt;prevail!</span><br><span class="line">  John--&gt;&gt;Alice: Great!</span><br><span class="line">  John-&gt;&gt;Bob: How about you?</span><br><span class="line">  Bob--&gt;&gt;John: Jolly good!</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+sequenceDiagram
+participant Alice
+participant Bob
+Alice-&gt;&gt;John: Hello John, how are you?
+loop Healthcheck
+    John-&gt;&gt;John: Fight against hypochondria
+end
+Note right of John: Rational thoughts &lt;br&#x2F;&gt;prevail!
+John--&gt;&gt;Alice: Great!
+John-&gt;&gt;Bob: How about you?
+Bob--&gt;&gt;John: Jolly good!
+</pre>
+<h4 id="甘特图">甘特图</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gantt</span><br><span class="line">dateFormat  YYYY-MM-DD</span><br><span class="line">title Adding GANTT diagram to mermaid</span><br><span class="line">excludes weekdays 2014-01-10</span><br><span class="line"></span><br><span class="line">section A section</span><br><span class="line">Completed task            :done,    des1, 2014-01-06,2014-01-08</span><br><span class="line">Active task               :active,  des2, 2014-01-09, 3d</span><br><span class="line">Future task               :         des3, after des2, 5d</span><br><span class="line">Future task2               :         des4, after des3, 5d</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+gantt
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram to mermaid
+excludes weekdays 2014-01-10
+
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2               :         des4, after des3, 5d
+</pre>
+<h4 id="类图">类图</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">Class01 &lt;|-- AveryLongClass : Cool</span><br><span class="line">Class03 *-- Class04</span><br><span class="line">Class05 o-- Class06</span><br><span class="line">Class07 .. Class08</span><br><span class="line">Class09 --&gt; C2 : Where am i?</span><br><span class="line">Class09 --* C3</span><br><span class="line">Class09 --|&gt; Class07</span><br><span class="line">Class07 : equals()</span><br><span class="line">Class07 : Object[] elementData</span><br><span class="line">Class01 : size()</span><br><span class="line">Class01 : int chimp</span><br><span class="line">Class01 : int gorilla</span><br><span class="line">Class08 &lt;--&gt; C2: Cool label</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+classDiagram
+Class01 &lt;|-- AveryLongClass : Cool
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 --&gt; C2 : Where am i?
+Class09 --* C3
+Class09 --|&gt; Class07
+Class07 : equals()
+Class07 : Object[] elementData
+Class01 : size()
+Class01 : int chimp
+Class01 : int gorilla
+Class08 &lt;--&gt; C2: Cool label
+</pre>
+<h4 id="行程图">行程图</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">journey</span><br><span class="line">  title My working day</span><br><span class="line">  section Go to work</span><br><span class="line">    Make tea: 5: Me</span><br><span class="line">    Go upstairs: 3: Me</span><br><span class="line">    Do work: 1: Me, Cat</span><br><span class="line">  section Go home</span><br><span class="line">    Go downstairs: 5: Me</span><br><span class="line">    Sit down: 5: Me</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+journey
+title My working day
+section Go to work
+  Make tea: 5: Me
+  Go upstairs: 3: Me
+  Do work: 1: Me, Cat
+section Go home
+  Go downstairs: 5: Me
+  Sit down: 5: Me
+</pre>
+<h4 id="饼图">饼图</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pie</span><br><span class="line">  title Key elements in Product X</span><br><span class="line">  &quot;Calcium&quot; : 42.96</span><br><span class="line">  &quot;Potassium&quot; : 50.05</span><br><span class="line">  &quot;Magnesium&quot; : 10.01</span><br><span class="line">  &quot;Iron&quot; :  5</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">
+pie
+title Key elements in Product X
+&quot;Calcium&quot; : 42.96
+&quot;Potassium&quot; : 50.05
+&quot;Magnesium&quot; : 10.01
+&quot;Iron&quot; :  5
+</pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
+              <a href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 插件</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20211103/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84Markdown%E7%9F%A5%E8%AF%86/" rel="prev" title="你不知道的Markdown知识">
+                  <i class="fa fa-chevron-left"></i> 你不知道的Markdown知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20211104/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8F%92%E4%BB%B6-MathJax/" rel="next" title="数学公式插件-MathJax">
+                  数学公式插件-MathJax <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">猛吃雪糕</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.2/dist/mermaid.min.js","integrity":"sha256-UIQPVkGifpwMvDH5yGgORJ9sSTDq38zz6BGU6dNaKhM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://mopsite.github.io/20211103/%E7%BB%98%E5%9B%BE%E6%8F%92%E4%BB%B6-Mermaid/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/fontawesome.js"></script>
+</body>
+</html>

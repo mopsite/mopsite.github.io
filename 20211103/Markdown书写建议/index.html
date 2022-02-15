@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mopsite.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="虽然目前编辑器对 Markdown 的支持存在很大差异，方言现象严重，但是对于 Markdown 基础语法的支持都是相似的。 针对 Markdown 基础语法产生的差异大部分是在区块相接、嵌套和 Lazy 输入时产生的。所以养成一个良好的书写习惯可以规避掉大部分兼容性问题。 本文将会提供一些 Markdown 书写的建议，遵循这些建议会让你的 Markdown 文档更加易读，出现更少的语法歧义，同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown书写建议">
+<meta property="og:url" content="https://mopsite.github.io/20211103/Markdown%E4%B9%A6%E5%86%99%E5%BB%BA%E8%AE%AE/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="虽然目前编辑器对 Markdown 的支持存在很大差异，方言现象严重，但是对于 Markdown 基础语法的支持都是相似的。 针对 Markdown 基础语法产生的差异大部分是在区块相接、嵌套和 Lazy 输入时产生的。所以养成一个良好的书写习惯可以规避掉大部分兼容性问题。 本文将会提供一些 Markdown 书写的建议，遵循这些建议会让你的 Markdown 文档更加易读，出现更少的语法歧义，同">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-03T12:00:21.000Z">
+<meta property="article:modified_time" content="2021-11-15T17:53:56.938Z">
+<meta property="article:author" content="猛吃雪糕">
+<meta property="article:tag" content="markdown">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mopsite.github.io/20211103/Markdown%E4%B9%A6%E5%86%99%E5%BB%BA%E8%AE%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mopsite.github.io/20211103/Markdown%E4%B9%A6%E5%86%99%E5%BB%BA%E8%AE%AE/","path":"20211103/Markdown书写建议/","title":"Markdown书写建议"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Markdown书写建议 | Hello World</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hello World</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="far fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="far fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="far fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="far fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="far fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%E5%85%83%E7%B4%A0"><span class="nav-number">1.</span> <span class="nav-text">范围元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E8%B0%83%E5%92%8C%E9%87%8D%E5%BC%BA%E8%B0%83"><span class="nav-number">2.</span> <span class="nav-text">强调和重强调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%93%BE%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">自动链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E9%A6%96%E7%A9%BA%E6%A0%BC"><span class="nav-number">4.</span> <span class="nav-text">行首空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E8%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E4%BB%A3%E7%A0%81"><span class="nav-number">7.</span> <span class="nav-text">区块代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%9A%94%E7%BA%BF"><span class="nav-number">8.</span> <span class="nav-text">分隔线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E5%BC%95%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">区块引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">10.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">11.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="猛吃雪糕"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">猛吃雪糕</p>
+  <div class="site-description" itemprop="description">帅到无边心是岸，拽临绝顶我为峰</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=37662788&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;37662788&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="far fa-comment fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:37662788@qq.com" title="E-Mail → mailto:37662788@qq.com" rel="noopener" target="_blank"><i class="far fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/mopsite" title="Github → https:&#x2F;&#x2F;github.com&#x2F;mopsite" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/mop233" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;mop233" rel="noopener" target="_blank"><i class="fab fa-codepen fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zcool.com.cn/u/15088128" title="ZCool → https:&#x2F;&#x2F;www.zcool.com.cn&#x2F;u&#x2F;15088128" rel="noopener" target="_blank"><i class="far fa-palette fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mopsite.github.io/20211103/Markdown%E4%B9%A6%E5%86%99%E5%BB%BA%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="猛吃雪糕">
+      <meta itemprop="description" content="帅到无边心是岸，拽临绝顶我为峰">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Markdown书写建议
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-03 20:00:21" itemprop="dateCreated datePublished" datetime="2021-11-03T20:00:21+08:00">2021-11-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-16 01:53:56" itemprop="dateModified" datetime="2021-11-16T01:53:56+08:00">2021-11-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%92%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">排版</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>虽然目前编辑器对 Markdown 的支持存在很大差异，方言现象严重，但是对于 Markdown 基础语法的支持都是相似的。</p>
+<p>针对 Markdown 基础语法产生的差异大部分是在区块相接、嵌套和 Lazy 输入时产生的。所以养成一个良好的书写习惯可以规避掉大部分兼容性问题。</p>
+<p>本文将会提供一些 Markdown 书写的建议，遵循这些建议会让你的 Markdown 文档更加易读，出现更少的语法歧义，同时也会具备更高的兼容性。</p>
+<span id="more"></span>
+<p>书写高兼容性的 Markdown 文档应该遵循以下两个原则：</p>
+<ul>
+<li><p><strong>清晰原则</strong>。清晰是 Markdown 文档「易读性」的体现，如果一份 Markdown 文档让人读起来都可能有语法歧义，那么对于机器来说，也很容易产生兼容性问题。清晰原则具体表现为区块间有明确的区分、行内元素有明确的范围、避免使用歧义语法、避免使用 Lazy 输入等方面。</p></li>
+<li><p><strong>简单原则</strong>。Markdown 本身只是轻量级的标记语言，使用过度复杂的功能、画蛇添足的输入内容，都会产生兼容性问题。简单原则具体表现为避免使用不被公认的偏僻功能、避免不必要的输入、尽量少用嵌套、范围行内元素避免嵌套等方面。</p></li>
+</ul>
+<h3 id="范围元素">范围元素</h3>
+<p>这里所说的范围元素指采用行内元素中标识包裹的语法元素，包括强调、重强调、删除线、行内代码和下划线 HTML 标签。</p>
+<ul>
+<li><p>范围元素不能超出所在的区块，最好不超出所在行，表格内的不能超出单元格。</p>
+<p>虽然目前部分编辑器很只能，允许跨行甚至跨区块使用，但是并不提倡这么使用，容易导致意想不到的结果。既然都是行内元素，那么就最好让它在一行内结束。</p>
+<p>不能跨区块很好理解，为什么不提倡跨行呢？一般的跨行使用是没有问题的，但是如果跨行使用行内代码，有的编辑器会变成同一行。另外跨行扩大了范围，再添加分为元素时容易出现范围元素的嵌套或交叉。最重要的原因是当我们实际书写时，很多时候我们是不能很好的区分到底应该使用多个文本行还是多个段落，当我们需要在文本行间添加空行转化为段落时，跨行的范围元素就会变成跨区块而失效，所以不推荐跨行使用范围元素。</p></li>
+<li><p>范围元素尽量避免使用交叉，少用嵌套。</p>
+<p>交叉不应该使用，因为太容易出现错误，而且目前很多编辑器支持不好，更重要的原因是交叉违背了 Markdown 的易读特性，不符合清晰原则。</p>
+<p>尽量少用嵌套也是因为可以让文档更清晰更简单。但是在实际的书写过程中，使用嵌套的几率是很高的。如果使用嵌套，特别是多个范围元素作用于同一段文本时，需要注意让元素标识两侧对称。</p></li>
+<li><p>除了行内代码之外的范围元素，书写时标识内侧应该紧贴文字，避免紧贴空格或特殊符号。紧贴文字之后易读性更高，也更符合 Markdown 的理念。</p>
+<p>紧贴文字，内侧避免紧贴符号：<code>123,**456**,789</code>。不推荐写成：<code>123**,456,**789</code>。</p>
+<p>紧贴文字，内侧避免紧贴空格：<code>test *span* elements</code>。不推荐写成：<code>test* span *elements</code>。</p></li>
+</ul>
+<h3 id="强调和重强调">强调和重强调</h3>
+<p>强调默认是斜体，重强调默认是粗体。</p>
+<p>为什么不直接叫斜体或粗体呢？因为强调和重强调的语法在 HTML 中输出就是<code>&lt;em&gt;</code>和<code>&lt;strong&gt;</code>标签，而不是直接表示斜体的<code>&lt;i&gt;</code>和粗体的<code>&lt;b&gt;</code>标签，只不过<code>&lt;em&gt;</code>和<code>&lt;strong&gt;</code>标签默认对应斜体和粗体。</p>
+<p>它们看似没有区别，但是在本质上有很大的区别。就好比在 Word 中使用样式添加标题，和直接对文字进行加粗并放大字号的区别一样。</p>
+<p>强调不是一个具体的添加格式，它的格式是可以改变的，不一定非要是斜体。只是目前大部分编辑器都是直接把强调理解为斜体，这就感觉有些掉价了。这也是非常可惜的做法，尤其是在中文领域。</p>
+<p>强调有两种书写方式：一对<code>*</code>或<code>_</code>包裹。重强调也有两种书写方式：一对<code>**</code>或<code>__</code>包裹。</p>
+<p>无论强调还是重强调，都建议<strong>只使用星号</strong>，不建议使用下划线。</p>
+<ol type="1">
+<li>有些编辑器会把<code>_</code>作为添加下划线的语法，而不是强调的语法。</li>
+<li>在计算机领域常使用<code>_</code>作为连字符或代替空格。部分 Markdown 语法规定两个字母间的<code>_</code>不被识别为强调。</li>
+<li>中文状态下，无法直接输入<code>_</code>，需要切换成英文才能输入。</li>
+</ol>
+<h3 id="自动链接">自动链接</h3>
+<p>链接的书写方式有三种：行内式、参考式和自动链接。</p>
+<p>其中，自动链接是一种快速添加方式，只要用<code>&lt;&gt;</code>包裹即可。而有些编辑器的 Lazy 输入允许不用尖括号包裹，可以直接输入链接。如果直接输入，请记得在后面加个空格以防万一。</p>
+<p><strong>建议使用自动链接时用尖括号包裹</strong>，如：<code>&lt;http://www.baidu.com&gt;</code>，因为很多编辑器不一定能自动识别链接。</p>
+<p>这三种链接书写方式<strong>建议使用行内式</strong>。当然，如果掌握熟练的话，随意使用。</p>
+<h3 id="行首空格">行首空格</h3>
+<p>行首的空格（包括 Tab）主要的功能是用于缩进式区块代码、列表嵌套等。</p>
+<p>原生 Markdown 允许在每一行行首任意输入 0~3 个空格，不会影响最终输出。其原意是让用户可以根据需要使用行首空格对源码进行对齐，增加易读性。</p>
+<p>但是在 Markdown 语法百花齐放的今天，使用这种方式输入是很危险的，而且现在的编辑器都非常智能，基本不存在易读性问题。所以<strong>建议只在缩进式代码和列表嵌套时使用行首空格</strong>。</p>
+<p>有的教程说可以在段落行首添加 2 个空格进行缩进，更好看。除非对 Markdown 非常熟练，否则不建议随意添加。</p>
+<h3 id="空行">空行</h3>
+<p>空行的作用主要是用于区块元素的连接。这里的建议是<strong>除了标题后接区块时可以不加空行以外，所有区块都建议使用一个空行区分</strong>。因为目前还没有一款编辑器要求标题后接区块必须添加空行。而且目前大部分编辑器都会把文档中的标题着重突出，也不存在易读性问题，所以标题后面的空行是可有可无的。</p>
+<p>至于其他区块，都用空行区分，就可以大大增加文档的可读性了。而且，这样也不必去记忆到底哪些区块相接需要空行，哪些不需要。多敲一个空行也不是什么难事，这样做既符合清晰原则又符合简单原则。</p>
+<p>一般使用一个空行就够了，多了虽然不会影响最后的输出，但是会让源码间隔过宽不利于源码的阅读。</p>
+<h3 id="标题">标题</h3>
+<p>标题有两种书写方式：一种 Setext 标题，采用<code>=</code>或<code>-</code>作为底线；一种 Atx 标题，采用行首<code>#</code>。</p>
+<p><strong>建议使用 Atx 标题</strong>。</p>
+<p>Atx 标题比 Setext 标题有太多优势：</p>
+<ol type="1">
+<li>Atx 标题支持 6 阶标题，而 Setext 只支持 2 阶标题；</li>
+<li>Atx 标题只占用一行，而 Setext 标题占用多行；</li>
+<li>次阶 Setext 标题与分隔线一样使用三个<code>-</code>作为语法，容易造成语法错误。</li>
+</ol>
+<p>总之，Setext 标题不稳定、容易出错、功能也单一，所以只推荐使用 Atx 标题。使用 Atx 标题唯一需要注意的是，<strong>井号后面加一个空格</strong>，这是标准的 Markdown 书写方式。</p>
+<h3 id="区块代码">区块代码</h3>
+<p>区块代码有两种书写方式：缩进式和围栏式。<strong>建议使用围栏式区块代码</strong>。</p>
+<p>围栏式代码比缩进式代码有太多优势：</p>
+<ol type="1">
+<li>围栏式代码有明确的开始和结束标识，而缩进式采用的 Tab 不是明确的开始标识；</li>
+<li>围栏式代码可以定义代码种类并高亮语法，而缩进式不能；</li>
+<li>缩进式代码与嵌套列表一样使用 Tab 作为语法，容易出现错误。</li>
+</ol>
+<h3 id="分隔线">分隔线</h3>
+<p>分隔线的写法有三种：三个或以上的<code>_</code>、<code>*</code>或<code>-</code>。</p>
+<p><strong>建议使用三个星号书写分隔线</strong>，因为这样最安全、也最方便：</p>
+<ol type="1">
+<li>下划线需要切换英文才能输入，星号更方便直接；</li>
+<li>减号与次阶 Setext 标题共用一个语法，不够安全。</li>
+</ol>
+<p>如果想使用减号写分隔线，可以在减号前预留空行，这样会更安全。</p>
+<h3 id="区块引用">区块引用</h3>
+<p>区块引用的书写其实很简单，因为最多就是嵌套一下段落之类的，出错率很低。</p>
+<p><strong>建议不要使用 Lazy 输入</strong>，老老实实在每一行的行首输入<code>&gt;</code>。<code>&gt;</code>后面可接空格，也可不接，建议还是接一个空格，因为这样更好看，而且可以与列表、Atx 标题等语法对齐，减少记忆负担。</p>
+<h3 id="列表">列表</h3>
+<p>与区块引用一样，请避免使用 Lazy 输入，因为列表太容易出问题。</p>
+<p><strong>项目标识后需要接空格</strong>，同时应该尽量少用列表嵌套，如果列表需要包含很多内容，可以多使用标题。</p>
+<p>对于有序列表，建议从数字 1 开始写，虽然有的语法允许用户自定义开始的数字，但是一般用不到。</p>
+<p>对于无序列表，项目表示可以用<code>*</code>、<code>+</code>或<code>-</code>三种方式，<strong>首选使用减号</strong>，因为减号可以直接输入，非常方便。</p>
+<p>另外还有一个建议：<strong>同一个列表中，同一级的项目使用同一个项目标识，不同级的列表用不同标识</strong>，这样效果更好。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- 一级列表</span><br><span class="line">  + 二级列表</span><br><span class="line">    * 三级列表</span><br><span class="line">- 一级列表</span><br><span class="line">  + 二级列表</span><br><span class="line">    * 三级列表</span><br><span class="line">- 一级列表</span><br><span class="line">  + 二级列表</span><br><span class="line">    * 三级列表</span><br></pre></td></tr></table></figure>
+<p>尽量不要使用不同符号写同一级列表，因为有的语法规定，用不同的项目符号会生成全新的列表，而且易读性差，也不符合清晰原则。</p>
+<h3 id="总结">总结</h3>
+<ol type="1">
+<li>范围元素不超出行，表格内的不超出单元格；</li>
+<li>范围元素不交叉，少嵌套。如果其那套，记得两侧标识要对称；</li>
+<li>除行内代码之外的范围元素应紧贴文字；</li>
+<li>不使用 Lazy 输入；</li>
+<li>除了标题后可以不接空行，所有区块使用空行区分；</li>
+<li>只在缩进式代码与列表嵌套时使用行首缩进；</li>
+<li>标题首选 Atx 式；</li>
+<li>区块代码首选围栏式；</li>
+<li>分隔线首选使用星号；</li>
+<li>有序列表建议从 1 开始写；</li>
+<li>无序列表的项目符号首选减号；</li>
+<li>同一级的无序列表使用同一个项目符号。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20211102/YAML%E8%AF%AD%E8%A8%80/" rel="prev" title="YAML 语言">
+                  <i class="fa fa-chevron-left"></i> YAML 语言
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20211103/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84Markdown%E7%9F%A5%E8%AF%86/" rel="next" title="你不知道的Markdown知识">
+                  你不知道的Markdown知识 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">猛吃雪糕</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.2/dist/mermaid.min.js","integrity":"sha256-UIQPVkGifpwMvDH5yGgORJ9sSTDq38zz6BGU6dNaKhM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://mopsite.github.io/20211103/Markdown%E4%B9%A6%E5%86%99%E5%BB%BA%E8%AE%AE/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xlovet/asset/js/fontawesome.js"></script>
+</body>
+</html>
