@@ -855,6 +855,101 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date1 = dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> date2 = dayjs(<span class="string">&#x27;2018-06-05&#x27;</span>)</span><br><span class="line">date1.diff(date2) <span class="comment">// 20214000000 默认单位是毫秒</span></span><br></pre></td></tr></table></figure>
 <p>要获取其他单位下的差异，则在第二个参数传入相应的单位。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date1 = dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>)</span><br><span class="line">date1.diff(<span class="string">&#x27;2018-06-05&#x27;</span>, <span class="string">&#x27;month&#x27;</span>) <span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
+<p>如果需要返回的结果为浮点数，需要将第三个参数设置为 true。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date1 = dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>)</span><br><span class="line">date1.diff(<span class="string">&#x27;2018-06-05&#x27;</span>, <span class="string">&#x27;month&#x27;</span>, <span class="literal">true</span>) <span class="comment">// 7.645161290322581</span></span><br></pre></td></tr></table></figure>
+<p><strong>支持的单位列表</strong></p>
+<p>各个传入的单位对大小写不敏感，支持缩写和复数。请注意，缩写是区分大小写的。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">单位</th>
+<th style="text-align: center;">缩写</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">day</td>
+<td style="text-align: center;">d</td>
+<td>星期几（星期天 0，星期六 6）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">week</td>
+<td style="text-align: center;">w</td>
+<td>Week of Year</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">quarter</td>
+<td style="text-align: center;">Q</td>
+<td>Quarter</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">month</td>
+<td style="text-align: center;">M</td>
+<td>月份（一月 0，十二月 11）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">year</td>
+<td style="text-align: center;">y</td>
+<td>Year</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">hour</td>
+<td style="text-align: center;">h</td>
+<td>Hour</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">minute</td>
+<td style="text-align: center;">m</td>
+<td>Minute</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">second</td>
+<td style="text-align: center;">s</td>
+<td>Second</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">millisecond</td>
+<td style="text-align: center;">ms</td>
+<td>Millisecond</td>
+</tr>
+</tbody>
+</table>
+<h4 id="unix-时间戳毫秒-1">Unix 时间戳（毫秒）</h4>
+<p>返回当前实例的 UNIX 时间戳，13 位数字，毫秒。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).valueOf() <span class="comment">// 1548381600000</span></span><br><span class="line">+dayjs(<span class="number">1548381600000</span>) <span class="comment">// 1548381600000</span></span><br></pre></td></tr></table></figure>
+<p>你应该使用 Unix Timestamp 来获取 UNIX 时间戳（10位，秒）。</p>
+<h4 id="unix-时间戳">Unix 时间戳</h4>
+<p>返回当前实例的 UNIX 时间戳，10 位数字，秒。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).unix() <span class="comment">// 1548381600</span></span><br></pre></td></tr></table></figure>
+<p>此值不包含毫秒信息，会进位到秒。</p>
+<h4 id="days-in-month">Days in Month</h4>
+<p>获取当前月份包含的天数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).daysInMonth() <span class="comment">// 31</span></span><br></pre></td></tr></table></figure>
+<h4 id="as-javascript-date">As Javascript Date</h4>
+<p>调用<code>dayjs#toDate</code>从 Day.js 对象中获取原生的 Date 对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).toDate()</span><br></pre></td></tr></table></figure>
+<h4 id="as-array">As Array</h4>
+<p>返回一个包含各个时间信息的 Array。</p>
+<div class="note warning"><p>使用本功能需先配置 ToArray 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(toArray)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).toArray() <span class="comment">// [ 2019, 0, 25, 0, 0, 0, 0 ]</span></span><br></pre></td></tr></table></figure>
+<h4 id="as-json">As JSON</h4>
+<p>序列化为 ISO 8601 格式的字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).toJSON() <span class="comment">// &#x27;2019-01-25T02:00:00.000Z&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="as-iso-8601-string">As ISO 8601 String</h4>
+<p>返回一个 ISO 8601 格式的字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).toISOString() <span class="comment">// &#x27;2019-01-25T02:00:00.000Z&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="as-object">As Object</h4>
+<p>返回包含时间信息的 Object。</p>
+<div class="note warning"><p>使用本功能需先配置 ToObject 插件，才能正常运行。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs.extend(toObject)</span><br><span class="line"></span><br><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).toObject()</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  years: 2019,</span></span><br><span class="line"><span class="comment">  months: 0,</span></span><br><span class="line"><span class="comment">  date: 25,</span></span><br><span class="line"><span class="comment">  hours: 0,</span></span><br><span class="line"><span class="comment">  minutes: 0,</span></span><br><span class="line"><span class="comment">  seconds: 0,</span></span><br><span class="line"><span class="comment">  milliseconds: 0</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="as-string">As String</h4>
+<p>返回包含时间信息的 string。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>).toString() <span class="comment">// &#x27;Fri, 25 Jan 2019 02:00:00 GMT&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="查询">查询</h3>
+<p>Day.js 对象还有很多查询的方法。</p>
 ]]></content>
       <categories>
         <category>前端</category>
