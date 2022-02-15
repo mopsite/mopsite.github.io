@@ -921,3 +921,150 @@ dayjs().calendar(null, {
   sameElse: 'DD/MM/YYYY' // Everything else (7/10/2011)
 })
 ```
+
+#### Difference
+
+返回指定单位下两个日期时间之间的差异。
+
+要获得以毫秒为单位的差异，请使用`dayjs#diff`。
+
+```js
+const date1 = dayjs('2019-01-25')
+const date2 = dayjs('2018-06-05')
+date1.diff(date2) // 20214000000 默认单位是毫秒
+```
+
+要获取其他单位下的差异，则在第二个参数传入相应的单位。
+
+```js
+const date1 = dayjs('2019-01-25')
+date1.diff('2018-06-05', 'month') // 7
+```
+
+如果需要返回的结果为浮点数，需要将第三个参数设置为 true。
+
+```js
+const date1 = dayjs('2019-01-25')
+date1.diff('2018-06-05', 'month', true) // 7.645161290322581
+```
+
+**支持的单位列表**
+
+各个传入的单位对大小写不敏感，支持缩写和复数。请注意，缩写是区分大小写的。
+
+|单位|缩写|详情|
+|:--:|:--:|---|
+|day|d|星期几（星期天 0，星期六 6）|
+|week|w|Week of Year|
+|quarter|Q|Quarter|
+|month|M|月份（一月 0，十二月 11）|
+|year|y|Year|
+|hour|h|Hour|
+|minute|m|Minute|
+|second|s|Second|
+|millisecond|ms|Millisecond|
+
+#### Unix 时间戳（毫秒）
+
+返回当前实例的 UNIX 时间戳，13 位数字，毫秒。
+
+```js
+dayjs('2019-01-25').valueOf() // 1548381600000
++dayjs(1548381600000) // 1548381600000
+```
+
+你应该使用 Unix Timestamp 来获取 UNIX 时间戳（10位，秒）。
+
+#### Unix 时间戳
+
+返回当前实例的 UNIX 时间戳，10 位数字，秒。
+
+```js
+dayjs('2019-01-25').unix() // 1548381600
+```
+
+此值不包含毫秒信息，会进位到秒。
+
+#### Days in Month
+
+获取当前月份包含的天数。
+
+```js
+dayjs('2019-01-25').daysInMonth() // 31
+```
+
+#### As Javascript Date
+
+调用`dayjs#toDate`从 Day.js 对象中获取原生的 Date 对象。
+
+```js
+dayjs('2019-01-25').toDate()
+```
+
+#### As Array
+
+返回一个包含各个时间信息的 Array。
+
+{%note warning%}
+使用本功能需先配置 ToArray 插件，才能正常运行。
+{%endnote%}
+
+```js
+dayjs.extend(toArray)
+
+dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
+```
+
+#### As JSON
+
+序列化为 ISO 8601 格式的字符串。
+
+```js
+dayjs('2019-01-25').toJSON() // '2019-01-25T02:00:00.000Z'
+```
+
+#### As ISO 8601 String
+
+返回一个 ISO 8601 格式的字符串。
+
+```js
+dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
+```
+
+#### As Object
+
+返回包含时间信息的 Object。
+
+{%note warning%}
+使用本功能需先配置 ToObject 插件，才能正常运行。
+{%endnote%}
+
+```js
+dayjs.extend(toObject)
+
+dayjs('2019-01-25').toObject()
+
+/*
+{
+  years: 2019,
+  months: 0,
+  date: 25,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  milliseconds: 0
+}
+*/
+```
+
+#### As String
+
+返回包含时间信息的 string。
+
+```js
+dayjs('2019-01-25').toString() // 'Fri, 25 Jan 2019 02:00:00 GMT'
+```
+
+### 查询
+
+Day.js 对象还有很多查询的方法。
