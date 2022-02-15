@@ -853,6 +853,8 @@
 <p>返回指定单位下两个日期时间之间的差异。</p>
 <p>要获得以毫秒为单位的差异，请使用<code>dayjs#diff</code>。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date1 = dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> date2 = dayjs(<span class="string">&#x27;2018-06-05&#x27;</span>)</span><br><span class="line">date1.diff(date2) <span class="comment">// 20214000000 默认单位是毫秒</span></span><br></pre></td></tr></table></figure>
+<p>要获取其他单位下的差异，则在第二个参数传入相应的单位。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date1 = dayjs(<span class="string">&#x27;2019-01-25&#x27;</span>)</span><br><span class="line">date1.diff(<span class="string">&#x27;2018-06-05&#x27;</span>, <span class="string">&#x27;month&#x27;</span>) <span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>前端</category>
