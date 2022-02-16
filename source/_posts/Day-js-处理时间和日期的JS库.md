@@ -1068,3 +1068,792 @@ dayjs('2019-01-25').toString() // 'Fri, 25 Jan 2019 02:00:00 GMT'
 ### 查询
 
 Day.js 对象还有很多查询的方法。
+
+#### Is Before
+
+这表示 Day.js 对象是否在另一个提供的日期时间之前。
+
+```js
+dayjs().isBefore(dayjs('2011-01-01')) // 默认毫秒
+```
+
+如果想使用除了毫秒以外的单位进行比较，则将单位作为第二个参数传入。
+
+```js
+dayjs().isBefore('2011-01-01', 'year')
+```
+
+各个传入的单位对大小写不敏感，支持缩写和复数。
+
+#### Is Same
+
+这表示 Day.js 对象是否和另一个提供的日期时间相同。
+
+```js
+dayjs().isSame(dayjs('2011-01-01')) // 默认毫秒
+dayjs().isSame('2011-01-01', 'year')
+```
+
+当使用第二个参数时，将会连同去比较更大的单位。如传入 month 将会比较 month 和 year。传入 day 将会比较 day、month 和 year。
+
+#### Is After
+
+这表示 Day.js 对象是否在另一个提供的日期时间之后。
+
+```js
+dayjs().isAfter(dayjs('2011-01-01'))
+dayjs().isAfter('2011-01-01', 'year')
+```
+
+#### Is Same or Before/After
+
+这表示 Day.js 对象是否和另一个提供的日期时间相同或在其之前/之后。
+
+{%note warning%}
+使用本功能需先配置 IsSameOrBefore/After 插件，才能正常运行。
+{%endnote%}
+
+```js
+dayjs.extend(isSameOrBefore)
+dayjs.extend(isSameOrAfter)
+
+dayjs.isSameOrBefore(dayjs('2011-01-01'))
+dayjs.isSameOrBefore('2011-01-01', 'year')
+dayjs.isSameOrAfter(dayjs('2011-01-01'))
+dayjs.isSameOrAfter('2011-01-01', 'year')
+```
+
+#### Is Between
+
+这表示 Day.js 对象是否在其他两个日期时间之间。
+
+{%note warning%}
+使用本功能需先配置 IsBetween 插件，才能正常运行。
+{%endnote%}
+
+```js
+dayjs.extend(isBetween)
+
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'))
+dayjs().isBetween('2010-10-19', '2010-10-25', 'year')
+```
+
+第四个参数是设置包容性。`[`表示包含，`(`表示排除。要使用包容性参数，必须同时传入两个指示符。
+
+```js
+dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', null, '[)')
+```
+
+#### Is a Dayjs
+
+这表示一个变量是否为 Day.js 对象。
+
+```js
+dayjs.isDayjs(dayjs()) // true
+dayjs.isDayjs(new Date()) // false
+```
+
+这和使用 instanceof 的结果是一样的：
+
+```js
+dayjs() instanceof dayjs // true
+```
+
+#### Is Leap Year
+
+查询 Day.js 对象的年份是否是闰年。
+
+{%note warning%}
+使用本功能需先配置 IsLeapYear 插件，才能正常运行。
+{%endnote%}
+
+```js
+dayjs.extend(isLeapYear)
+dayjs('2000-01-01').isLeapYear() // true
+```
+
+### 国际化（i18n）
+
+Day.js 完美支持国际化。但除非手动加载，多国语言默认时不会被打包到工程里的。
+
+你可以加载多个其他语言并自由切换。
+
+#### 加载语言配置
+
+**NodeJS**
+
+按需加载语言文件。
+
+```js
+require('dayjs/locale/zh-cn')
+
+dayjs.locale('zh-cn') // 全局使用
+dayjs().locale('zh-cn').format() // 当前实例使用
+```
+
+你还可以加载并获取语言配置对象，方便后面使用。
+
+```js
+var locale_de = require('dayjs/locale/de')
+```
+
+**浏览器**
+
+```html
+<script src="path/to/dayjs/locale/de"></script>
+<script>
+  dayjs.locale('de')
+  dayjs().locale('de').format()
+</script>
+```
+
+获取语言对象方便后面使用。
+
+```html
+<script src="path/to/dayjs/locale/de"></script>
+<script>
+  var customLocale = window.dayjs_locale_zh_cn
+</script>
+```
+
+可以通过 CDN 加载 Day.js。
+
+```html
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/locale/zh-cn.js"></script>
+<script>dayjs.locale('zh-cn')</script>
+```
+
+#### 改变语言配置
+
+**全局**
+
+默认情况下，Day.js 只内置了 English 的语言配置。你可以按需加载其他本地化语言配置。
+
+```js
+require('dayjs/locale/zh-cn')
+```
+
+当加载了一个语言配置之后，它就是可用的状态了。要改变全局语言配置，只需调用`dayjs.locale`并传入一个已经加载的语言配置的名称。
+
+更改全局的语言配置并不会影响之前存在的实例。
+
+```js
+dayjs.locale('zh-cn') // 全局使用简体中文
+dayjs.locale('en') // 全局使用默认的英语语言
+```
+
+**当前实例**
+
+当操作多个 Day.js 实例并想格式化显示为不同语言的文字时，全局的语言配置可能会出现问题。
+
+用法与`dayjs#locale`一致，但只会修改当前实例的语言配置。
+
+```js
+require('dayjs/locale/de')
+dayjs().locale('de').format() // 局部修改语言配置
+```
+
+#### 查看当前语言配置
+
+返回当前 Day.js 实例的语言配置。
+
+```js
+dayjs.locale() // 'en'
+```
+
+#### 当前语言的月份和周
+
+获取当前语言配置的全部月份和星期列表。
+
+{%note warning%}
+使用本功能需先配置 LocleData 插件，才能正常运行。
+{%endnote%}
+
+```js
+dayjs.extend(localeData)
+
+dayjs.weekdays()
+dayjs.weekdaysShort()
+dayjs.weekdaysMin()
+dayjs.monthsShort()
+dayjs.months() // e.g. return [ 'January','February','March','April','May',
+// 'June','July','August','September','October','November','December' ]
+```
+
+#### 获取语言配置的属性
+
+你可以通过调用`dayjs.localeData()`来获得当前全局语言配置的属性。
+
+{%note warning%}
+使用本功能需先配置 LocleData 插件，才能正常运行。
+{%endnote%}
+
+```js
+dayjs.extend(localeData)
+
+globalLocaleData = dayjs.localeData()
+globalLocaleData.firstDayOfWeek()
+globalLocaleData.months()
+globalLocaleData.monthsShort()
+globalLocaleData.weekdays()
+globalLocaleData.weekdaysShort()
+globalLocaleData.weekdaysMin()
+
+globalLocaleData.months(dayjs())
+globalLocaleData.monthsShort(dayjs())
+globalLocaleData.weekdays(dayjs())
+globalLocaleData.weekdaysShort(dayjs())
+globalLocaleData.weekdaysMin(dayjs())
+
+instanceLocaleData = dayjs().localeData()
+instanceLocaleData.firstDayOfWeek()
+instanceLocaleData.months()
+instanceLocaleData.monthsShort()
+instanceLocaleData.weekdays()
+instanceLocaleData.weekdaysShort()
+instanceLocaleData.weekdaysMin()
+```
+
+### 插件
+
+插件是一些独立的程序，可以给 Day.js 增加新功能和扩展已有功能。
+
+默认情况下，Day.js 只包含核心的代码，并没有安装任何插件。你可以加载多个插件来满足各类需求。
+
+你还可以编写自己的 Day.js 插件来满足不同的需求。插件模板如下：
+
+```js
+export default (option, dayjsClass, dayjsFactory) => {
+  // extend dayjs()
+  // e.g. add dayjs().isSameOrBefore()
+  dayjsClass.prototype.isSameOrBefore = function(arguments) {}
+
+  // extend dayjs
+  // e.g. add dayjs.utc()
+  dayjsFactory.utc = arguments => {}
+
+  // overriding existing API
+  // e.g. extend dayjs().format()
+  const oldFormat = dayjsClass.prototype.format
+  dayjsClass.prototype.format = function(arguments) {
+    // original format result
+    const result = oldFormat.bind(this)(arguments)
+    // return modified result
+  }
+}
+```
+
+#### 加载插件
+
+**NodeJS**
+
+```js
+var AdvancedFormat = require('dayjs/plugin/advancedFormat')
+
+dayjs.extend(AdvancedFormat)
+```
+
+**浏览器**
+
+```html
+<script src="path/to/dayjs/plugin/advancedFormat"></script>
+
+<script>
+  dayjs.extend(window.dayjs_plugin_advancedFormat)
+</script>
+```
+
+可以通过 CDN 加载 Day.js。
+
+```html
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
+<script>dayjs.extend(window.dayjs_plugin_utc)</script>
+```
+
+#### AdvancedFormat
+
+AdvancedFormat 扩展了`dayjs().format`API 以支持更多模板。
+
+```js
+var advancedFormat = require('dayjs/plugin/advancedFormat')
+dayjs.extend(advancedFormat)
+
+dayjs().format('Q Do k kk X x')
+```
+
+扩展的模板列表：
+
+|模板|输出|详情|
+|---|---|---|
+|Q|1-4|季度|
+|Do|1st 2nd ... 31st|带序数词的月份里的一天|
+|k|1-24|时：由 1 开始|
+|kk|01-24|时：由 1 开始，两位数|
+|X|1360013296|秒为单位的 Unix 时间戳|
+|x|1360013296123|毫秒为单位的 Unix 时间戳|
+|w|1 2 ... 52 53|周数（依赖 WeekOfYear 插件）|
+|ww|01 02 ... 52 53|周数，两位数（依赖 WeekOfYear 插件）|
+|W|1 2 ... 52 53|ISO 周数（依赖 IsoWeek 插件）|
+|WW|01 02 ... 52 53|ISO 周数，两位数（依赖 IsoWeek 插件）|
+|wo|1st 2nd ... 52nd 53rd|带序号周数（依赖 WeekOfYear 插件）|
+|gggg|2017|按周计算的年份（依赖 WeekYear 插件）|
+|GGGG|2017|ISO 按周计算的年份（依赖 IsoWeek 插件）|
+|z|EST|UTC 偏移量的缩写（依赖 Timezone 插件）|
+|zzz|Eastern Standard Time|UTC 偏移量的全名（依赖 Timezone 插件）|
+
+#### ArraySupport
+
+ArraySupport 扩展了`dayjs()`、`dayjs.utc`API 以支持数组参数。
+
+```js
+var arraySupport = require("dayjs/plugin/arraySupport");
+dayjs.extend(arraySupport);
+
+dayjs([2010, 1, 14, 15, 25, 50, 125]);
+dayjs.utc([2010, 1, 14, 15, 25, 50, 125]);
+```
+
+#### Calendar
+
+Calendar 增加了`.calendar`API 返回一个 string 来显示日历时间。
+
+```js
+var calendar = require('dayjs/plugin/calendar')
+dayjs.extend(calendar)
+
+dayjs().calendar(dayjs('2008-01-01'))
+dayjs().calendar(null, {
+  sameDay: '[Today at] h:mm A', // The same day ( Today at 2:30 AM )
+  nextDay: '[Tomorrow at] h:mm A', // The next day ( Tomorrow at 2:30 AM )
+  nextWeek: 'dddd [at] h:mm A', // The next week ( Sunday at 2:30 AM )
+  lastDay: '[Yesterday at] h:mm A', // The day before ( Yesterday at 2:30 AM )
+  lastWeek: '[Last] dddd [at] h:mm A', // Last week ( Last Monday at 2:30 AM )
+  sameElse: 'DD/MM/YYYY' // Everything else ( 17/10/2011 )
+})
+```
+
+#### CustomParseFormat
+
+CustomParseFormat 扩展了`dayjs()`支持自定义时间格式。
+
+```js
+var customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat)
+
+dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
+// Returns an instance containing '1969-05-02T18:02:03.000Z'
+
+dayjs('2018 Enero 15', 'YYYY MMMM DD', 'es')
+// Returns an instance containing '2018-01-15T00:00:00.000Z'
+
+dayjs('1970-00-00', 'YYYY-MM-DD', true) // strict parsing
+```
+
+#### DayOfYear
+
+DayOfYear 增加了`.dayOfYear()`API 返回一个 number 来表示 Dayjs 的日期是年中第几天，或设置成是年中第几天。
+
+```js
+var dayOfYear = require('dayjs/plugin/dayOfYear')
+dayjs.extend(dayOfYear)
+
+dayjs('2010-01-01').dayOfYear() // 1
+dayjs('2010-01-01').dayOfYear(365) // 2010-12-31
+```
+
+#### Duration
+
+Duration 增加了`.duration`和`.isDuring`API 来支持时间长度。
+
+```js
+var duration = require('dayjs/plugin/duration')
+dayjs.extend(duration)
+
+dayjs.duration(100)
+```
+
+#### IsBetween
+
+IsBetween 增加了`.isBetween()`API 返回一个 boolean 来展示一个时间是否介于两个时间之间。
+
+```js
+var isBetween = require('dayjs/plugin/isBetween')
+dayjs.extend(isBetween)
+
+// 如果使用年份对比 `year` 则传入第三个参数
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year')
+
+// 第四个参数是两个字符 '[' 表示包含, '(' 表示不包含
+// '()' 不包含开始和结束的日期 (默认)
+// '[]' 包含开始和结束的日期
+// '[)' 包含开始日期但不包含结束日期
+dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', null, '[)')
+```
+
+#### IsLeapYear
+
+IsLeapYear 增加了`.isLeapYear`API 返回一个 boolean 来展示一个 Day.js 对象的年份是不是闰年。
+
+```js
+var isLeapYear = require('dayjs/plugin/isLeapYear')
+dayjs.extend(isLeapYear)
+
+dayjs('2000-01-01').isLeapYear() // true
+```
+
+#### IsSameOrAfter
+
+IsSameOrAfter 增加了`.isSameOrAfter()`API 返回一个 boolean 来展示一个日期是非和另一个日期相同或在其后。
+
+```js
+var isSameOrAfter = require('dayjs/plugin/isSameOrAfter')
+dayjs.extend(isSameOrAfter)
+
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year')
+```
+
+#### IsSameOrBefore
+
+IsSameOrBefore 增加了`.isSameOrBefore()`API 返回一个 boolean 来展示一个日期是非和另一个日期相同或在之前。
+
+```js
+var isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
+dayjs.extend(isSameOrBefore)
+
+dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year')
+```
+
+#### IsToday
+
+IsToday 增加了`.isToday()`API 来判断当前 Day.js 对象是否是今天。
+
+```js
+var isToday = require('dayjs/plugin/isToday')
+
+dayjs.extend(isToday)
+
+dayjs().isToday() // true
+```
+
+#### IsTomorrow
+
+IsTomorrow 增加了`.isTomorrow`API 来判断当前 Day.js 对象是否是明天。
+
+```js
+var isTomorrow = require('dayjs/plugin/isTomorrow')
+
+dayjs.extend(isTomorrow)
+
+dayjs().add(1, 'day').isTomorrow() // true
+```
+
+#### IsYesterday
+
+IsYesterday 增加了`.isYesterday`API 来判断当前 Day.js 对象是否是昨天。
+
+```js
+var isYesterday = require('dayjs/plugin/isYesterday')
+
+dayjs.extend(isYesterday)
+
+dayjs().add(-1, 'day').isYesterday() // true
+```
+
+#### IsoWeek
+
+IsoWeek 添加了`.isoWeek()`API 以获取或设置年度的 ISO 周数。并添加`.isoWeekday()`获取或设置一周的 ISO 日和`isoWeekYear()`获取 ISO 周年，并扩展`.startOf`、`.endOf`APIs 支持单位 `isoWeek`。
+
+```js
+var isoWeek = require('dayjs/plugin/isoWeek')
+
+dayjs.extend(isoWeek)
+
+dayjs().isoWeek()
+dayjs().isoWeekday()
+dayjs().isoWeekYear()
+```
+
+#### IsoWeeksInYear
+
+IsoWeeksInYear 增加了`.isoWeeksInYear()`API 返回一个 number 来得到依据 ISO week 标准一年中有几周。
+
+{%note warning%}
+使用本功能需先配置 IsLeapYear 插件，才能正常运行。
+{%endnote%}
+
+```js
+var isoWeeksInYear = require('dayjs/plugin/isoWeeksInYear')
+var isLeapYear = require('dayjs/plugin/isLeapYear') // dependent on isLeapYear plugin
+dayjs.extend(isoWeeksInYear)
+dayjs.extend(isLeapYear)
+
+dayjs('2004-01-01').isoWeeksInYear() // 53
+dayjs('2005-01-01').isoWeeksInYear() // 52
+```
+
+#### LocaleData
+
+LocaleData 增加了`dayjs().localeData`API 来提供本地化数据。
+
+```js
+var localeData = require('dayjs/plugin/localeData')
+dayjs.extend(localeData)
+
+dayjs().localeData()
+```
+
+支持的方法：
+
+```js
+dayjs.months()
+dayjs.monthsShort()
+dayjs.weekdays()
+dayjs.weekdaysShort()
+dayjs.weekdaysMin()
+dayjs.longDateFormat('L')
+
+globalLocaleData = dayjs.localeData()
+globalLocaleData.firstDayOfWeek()
+globalLocaleData.months()
+globalLocaleData.monthsShort()
+globalLocaleData.weekdays()
+globalLocaleData.weekdaysShort()
+globalLocaleData.weekdaysMin()
+globalLocaleData.longDateFormat('L')
+
+globalLocaleData.months(dayjs())
+globalLocaleData.monthsShort(dayjs())
+globalLocaleData.weekdays(dayjs())
+globalLocaleData.weekdaysShort(dayjs())
+globalLocaleData.weekdaysMin(dayjs())
+globalLocaleData.meridiem()
+globalLocaleData.ordinal()
+
+instanceLocaleData = dayjs().localeData()
+instanceLocaleData.firstDayOfWeek()
+instanceLocaleData.months()
+instanceLocaleData.monthsShort()
+instanceLocaleData.weekdays()
+instanceLocaleData.weekdaysShort()
+instanceLocaleData.weekdaysMin()
+instanceLocaleData.longDateFormat('L')
+instanceLocaleData.meridiem()
+instanceLocaleData.ordinal()
+```
+
+#### LocalizedFormat
+
+LocalizedFormat 扩展了`dayjs().format`API 以支持更多本地化的长日期格式。
+
+```js
+var localizedFormat = require('dayjs/plugin/localizedFormat')
+dayjs.extend(localizedFormat)
+
+dayjs().format('L LT')
+```
+
+#### MinMax
+
+MinMax 增加了`.min`、`.max`API 返回一个 dayjs 来比较传入的 Day.js 实例的大小。它接受传入多个 Day.js 实例或一个数组。
+
+```js
+var minMax = require('dayjs/plugin/minMax')
+dayjs.extend(minMax)
+
+dayjs.max(dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01'))
+dayjs.min([dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01')])
+```
+
+#### ObjectSupport
+
+ObjectSupport 扩展了`dayjs()`、`dayjs.utc`、`dayjs().set`、`dayjs().add`、`dayjs().subtract`API 以支持传入对象参数。
+
+```js
+var objectSupport = require("dayjs/plugin/objectSupport");
+dayjs.extend(objectSupport);
+
+dayjs({
+  year: 2010,
+  month: 1,
+  day: 12
+});
+dayjs.utc({
+  year: 2010,
+  month: 1,
+  day: 12
+});
+dayjs().set({ year: 2010, month: 1, day: 12 })
+dayjs().add({ M: 1 })
+dayjs().subtract({ month: 1 })
+```
+
+#### PluralGetSet
+
+PluralGetSet 增加了复数形式的 API。`.milliseconds()`, `.seconds()`, `.minutes()`, `.hours()`, `.days()`, `.weeks()`, `.isoWeeks()`, `.months()`, `.quarters()`, `.years()`, `.dates()`。
+
+```js
+var pluralGetSet = require('dayjs/plugin/pluralGetSet')
+dayjs.extend(pluralGetSet)
+
+dayjs().millisecond()
+dayjs().milliseconds()
+```
+
+#### QuarterOfYear
+
+QuarterOfYear 增加了`.quarter()`API 返回当前实例是哪个季度，并扩展了`.add`、`.subtract`、`.startOf`、`.endOf`API 来支持 quarter 季度单位。
+
+```js
+var quarterOfYear = require('dayjs/plugin/quarterOfYear')
+dayjs.extend(quarterOfYear)
+
+dayjs('2010-04-01').quarter() // 2
+dayjs('2010-04-01').quarter(2)
+```
+
+#### RelativeTime
+
+RelativeTime 增加了`.from`、`.to`、`.fromNow`、`.toNow`4 个 API 来展示相对的时间。
+
+```js
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
+dayjs().from(dayjs('1990-01-01')) // 31 年后
+dayjs().from(dayjs('1990-01-01'), true) // 31 年
+dayjs().fromNow()
+
+dayjs().to(dayjs('1990-01-01')) // 31 年前
+dayjs().toNow()
+```
+
+#### Timezone
+
+Timezone 插件添加了`dayjs.tz`、`.tz`、`.tz.guess`、`.tz.setDefault`API，在时区之间解析或显示。
+
+```js
+var utc = require('dayjs/plugin/utc') // dependent on utc plugin
+var timezone = require('dayjs/plugin/timezone')
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+dayjs.tz("2014-06-01 12:00", "America/New_York")
+
+dayjs("2014-06-01 12:00").tz("America/New_York")
+
+dayjs.tz.guess()
+
+dayjs.tz.setDefault("America/New_York")
+```
+
+#### ToArray
+
+ToArray 增加了`.toArray()`API 来返回包含时间数值的 array。
+
+```js
+var toArray = require('dayjs/plugin/toArray')
+dayjs.extend(toArray)
+
+dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
+```
+
+#### ToObject
+
+ToObject 增加了`.toObject()`API 来返回包含时间数值的 object。
+
+```js
+var toObject = require('dayjs/plugin/toObject')
+dayjs.extend(toObject)
+
+dayjs('2019-01-25').toObject()
+/* { years: 2019,
+     months: 0,
+     date: 25,
+     hours: 0,
+     minutes: 0,
+     seconds: 0,
+     milliseconds: 0 } */
+```
+
+#### UpdateLocale
+
+UpdateLocale 增加了`.updateLocale`API 来更新语言配置的属性。
+
+```js
+var updateLocale = require('dayjs/plugin/updateLocale')
+dayjs.extend(updateLocale)
+
+dayjs.updateLocale('en', {
+  months : String[]
+})
+```
+
+#### UTC
+
+UTC 增加了`.utc`、`.local`、`.isUTC`APIs 使用 UTC 模式来解析和展示时间。
+
+```js
+var utc = require('dayjs/plugin/utc')
+dayjs.extend(utc)
+
+// 默认当地时间
+dayjs().format() //2019-03-06T17:11:55+08:00
+
+// UTC 模式
+dayjs.utc().format() // 2019-03-06T09:11:55Z
+
+// 将本地时间转换成 UTC 时间
+dayjs().utc().format() // 2019-03-06T09:11:55Z
+
+// 在 UTC 模式下，所有的展示方法都将使用 UTC 而不是本地时区
+// 所有的 get 和 set 方法也都会使用 Date#getUTC* 和 Date#setUTC* 而不是 Date#get* and Date#set*
+dayjs.utc().isUTC() // true
+dayjs.utc().local().format() //2019-03-06T17:11:55+08:00
+dayjs.utc('2018-01-01', 'YYYY-MM-DD') // with CustomParseFormat plugin
+```
+
+默认情况下，Day.js 会把时间解析成本地时间。如果想要使用 UTC 模式来解析和展示时间，可以使用`dayjs.utc()`而不是`dayjs()`。
+
+#### WeekOfYear
+
+WeekOfYear 增加了`.week()`API 返回一个 number 来表示 Day.js 的日期是年中第几周。
+
+```js
+var weekOfYear = require('dayjs/plugin/weekOfYear')
+dayjs.extend(weekOfYear)
+
+dayjs('2018-06-27').week() // 26
+dayjs('2018-06-27').week(5) // 设置周
+```
+
+#### WeekYear
+
+WeekYear 增加了`.weekYear()`API 来获取基于当前语言的按周计算的年份。
+
+```js
+var weekYear = require('dayjs/plugin/weekYear')
+var weekOfYear = require('dayjs/plugin/weekOfYear') // dependent on weekOfYear plugin
+dayjs.extend(weekOfYear)
+dayjs.extend(weekYear)
+
+dayjs().weekYear()
+```
+
+#### WeekDay
+
+WeekDay 增加了`.weekday()`API 来获取或设置当前语言的星期。
+
+```js
+var weekday = require('dayjs/plugin/weekday')
+dayjs.extend(weekday)
+
+// 当星期天是一周的第一天
+dayjs().weekday(-7); // 上个星期天
+dayjs().weekday(7); // 下个星期天
+
+// 当星期一是一周的第一天
+dayjs().weekday(-7) // 上个星期一
+dayjs().weekday(7) // 下个星期一
+```
