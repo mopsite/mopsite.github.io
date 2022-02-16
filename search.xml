@@ -4308,6 +4308,201 @@ title Key elements in Product X
       </tags>
   </entry>
   <entry>
+    <title>JavaScript颜色处理库-Chroma.js</title>
+    <url>/20220216/JavaScript%E9%A2%9C%E8%89%B2%E5%A4%84%E7%90%86%E5%BA%93-Chroma-js/</url>
+    <content><![CDATA[<p>许多开发人员用 CS 设计颜色代码和比例，从一些在线调色板中选择颜色。然而，它并不是每个人都喜欢的工具。好消息是我们有 Chroma.js，这是一个很小的库，对于在 JavaScript 代码中生成色阶有很大帮助。这意味着你可以直接将其插入到 JavaScript 代码框架中！</p>
+<span id="more"></span>
+<p>chroma.js 是一个很小的、零依赖的 JavaScript 库，可以用于各种颜色的转换。</p>
+<h2 id="安装">安装</h2>
+<p>对于 Node.js，使用<code>npm install chroma-js</code>命令安装 chroma-js npm 模块，然后使用<code>import chroma from "chroma-js"</code>命令将其导入到你的 JavaScript 中。</p>
+<p>对于浏览器，请下载 chroma.min.js 文件，或使用 <a href="https://cdnjs.com/libraries/chroma-js">cdnjs</a> 上的托管版本，即可启动并操作颜色。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;#D4F880&#x27;</span>).darken().hex(); <span class="comment">// #9BC04B</span></span><br></pre></td></tr></table></figure>
+<h2 id="快速开始">快速开始</h2>
+<p>以下是 chroma.js 能为你做的几件事：</p>
+<ul>
+<li>从各种格式中读取颜色</li>
+<li>分析和处理颜色</li>
+<li>将颜色转换为多种格式</li>
+<li>不同颜色中的线性和贝塞尔插值</li>
+</ul>
+<p>这里有一个简单的读取/操作/输出链的示例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;pink&#x27;</span>).darken().saturate(<span class="number">2</span>).hex()</span><br></pre></td></tr></table></figure>
+<p>除此之外，chroma.js 还可以使用各种方法帮你生成漂亮的颜色，例如用于映射或数据可视化的调色板。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.scale([<span class="string">&#x27;#fafa6e&#x27;</span>, <span class="string">&#x27;#2a4858&#x27;</span>]).mode(<span class="string">&#x27;1ch&#x27;</span>).colors(<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<p>chroma.js 提供了更多功能，这就是它的要点。</p>
+<h2 id="api">API</h2>
+<h3 id="chroma">Chroma</h3>
+<h4 id="chroma-1">chroma</h4>
+<p>第一步，是将你的颜色放入 chroma.js。这就是通用构造函数<code>chroma()</code>的作用。该函数尝试为你猜测输入颜色的格式。例如，它将识别 W3CX11 规范中的任何命名颜色：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;pink&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>如果没有匹配的命名颜色，chroma.js 则会检查十六进制字符串。它忽略大小写，<code>#</code>符号是可选的，它也可以识别较短的三个字母格式。因此，诸如<code>#ff3399</code>、<code>FF3399</code>、<code>#f39</code>等都是有效的十六进制表示。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;#ff3399&#x27;</span>)</span><br><span class="line">chroma(<span class="string">&#x27;F39&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>除了十六进制字符串之外，十六进制数（事实上，任何介于 0 到 16777215 之间的数）都将被识别。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="number">0xff3399</span>)</span><br></pre></td></tr></table></figure>
+<p>你还可以单独传递 RGB 值。每个参数必须在 0 到 255 之间。你可以将数字作为单独的参数或作为数组传递。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="number">0xff</span>, <span class="number">0x33</span>, <span class="number">0x99</span>)</span><br><span class="line">chroma(<span class="number">255</span>, <span class="number">51</span>, <span class="number">153</span>)</span><br><span class="line">chroma([<span class="number">255</span>, <span class="number">51</span>, <span class="number">153</span>])</span><br></pre></td></tr></table></figure>
+<p>你可以通过将颜色空间的名称作为最后一个参数来构造来自不同颜色空间的颜色。在这里，我们通过传递色调度数（0 ~ 360）以及饱和度和亮度的百分比来在定义 HSL 中的相同颜色：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="number">330</span>, <span class="number">1</span>, <span class="number">0.6</span>, <span class="string">&#x27;hsl&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>你还可以通过传递一个普通的 JS 对象来构造颜色，该对象的属性对应于 chroma.js 支持的颜色空间：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(&#123; <span class="attr">h</span>: <span class="number">120</span>, <span class="attr">s</span>: <span class="number">1</span>, <span class="attr">l</span>: <span class="number">0.75</span> &#125;)</span><br><span class="line">chroma(&#123; <span class="attr">l</span>: <span class="number">80</span>, <span class="attr">c</span>: <span class="number">25</span>, <span class="attr">h</span>: <span class="number">200</span> &#125;)</span><br><span class="line">chroma(&#123; <span class="attr">c</span>: <span class="number">1</span>, <span class="attr">m</span>: <span class="number">0.5</span>, <span class="attr">y</span>: <span class="number">0</span>, <span class="attr">k</span>: <span class="number">0.2</span> &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="chroma.valid">chroma.valid</h4>
+<p>你可以使用 chroma.valid 来判断是否可以通过 chroma.js 正确解析某个颜色参数。返回 boolean。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.valid(<span class="string">&#x27;red&#x27;</span>); <span class="comment">// true</span></span><br><span class="line">chroma.valid(<span class="string">&#x27;bread&#x27;</span>); <span class="comment">// false</span></span><br><span class="line">chroma.valid(<span class="string">&#x27;#F0000D&#x27;</span>); <span class="comment">// true</span></span><br><span class="line">chroma.valid(<span class="string">&#x27;#FOOOOD&#x27;</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.hsl">chroma.hsl</h4>
+<p>每个颜色空间在 chroma 命名空间下都有自己的构造函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.hsl(<span class="number">330</span>, <span class="number">1</span>, <span class="number">0.6</span>) <span class="comment">// #ff3399</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.hsv">chroma.hsv</h4>
+<h4 id="chroma.lab">chroma.lab</h4>
+<p>CIELAB 颜色空间。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.lab(<span class="number">40</span>, -<span class="number">20</span>, <span class="number">50</span>); <span class="comment">// #536600</span></span><br><span class="line">chroma.lab(<span class="number">50</span>, -<span class="number">20</span>, <span class="number">50</span>); <span class="comment">// #6e7f15</span></span><br><span class="line">chroma.lab(<span class="number">80</span>, -<span class="number">20</span>, <span class="number">50</span>); <span class="comment">// #c0cf66</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.oklab">chroma.oklab</h4>
+<p><a href="https://bottosson.github.io/posts/oklab/">Oklab 颜色空间</a>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.oklab(<span class="number">0.4</span>,-<span class="number">0.2</span>,<span class="number">0.5</span>); <span class="comment">// #624400</span></span><br><span class="line">chroma.oklab(<span class="number">0.5</span>,-<span class="number">0.2</span>,<span class="number">0.5</span>); <span class="comment">// #806100</span></span><br><span class="line">chroma.oklab(<span class="number">0.8</span>,-<span class="number">0.2</span>,<span class="number">0.5</span>); <span class="comment">// #d9c500</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.lch">chroma.lch</h4>
+<p>l 和 c 的范围取决于色调，大致范围在 0 到 100 - 150 之间，h 的范围在 0 到 360。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.lch(<span class="number">80</span>, <span class="number">40</span>, <span class="number">130</span>); <span class="comment">// #aad28c</span></span><br><span class="line">chroma(<span class="number">80</span>, <span class="number">40</span>, <span class="number">130</span>, <span class="string">&#x27;lch&#x27;</span>); <span class="comment">// #aad28c</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.hcl">chroma.hcl</h4>
+<p>你可以使用 hcl 代替 lch。亮度和色相通道被切换为与 HSL 更一致。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.hcl(<span class="number">130</span>, <span class="number">40</span>, <span class="number">80</span>); <span class="comment">// #aad28c</span></span><br><span class="line">chroma(<span class="number">130</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="string">&#x27;hcl&#x27;</span>); <span class="comment">// #aad28c</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.oklch">chroma.oklch</h4>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.oklch(<span class="number">0.5</span>, <span class="number">0.2</span>, <span class="number">240</span>); <span class="comment">// #0069c7</span></span><br><span class="line">chroma(<span class="number">0.8</span>, <span class="number">0.12</span>, <span class="number">60</span>, <span class="string">&#x27;oklch&#x27;</span>); <span class="comment">// #f6ab6b</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.cmyk">chroma.cmyk</h4>
+<p>每个值介于 0 到 1 之间。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.cmyk(<span class="number">0.2</span>, <span class="number">0.8</span>, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// #cc33ff</span></span><br><span class="line">chroma(<span class="number">0.2</span>, <span class="number">0.8</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&#x27;cmyk&#x27;</span>); <span class="comment">// cc33ff</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.gl">chroma.gl</h4>
+<p>GL 是 RGB(A) 的变体，唯一的区别是每个值的范围在 0 到 1 之间。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.gl(<span class="number">0.6</span>, <span class="number">0</span>, <span class="number">0.8</span>); <span class="comment">// #9900cc</span></span><br><span class="line">chroma.gl(<span class="number">0.6</span>, <span class="number">0</span>, <span class="number">0.8</span>, <span class="number">0.5</span>); <span class="comment">// #9900cc80</span></span><br><span class="line">chroma(<span class="number">0.6</span>, <span class="number">0</span>, <span class="number">0.8</span>, <span class="string">&#x27;gl&#x27;</span>); <span class="comment">// #9900cc</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.temperature">chroma.temperature</h4>
+<p>从色温标度返回颜色。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.temperature(<span class="number">2000</span>); <span class="comment">// candle light #ff8b14</span></span><br><span class="line">chroma.temperature(<span class="number">3500</span>); <span class="comment">// sunset #ffc38a</span></span><br><span class="line">chroma.temperature(<span class="number">6500</span>); <span class="comment">// daylight #fffafe</span></span><br></pre></td></tr></table></figure>
+<p>有效温度范围从 0 到大约 30000 开尔文。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">f = <span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> chroma.temperature(i * <span class="number">30000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="chroma.mix">chroma.mix</h4>
+<p>混合两种颜色。混合比是一个介于 0 到 1 之间的值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>) <span class="comment">// #b400b4</span></span><br><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="number">0.25</span>) <span class="comment">// #dd0080</span></span><br><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="number">0.75</span>) <span class="comment">// #8000dd</span></span><br></pre></td></tr></table></figure>
+<p>颜色混合根据用于插值的颜色空间产生不同的结果。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="number">0.5</span>, <span class="string">&#x27;rgb&#x27;</span>) <span class="comment">// #800080</span></span><br><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="number">0.5</span>, <span class="string">&#x27;hsl&#x27;</span>) <span class="comment">// #ff00ff</span></span><br><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="number">0.5</span>, <span class="string">&#x27;lab&#x27;</span>) <span class="comment">// #ca0088</span></span><br><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="number">0.5</span>, <span class="string">&#x27;lch&#x27;</span>) <span class="comment">// #fa0080</span></span><br><span class="line">chroma.mix(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="number">0.5</span>, <span class="string">&#x27;lrgb&#x27;</span>) <span class="comment">// #b400b4</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.average">chroma.average</h4>
+<p>类似于 chroma.mix，但接受两种以上的颜色。R、G、B 分量和 alpha 通道的简单平均。默认颜色空间为 lrgb。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">colors = [<span class="string">&#x27;#ddd&#x27;</span>, <span class="string">&#x27;yellow&#x27;</span>, <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;teal&#x27;</span>];</span><br><span class="line">chroma.average(colors); <span class="comment">// #d3b480</span></span><br><span class="line">chroma.average(colors, <span class="string">&#x27;rgb&#x27;</span>); <span class="comment">// #b79757</span></span><br><span class="line">chroma.average(colors, <span class="string">&#x27;lab&#x27;</span>); <span class="comment">// #d3a96a</span></span><br><span class="line">chroma.average(colors, <span class="string">&#x27;lch&#x27;</span>); <span class="comment">// #ef9e4e</span></span><br></pre></td></tr></table></figure>
+<p>也适用于 alpha 通道。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.average([<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;rgba(0, 0, 0, 0.5)&#x27;</span>]).css(); <span class="comment">// rgba(180, 0, 0, 0.75)</span></span><br></pre></td></tr></table></figure>
+<p>从 2.1 版开始，你还可以提供一个 weights 数组来计算颜色的加权平均值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">colors = [<span class="string">&#x27;#ddd&#x27;</span>, <span class="string">&#x27;yellow&#x27;</span>, <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;teal&#x27;</span>];</span><br><span class="line">chroma.average(colors, <span class="string">&#x27;lch&#x27;</span>, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>]); <span class="comment">// #f98841</span></span><br><span class="line">chroma.average(colors, <span class="string">&#x27;lch&#x27;</span>, [<span class="number">1.5</span>, <span class="number">0.5</span>, <span class="number">1</span>, <span class="number">2.3</span>]); <span class="comment">// #ae9e52</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.blend">chroma.blend</h4>
+<p>使用 RGB 通道混合函数来混合两种颜色。有效的混合模式有 multiply、darken、lighten、screen、overlay、burn 和 dodge。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.blend(<span class="string">&#x27;4CBBFC&#x27;</span>, <span class="string">&#x27;EEEE22&#x27;</span>, <span class="string">&#x27;multiply&#x27;</span>); <span class="comment">// #47af22</span></span><br><span class="line">chroma.blend(<span class="string">&#x27;4CBBFC&#x27;</span>, <span class="string">&#x27;EEEE22&#x27;</span>, <span class="string">&#x27;darken&#x27;</span>); <span class="comment">// #4cbb22</span></span><br><span class="line">chroma.blend(<span class="string">&#x27;4CBBFC&#x27;</span>, <span class="string">&#x27;EEEE22&#x27;</span>, <span class="string">&#x27;lighten&#x27;</span>); <span class="comment">// #eeeefc</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.random">chroma.random</h4>
+<p>通过生成随机十六进制字符串来创建随机颜色。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.random()</span><br></pre></td></tr></table></figure>
+<h4 id="chroma.contrast">chroma.contrast</h4>
+<p>计算两种颜色之间的 WCAG 对比度。建议最低对比度为 4.5:1，以确保文本在背景色下仍可度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.contrast(<span class="string">&#x27;pink&#x27;</span>, <span class="string">&#x27;hotpink&#x27;</span>); <span class="comment">// 1.721</span></span><br><span class="line">chroma.contrast(<span class="string">&#x27;pink&#x27;</span>, <span class="string">&#x27;purple&#x27;</span>); <span class="comment">// 6.124</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.distance">chroma.distance</h4>
+<p>计算给定颜色空间中两种颜色之间的欧几里得距离（默认为 Lab）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.distance(<span class="string">&#x27;#fff&#x27;</span>, <span class="string">&#x27;#ff0&#x27;</span>, <span class="string">&#x27;rgb&#x27;</span>); <span class="comment">// 255</span></span><br><span class="line">chroma.distance(<span class="string">&#x27;#fff&#x27;</span>, <span class="string">&#x27;#f0f&#x27;</span>, <span class="string">&#x27;rgb&#x27;</span>); <span class="comment">// 255</span></span><br><span class="line">chroma.distance(<span class="string">&#x27;#fff&#x27;</span>, <span class="string">&#x27;#ff0&#x27;</span>); <span class="comment">// 96.948</span></span><br><span class="line">chroma.distance(<span class="string">&#x27;#fff&#x27;</span>, <span class="string">&#x27;#f0f&#x27;</span>); <span class="comment">// 122.163</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.deltae">chroma.deltaE</h4>
+<p>计算国际照明委员会（CIE）在 2000 年开发的色差。实现基于 Bruce Lindbloom 的公式。结果值的范围从 0（无差异）到 100（最大差异），是衡量人眼感知色差的指标。可选参数 Kl、Kc 和 Kh 可用于调整亮度、色度和色相的权重。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.deltaE(<span class="string">&#x27;#ededee&#x27;</span>, <span class="string">&#x27;#ededee&#x27;</span>); <span class="comment">// 0</span></span><br><span class="line">chroma.deltaE(<span class="string">&#x27;#ededee&#x27;</span>, <span class="string">&#x27;#edeeed&#x27;</span>); <span class="comment">// 1.321</span></span><br><span class="line">chroma.deltaE(<span class="string">&#x27;#ececee&#x27;</span>, <span class="string">&#x27;#eceeec&#x27;</span>); <span class="comment">// 2.602</span></span><br><span class="line">chroma.deltaE(<span class="string">&#x27;#e9e9ee&#x27;</span>, <span class="string">&#x27;#e9eee9&#x27;</span>); <span class="comment">// 6.221</span></span><br><span class="line">chroma.deltaE(<span class="string">&#x27;#e4e4ee&#x27;</span>, <span class="string">&#x27;#e4eee4&#x27;</span>); <span class="comment">// 11.598</span></span><br><span class="line">chroma.deltaE(<span class="string">&#x27;#e0e0ee&#x27;</span>, <span class="string">&#x27;#e0eee0&#x27;</span>); <span class="comment">// 15.391</span></span><br><span class="line">chroma.deltaE(<span class="string">&#x27;#000000&#x27;</span>, <span class="string">&#x27;#ffffff&#x27;</span>); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+<h4 id="chroma.brewer">chroma.brewer</h4>
+<p>chroma.brewer 是 ColorBrewer 规范的映射，为方便起见，它包含在 chroma.js 中。chroma.scale 使用颜色进行构建。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.brewer.OrRd</span><br><span class="line"><span class="comment">// [&#x27;#fff7ec&#x27;, &#x27;#fee8c8&#x27;, &#x27;#fdd49e&#x27;, &#x27;#fdbb84&#x27;, &#x27;#fc8d59&#x27;, &#x27;#ef6548&#x27;, &#x27;#d7301f&#x27;, &#x27;#b30000&#x27;, &#x27;#7f0000&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h3 id="color">Color</h3>
+<h4 id="color.alpha">color.alpha</h4>
+<p>使用 clor.alpha 来获取或设置颜色的不透明度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;red&#x27;</span>).alpha(<span class="number">0.5</span>); <span class="comment">// #ff000080</span></span><br><span class="line">chroma(<span class="string">&#x27;rgba(255,0,0,0.35)&#x27;</span>).alpha(); <span class="comment">// 0.35</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.darken">color.darken</h4>
+<p>加载后，chroma.js 可以改变颜色。我们在上面已经看到的一种方式是，你可以更改亮度。默认值为 1。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).darken(); <span class="comment">// #c93384</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).darken(<span class="number">2</span>); <span class="comment">// #930058</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).darken(<span class="number">2.6</span>); <span class="comment">// #74003f</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.brighten">color.brighten</h4>
+<p>与 darken 类似，但反向相反。默认值为 1。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).brighten(); <span class="comment">// #ff9ce6</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).brighten(<span class="number">2</span>); <span class="comment">// #ffd1ff</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).brighten(<span class="number">3</span>); <span class="comment">// #ffffff</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.saturate">color.saturate</h4>
+<p>通过操纵 Lch 色度来更改颜色的饱和度。默认值为 1。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;slategray&#x27;</span>).saturate(); <span class="comment">// #4b83ae</span></span><br><span class="line">chroma(<span class="string">&#x27;slategray&#x27;</span>).saturate(<span class="number">2</span>); <span class="comment">// #0087cd</span></span><br><span class="line">chroma(<span class="string">&#x27;slategray&#x27;</span>).saturate(<span class="number">3</span>); <span class="comment">// #008bec</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.desaturate">color.desaturate</h4>
+<p>与 saturate 类似，但反向相反。默认值为 1。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).desaturate(); <span class="comment">// #e77dae</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).desaturate(<span class="number">2</span>); <span class="comment">// #cd8ca8</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).desaturate(<span class="number">3</span>); <span class="comment">// #b199a3</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.set">color.set</h4>
+<p>更改单个通道并将结果返回一个新 chroma 对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;skyblue&#x27;</span>).set(<span class="string">&#x27;hsl.h&#x27;</span>, <span class="number">0</span>); <span class="comment">// #eb8787</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).set(<span class="string">&#x27;lch.c&#x27;</span>, <span class="number">30</span>); <span class="comment">// #ce8ca9</span></span><br></pre></td></tr></table></figure>
+<p>相对设置也有效：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orangered&#x27;</span>).set(<span class="string">&#x27;lab.l&#x27;</span>, <span class="string">&#x27;*0.5&#x27;</span>); <span class="comment">// #a10000</span></span><br><span class="line">chroma(<span class="string">&#x27;darkseagreen&#x27;</span>).set(<span class="string">&#x27;lch.c&#x27;</span>, <span class="string">&#x27;*2&#x27;</span>); <span class="comment">// #63c56c</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.get">color.get</h4>
+<p>返回单个通道的值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orangered&#x27;</span>).get(<span class="string">&#x27;lab.l&#x27;</span>); <span class="comment">// 57.582</span></span><br><span class="line">chroma(<span class="string">&#x27;orangered&#x27;</span>).get(<span class="string">&#x27;hsl.l&#x27;</span>); <span class="comment">// 0.5</span></span><br><span class="line">chroma(<span class="string">&#x27;orangered&#x27;</span>).get(<span class="string">&#x27;rgb.g&#x27;</span>); <span class="comment">// 69</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.luminance">color.luminance</h4>
+<p>如果不带参数调用 color.luminance，将根据 WCAG 定义返回相对亮度。标准化 0 为最深的黑色，1 为最浅的白色。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;white&#x27;</span>).luminance(); <span class="comment">// 1</span></span><br><span class="line">chroma(<span class="string">&#x27;aquamarine&#x27;</span>).luminance(); <span class="comment">// 0.808</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).luminance(); <span class="comment">// 0.347</span></span><br><span class="line">chroma(<span class="string">&#x27;darkslateblue&#x27;</span>).luminance(); <span class="comment">// 0.066</span></span><br><span class="line">chroma(<span class="string">&#x27;black&#x27;</span>).luminance(); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<p>chroma.js 还允许你调整颜色的亮度。源颜色将用黑色或白色进行插值，直到找到正确的亮度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;white&#x27;</span>).luminance(<span class="number">0.5</span>); <span class="comment">// #bcbcbc</span></span><br><span class="line">chroma(<span class="string">&#x27;aquamarine&#x27;</span>).luminance(<span class="number">0.5</span>); <span class="comment">// #67ceab</span></span><br><span class="line">chroma(<span class="string">&#x27;hotpink&#x27;</span>).luminance(<span class="number">0.5</span>); <span class="comment">// #ff9dce</span></span><br><span class="line">chroma(<span class="string">&#x27;darkslateblue&#x27;</span>).luminance(<span class="number">0.5</span>); <span class="comment">// #bcb8d5</span></span><br></pre></td></tr></table></figure>
+<p>默认情况下，此插值在 RGB 中完成，但你可以通过将不同的颜色空间作为第二个参数来传递。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;aquamarine&#x27;</span>).luminance(<span class="number">0.5</span>, <span class="string">&#x27;lab&#x27;</span>); <span class="comment">// #67ceab</span></span><br><span class="line">chroma(<span class="string">&#x27;aquamarine&#x27;</span>).luminance(<span class="number">0.5</span>, <span class="string">&#x27;hsl&#x27;</span>); <span class="comment">// #67ceab</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.hex">color.hex</h4>
+<p>chroma.js 允许你以各种颜色空间和格式输出颜色。大多数情况下，你需要将颜色输出为十六进制字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).hex() <span class="comment">// #ffa500</span></span><br></pre></td></tr></table></figure>
+<p>从 1.4.0 版本开始，默认模式为 auto，这意味着如果十六进制字符串小于 1，则将包含 alpha 通道。如果你不希望包含 alpha 通道，则必须将模式显示设置为 rgb：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).alpha(<span class="number">0.5</span>).hex(); <span class="comment">// #ffa50080</span></span><br><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).alpha(<span class="number">0.5</span>).hex(<span class="string">&#x27;rgb&#x27;</span>); <span class="comment">// #ffa500</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.name">color.name</h4>
+<p>返回颜色名称。如果该颜色没有名称，则返回十六进制 RGB 字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;#ffa500&#x27;</span>).name(); <span class="comment">// orange</span></span><br><span class="line">chroma(<span class="string">&#x27;#ffa505&#x27;</span>).name(); <span class="comment">// #ffa505</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.css">color.css</h4>
+<p>返回可用作 CSS 颜色定义的 RGB() 或 HSL() 字符串表示形式。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;teal&#x27;</span>).css(); <span class="comment">// rgb(0, 128, 128)</span></span><br><span class="line">chroma(<span class="string">&#x27;teal&#x27;</span>).alpha(<span class="number">0.5</span>).css(); <span class="comment">// rgba(0, 128, 128, 0.5)</span></span><br><span class="line">chroma(<span class="string">&#x27;teal&#x27;</span>).css(<span class="string">&#x27;hsl&#x27;</span>); <span class="comment">// hsl(180, 100%, 25.1%)</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.rgb">color.rgb</h4>
+<p>返回一个包含 red、green 和 blue 分量的数组，每个都是 0 到 255 范围内的数字。Chroma 在内部将 RGB 通道存储为浮点数，但在返回之前对数字进行四舍五入。你可以通过 false 来防止四舍五入。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).rgb(); <span class="comment">// [255, 165, 0]</span></span><br><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).darken().rgb(); <span class="comment">// [198, 118, 0]</span></span><br><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).darken().rgb(<span class="literal">false</span>); <span class="comment">// [198.05, 118.11, 0]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.rgba">color.rgba</h4>
+<p>与 rgb 类似，但是将 alpha 通道添加到返回的数组中。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).rgba(); <span class="comment">// [255, 165, 0, 1]</span></span><br><span class="line">chroma(<span class="string">&#x27;hsla(20, 100%, 40%, 0.5)&#x27;</span>).rgba(); <span class="comment">// [204, 68, 0, 0.5]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.hsl">color.hsl</h4>
+<p>返回一个包含 hue、saturation 和 lightness 的数组。对于无色相的颜色（黑、白和灰），色相分量将为 NaN。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).hsl(); <span class="comment">// [38.82, 1, 0.5, 1]</span></span><br><span class="line">chroma(<span class="string">&#x27;white&#x27;</span>).hsl(); <span class="comment">// [NaN, 0, 1, 1]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.hsv">color.hsv</h4>
+<p>与 hsl 类似，返回一个包含 hue、saturation 和 value 的数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).hsv(); <span class="comment">// [38.82, 1, 1]</span></span><br><span class="line">chroma(<span class="string">&#x27;white&#x27;</span>).hsv(); <span class="comment">// [NaN, 0, 1]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.hsi">color.hsi</h4>
+<p>返回一个包含 hue、saturation 和 intensity（强度）的数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).hsi(); <span class="comment">// [39.64, 1, 0.55]</span></span><br><span class="line">chroma(<span class="string">&#x27;white&#x27;</span>).hsi(); <span class="comment">// [NaN, 0, 1]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.lab">color.lab</h4>
+<p>返回一个包含 L、a 和 b 的数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).lab() <span class="comment">// [74.94, 23.93, 78.95]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.oklab">color.oklab</h4>
+<p>返回一个包含 L、a 和 b 的数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;orange&#x27;</span>).oklab() <span class="comment">// [0.79, 0.06, 0.16]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.lch">color.lch</h4>
+<p>返回一个包含 lightness、chroma 和 hub 的数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;sykblue&#x27;</span>).lch() <span class="comment">// [79.21, 25.94, 235.11]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.hcl">color.hcl</h4>
+<p>lch 的别名，但分量的顺序相反。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;skyblue&#x27;</span>).hcl() <span class="comment">// [235.11, 25.94, 79.21]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.oklch">color.oklch</h4>
+<p>返回一个包含 lightness、chroma 和 hub 的数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;sykblue&#x27;</span>).oklch() <span class="comment">// [0.81, 0.08, 225.75]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.num">color.num</h4>
+<p>返回十六进制 RGB 颜色的数字表示形式。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;#000000&#x27;</span>).num(); <span class="comment">// 0</span></span><br><span class="line">chroma(<span class="string">&#x27;#0000ff&#x27;</span>).num(); <span class="comment">// 255</span></span><br><span class="line">chroma(<span class="string">&#x27;#00ff00&#x27;</span>).num(); <span class="comment">// 65280</span></span><br><span class="line">chroma(<span class="string">&#x27;#ff0000&#x27;</span>).num(); <span class="comment">// 16711680</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.temperature">color.temperature</h4>
+<p>返回给定颜色的色温值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;#ff3300&#x27;</span>).temperature(); <span class="comment">// 1000</span></span><br><span class="line">chroma(<span class="string">&#x27;#ff8a13&#x27;</span>).temperature(); <span class="comment">// 2000</span></span><br><span class="line">chroma(<span class="string">&#x27;#ffe3cd&#x27;</span>).temperature(); <span class="comment">// 4999</span></span><br><span class="line">chroma(<span class="string">&#x27;#cbdbff&#x27;</span>).temperature(); <span class="comment">// 10115</span></span><br><span class="line">chroma(<span class="string">&#x27;#b3ccff&#x27;</span>).temperature(); <span class="comment">// 15169</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.gl">color.gl</h4>
+<p>类似 rgb，但返回的通道范围是 0 到 1，而不是 0 到 255。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma(<span class="string">&#x27;33cc00&#x27;</span>).gl(); <span class="comment">// [0.2, 0.8, 0.1]</span></span><br></pre></td></tr></table></figure>
+<h4 id="color.clipped">color.clipped</h4>
+<p>将颜色从 CIELab 颜色空间转为 RGB 时，颜色通道会被裁剪为 0 到 255 的范围。该范围之外的颜色可能在自然界中存在，但无法在 RGB 显示器上显示（例如紫外线）。你可以使用 color.clipped 来测试颜色是否被裁剪。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[c = chroma.hcl(<span class="number">50</span>, <span class="number">40</span>, <span class="number">20</span>), c.clipped()]; <span class="comment">// [#581d00, true]</span></span><br><span class="line">[c = chroma.hcl(<span class="number">50</span>, <span class="number">40</span>, <span class="number">40</span>), c.clipped()]; <span class="comment">// [#904c2d, false]</span></span><br><span class="line">[c = chroma.hcl(<span class="number">50</span>, <span class="number">40</span>, <span class="number">60</span>), c.clipped()]; <span class="comment">// [#c97e5c, false]</span></span><br><span class="line">[c = chroma.hcl(<span class="number">50</span>, <span class="number">40</span>, <span class="number">80</span>), c.clipped()]; <span class="comment">// [#ffb38f, true]</span></span><br><span class="line">[c = chroma.hcl(<span class="number">50</span>, <span class="number">40</span>, <span class="number">100</span>), c.clipped()]; <span class="comment">// [#ffebc5, true]</span></span><br></pre></td></tr></table></figure>
+<p>作为额外功能，你可以使用 color._rgb._unclipped 访问未裁剪的 RGB 分量。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">chroma.hcl(<span class="number">50</span>, <span class="number">40</span>, <span class="number">100</span>).rgb(); <span class="comment">// [255, 235, 197]</span></span><br><span class="line">chroma.hcl(<span class="number">50</span>, <span class="number">40</span>, <span class="number">100</span>)._rgb._unclipped; <span class="comment">// [322.65, 235.24, 196.7, 1]</span></span><br></pre></td></tr></table></figure>
+<h3 id="color-scales">Color Scales</h3>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>JS库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>About Me</title>
     <url>/about/index.html</url>
     <content><![CDATA[<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;猛吃雪糕 / Paul&quot;</span>,</span><br><span class="line">  <span class="attr">gender</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">  <span class="attr">address</span>: <span class="string">&quot;湖北省武汉市&quot;</span>,</span><br><span class="line">  <span class="attr">education</span>: <span class="string">&quot;本科 / 湖北工业大学&quot;</span>,</span><br><span class="line">  <span class="attr">major</span>: <span class="string">&quot;英语&quot;</span>,</span><br><span class="line">  <span class="attr">skills</span>: [<span class="string">&quot;HTML&quot;</span>, <span class="string">&quot;CSS&quot;</span>, <span class="string">&quot;JavaScript&quot;</span>, <span class="string">&quot;jQuery&quot;</span>, <span class="string">&quot;Vue&quot;</span>, <span class="string">&quot;Git&quot;</span>, <span class="string">&quot;PhotoShop&quot;</span>, <span class="string">&quot;Illustrator&quot;</span>],</span><br><span class="line">  <span class="attr">blog</span>: <span class="string">&quot;https://20s.win&quot;</span>,</span><br><span class="line">  <span class="attr">Github</span>: <span class="string">&quot;https://github.com/mopsite&quot;</span>,</span><br><span class="line">  <span class="attr">Email</span>: <span class="string">&quot;37662788@qq.com&quot;</span>,</span><br><span class="line">  <span class="attr">descritpion</span>: <span class="string">&quot;知识改变命运，奋斗成就人生&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
