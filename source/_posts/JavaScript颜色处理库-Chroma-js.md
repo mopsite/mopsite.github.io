@@ -577,3 +577,183 @@ chroma.hcl(50, 40, 100)._rgb._unclipped; // [322.65, 235.24, 196.7, 1]
 ```
 
 ### Color Scales
+
+#### chroma.scale
+
+chroma.scale 是将数值映射到调色板的函数，使用它可以创建色标。默认色标的范围从 0 到 1，颜色从白到黑。
+
+```js
+f = chroma.scale()
+f(0.25) // #bfbfbf
+f(0.5) // #808080
+f(0.75) // #404040
+```
+
+你可以将一组颜色传递给 chroma.scale，任何可以被 chroma() 读取的颜色都能使用。如果你传递两种以上的颜色，它们将沿着渐变均匀分布。
+
+```js
+chroma.scale(['yellow', '008ae5']);
+chroma.scale(['yellow', 'red', 'black']);
+```
+
+#### scale.domain
+
+你可以更改输入范围以匹配你的特定用例。
+
+```js
+// 默认范围是 [0,1]
+chroma.scale(['yellow', '008ae5']);
+// 将范围修改为 [0,100]
+chroma.scale(['yellow', '008ae5']).domain([0, 100]);
+```
+
+你可以通过修改范围来设置每种颜色的确切位置。
+
+```js
+chroma.scale(['yellow', 'lightgreen', '008ae5']).domain([0, 0.25, 1]);
+```
+
+#### scale.mode
+
+与 chroma.mix 一样，颜色插值的结果将取决于插值通道的颜色模式。默认模式是 RGB：
+
+```js
+chroma.scale(['yellow', '008ae5'])
+```
+
+上面的用法有时很好，但有时，RGB 双色渐变会经过灰色，Lab 插值会产生更好的结果：
+
+```js
+chroma.scale(['yellow', 'navy']);
+chroma.scale(['yellow', 'navy']).mode('lab');
+```
+
+另外请注意，RGB 插值会使中心周围变得很暗，使用线性 RGB 插值可以获得更好的结果：
+
+```js
+chroma.scale(['#f00', '#0f0']);
+chroma.scale(['#f00', '#0f0']).mode('lrgb');
+```
+
+其他有用的插值模式可能是 HSL 或 Lch，尽管这两者都倾向于产生过于饱和或发量的渐变。
+
+```js
+chroma.scale(['yellow', 'navy']).mode('lab');
+chroma.scale(['yellow', 'navy']).mode('hsl');
+chroma.scale(['yellow', 'navy']).mode('lch');
+```
+
+#### scale.gamma
+
+伽马校正可用于将色阶的中心“偏移”到开头（gamma < 1）或结尾（gamma > 1），通常用于“均匀”亮度梯度，默认值为 1。
+
+```js
+chroma.scale('YlGn').gamma(0.5);
+chroma.scale('YlGn').gamma(1);
+chroma.scale('YlGn').gamma(2);
+```
+
+#### scale.correctLightness
+
+这可以确保亮度范围在色标上均匀分布。在使用多色相色标时特别有用，这种情况下，简单的伽马校正对你没有很大的帮助。
+
+```js
+chroma.scale(['black','red','yellow','white']);
+chroma.scale(['black','red','yellow','white']).correctLightness();
+```
+
+#### scale.cache
+
+默认情况下，chroma.scale 实例将缓存每个计算值到颜色的对，你可以通过设置关闭缓存。
+
+```js
+chroma.scale(['yellow', '008ae5']).cache(false);
+```
+
+#### scale.padding
+
+通过在渐变的两侧切割一小部分来缩小颜色范围。如果传递单个数字，则两端将应用相同的填充。
+
+```js
+chroma.scale('RdYlBu').padding(0.15);
+chroma.scale('RdYlBu').padding(0.3);
+chroma.scale('RdYlBu').padding(-0.15);
+```
+
+或者，你可以通过传递两个数字的数组来单独指定每条边的填充。
+
+```js
+chroma.scale('OrRd').padding([0.2, 0]);
+```
+
+#### scale.colors
+
+你可以调用 scale.colors(n)，以从色标中快速获取 n 等距离的颜色。如果不带参数，则返回用于创建比例的原始颜色数组。
+
+```js
+chroma.scale('OrRd').colors(5);
+chroma.scale(['white', 'black']).colors(12);
+```
+
+#### scale.classes
+
+如果你希望 scale 函数返回一组不同的颜色而不是连续渐变，可以使用 scale.classes。如果你传递一个数字，色阶将按等距分解。
+
+```js
+chroma.scale('OrRd').classes(5);
+chroma.scale('OrRd').classes(8);
+```
+
+你还可以将多个数字作为数组传递来自定义分隔距离。
+
+```js
+chroma.scale('OrRd').classes([0, 0.3, 0.55, 0.85, 1]);
+```
+
+#### scale.nodata
+
+如果你将非数字（如 null 或 undefined）传递给 chroma.scale 时，将返回`#cccccc`或`no data`。你可以通过 scale.nodata 来修改`no data`的颜色：
+
+```js
+chroma.scale('OrRd')(null); // #cccccc
+chroma.scale('OrRd')(undefined); // #cccccc
+chroma.scale('OrRd').nodata('#eee')(null); // #eeeeee
+```
+
+#### scale.brewer
+
+chroma.js 包含来自 [ColorBrewer2.org](https://colorbrewer2.org) 的定义。
+
+```js
+chroma.scale('Y1GnBu')
+chroma.scale('Spectra1')
+```
+
+要翻转颜色，你只需要简单的翻转范围：
+
+```js
+chroma.scale('Spectra1').domain([1, 0])
+```
+
+你还可以通过 chroma.brewer 直接访问颜色：
+
+```js
+chroma.brewer.OrRd
+```
+
+#### chroma.bezier
+
+chroma.bezier 返回一个在 Lab 空间颜色之间进行贝塞尔插值的函数。该函数的输入范围从 0 到 1。
+
+```js
+// linear interpolation
+chroma.scale(['yellow', 'red', 'black']);
+// bezier interpolation
+chroma.bezier(['yellow', 'red', 'black']);
+```
+
+你可以将贝塞尔插值器转换为 chroma.scale 实例。
+
+```js
+chroma.bezier(['yellow', 'red', 'black']).scale().colors(5);
+```
