@@ -1,0 +1,1 @@
+function d(e){let r=new Set;return e.forEach(a=>r.add(a.date.year)),r=Array.from(r),r=r.map(a=>({year:a,lists:[]})),e.forEach(a=>{r.forEach(t=>{a.date.year===t.year&&t.lists.push({month:a.date.month,day:a.date.day,title:a.title,url:a.url})})}),r}export{d as f};
