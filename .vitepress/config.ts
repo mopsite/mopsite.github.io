@@ -43,6 +43,7 @@ export default defineConfig({
         apiKey: 'a5958b3863ace676771d60ba7d1ec174',
         locales: {
           root: {
+            placeholder:'搜索文档',
             translations: {
               button: {
                 buttonText: '搜索文档',
