@@ -12,7 +12,13 @@ export default defineConfig({
     [
       'script',
       {
-        src: 'https://cdn.jsdelivr.net/gh/xlovet/asset/js/fontawesome/v6/all.js'
+        src: 'https://cdn.jsdelivr.net/gh/xlovet/asset/js/fontawesome/v6/duotone.js'
+      }
+    ],
+    [
+      'script',
+      {
+        src: 'https://cdn.jsdelivr.net/gh/xlovet/asset/js/fontawesome/v6/fontawesome.js'
       }
     ]
   ],
@@ -43,7 +49,7 @@ export default defineConfig({
         apiKey: 'a5958b3863ace676771d60ba7d1ec174',
         locales: {
           root: {
-            placeholder:'搜索文档',
+            placeholder: '搜索文档',
             translations: {
               button: {
                 buttonText: '搜索文档',
@@ -89,7 +95,7 @@ export default defineConfig({
     footer: {
       message:
         'Powered by <a href="https://vitepress.dev/zh" target="_blank">VitePress</a>',
-      copyright: `© 2021 - ${year} <span style="color: red; padding: 0 2px;"><i class="fas fa-heart fa-beat"></i></span> <a href="mailto:37662788@qq.com">猛吃雪糕</a>`
+      copyright: `© 2021 - ${year} <span style="color: red; padding: 0 2px;"><i class="fad fa-swap-opacity fa-heart fa-beat"></i></span> <a href="mailto:37662788@qq.com">猛吃雪糕</a>`
     },
     nav: nav(),
     sidebar: sidebar(),

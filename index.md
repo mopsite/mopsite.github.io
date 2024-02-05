@@ -37,3 +37,9 @@ features:
     link: '/pages/posts/markdown-suggests'
     details: '让你的 Markdown 文档更加易读，出现更少的语法歧义，同时也会具备更高的兼容性。'
 ---
+
+<style scoped>
+  i {
+    color: red !important;
+  }
+</style>
