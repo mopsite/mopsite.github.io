@@ -1,0 +1,16 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "dependencies": {
+    "vitepress-markdown-timeline": "^1.2.1"
+  },
+  "devDependencies": {
+    "vitepress": "1.0.0-rc.40"
+  }
+}
