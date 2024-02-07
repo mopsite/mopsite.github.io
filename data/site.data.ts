@@ -1,12 +1,16 @@
 export const categories = ['前端', '工程化', '排版']
 
-export const tags = ['yaml', 'git', 'markdown', 'javascript', 'npm']
+export const tags = ['yaml', 'git', 'markdown', 'javascript', 'npm', 'module']
 
 export function sidebar() {
   return [
     {
       text: '最近更新',
       items: [
+        {
+          text: '在 ESM 中导入 JSON 文件',
+          link: '/pages/posts/import-json-to-esm'
+        },
         {
           text: 'JS 模块导入的不同方式和区别',
           link: '/pages/posts/import-require'

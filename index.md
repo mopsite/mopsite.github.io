@@ -12,6 +12,10 @@ hero:
       text: 在 Github 上查看
       link: https://github.com/mopsite/mopsite.github.io
 features:
+  - title: 在 ESM 中导入 JSON 文件
+    icon: '<i class="fa-duotone fa-moped"></i>'
+    link: '/pages/posts/import-json-to-esm'
+    details: '有时候，我们需要在 Node.js 的 ES 模块中处理 JSON 文件。目前有两种常规方案，和一种实验性方案。'
   - title: JS 模块导入的不同方式和区别
     icon: '<i class="fa-duotone fa-eclipse"></i>'
     link: '/pages/posts/import-require'
@@ -32,14 +36,4 @@ features:
     icon: '<i class="fa-duotone fa-grill-fire"></i>'
     link: '/pages/posts/git-subtree'
     details: '最常见的场景是写 vitepress 文档，通常文档的位置在项目的 docs/.vitepress/dist 目录中，并且文档部署的地方是 Github 中的 gh-pages 分支。'
-  - title: Markdown 书写建议
-    icon: '<i class="fa-duotone fa-moped"></i>'
-    link: '/pages/posts/markdown-suggests'
-    details: '让你的 Markdown 文档更加易读，出现更少的语法歧义，同时也会具备更高的兼容性。'
 ---
-
-<style scoped>
-  i {
-    color: red !important;
-  }
-</style>

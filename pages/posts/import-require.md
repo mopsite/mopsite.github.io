@@ -2,7 +2,7 @@
 title: 'JS 模块导入的不同方式和区别'
 date: '2023-3-1'
 category: '前端'
-tags: [javascript]
+tags: [javascript, module]
 ---
 
 # JS 模块导入的不同方式和区别
