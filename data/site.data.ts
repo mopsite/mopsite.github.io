@@ -8,6 +8,10 @@ export function sidebar() {
       text: '最近更新',
       items: [
         {
+          text: '发布一个标准开源库',
+          link: '/pages/posts/npm-publish'
+        },
+        {
           text: '在 ESM 中导入 JSON 文件',
           link: '/pages/posts/import-json-to-esm'
         },

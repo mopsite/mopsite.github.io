@@ -12,6 +12,10 @@ hero:
       text: 在 Github 上查看
       link: https://github.com/mopsite/mopsite.github.io
 features:
+  - title: 发布一个标准开源库
+    icon: '<i class="fa-duotone fa-grill-fire"></i>'
+    link: '/pages/posts/npm-publish'
+    details: '当代码层面的工作完成之后，你可能需要将库发布给使用者。但是要想使我们的库称为一个标准开源库，还需要完成一些额外的工作。'
   - title: 在 ESM 中导入 JSON 文件
     icon: '<i class="fa-duotone fa-moped"></i>'
     link: '/pages/posts/import-json-to-esm'
@@ -32,8 +36,4 @@ features:
     icon: '<i class="fa-alicorn fa-duotone"></i>'
     link: '/pages/posts/js-decimal'
     details: '在编程语言中，有一种很奇怪的现象：当小数和小数发生运算的时候，结果跟我们熟识的数学运算结果不同。'
-  - title: git subtree 推送到指定分支
-    icon: '<i class="fa-duotone fa-grill-fire"></i>'
-    link: '/pages/posts/git-subtree'
-    details: '最常见的场景是写 vitepress 文档，通常文档的位置在项目的 docs/.vitepress/dist 目录中，并且文档部署的地方是 Github 中的 gh-pages 分支。'
 ---
