@@ -8,6 +8,10 @@ export function sidebar() {
       text: '最近更新',
       items: [
         {
+          text: 'JS 数据类型的转换',
+          link: '/pages/posts/js-coversion'
+        },
+        {
           text: '发布一个标准开源库',
           link: '/pages/posts/npm-publish'
         },

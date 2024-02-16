@@ -12,6 +12,10 @@ hero:
       text: 在 Github 上查看
       link: https://github.com/mopsite/mopsite.github.io
 features:
+  - title: JS 数据类型的转换
+    icon: '<i class="fa-alicorn fa-duotone"></i>'
+    link: '/pages/posts/js-coversion'
+    details: 'JS 中变量的数据类型是不确定的，但是各种运算符对数据类型是有要求的。如果运算符发现，运算子的类型与预期不符，就会自动转换类型。'
   - title: 发布一个标准开源库
     icon: '<i class="fa-duotone fa-grill-fire"></i>'
     link: '/pages/posts/npm-publish'
@@ -32,8 +36,4 @@ features:
     icon: '<i class="fa-alarm-clock fa-duotone"></i>'
     link: '/pages/posts/packages-json'
     details: '在每个前端项目中，都有 packages.json 文件，它是项目的配置文件，常见的配置有配置项目启动、打包命令、声明依赖包等。'
-  - title: JS 中的小数计算问题
-    icon: '<i class="fa-alicorn fa-duotone"></i>'
-    link: '/pages/posts/js-decimal'
-    details: '在编程语言中，有一种很奇怪的现象：当小数和小数发生运算的时候，结果跟我们熟识的数学运算结果不同。'
 ---

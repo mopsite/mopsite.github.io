@@ -103,6 +103,8 @@ console.log(num3.toFixed(3)) // 0.300 - 强制保留小数点后3位
 
 封装数学运算方法。当需要进行数学运算时，不直接进行，调用自己封装的方法来实现。
 
+第一种封装方式：
+
 ::: code-group
 ```js [加法]
 function add(...args) {
@@ -170,6 +172,57 @@ function mul(...args) {
   }
 
   return num
+}
+```
+:::
+
+第二种封装方式（推荐）：
+
+::: code-group
+```js [加法]
+const add = (arg1, arg2) => {
+  let r1, r2, m
+  try { r1 = arg1.toString().split('.')[1].length } catch (e) { r1 = 0 }
+  try { r2 = arg2.toString().split('.')[1].length } catch (e) { r2 = 0 }
+  m = Math.pow(10, Math.max(r1, r2))
+  return (arg1 * m + arg2 * m) / m
+}
+```
+
+```js [减法]
+const sub = (arg1, arg2) => {
+  let r1, r2, m, n
+  try { r1 = arg1.toString().split('.')[1].length } catch (e) { r1 = 0 }
+  try { r2 = arg2.toString().split('.')[1].length } catch (e) { r2 = 0 }
+  m = Math.pow(10, Math.max(r1, r2))
+  n = (r1 >= r2) ? r1 : r2
+  return ((arg1 * m - arg2 * m) / m).toFixed(n)
+}
+```
+
+```js [乘法]
+const mul = (arg1, arg2) => {
+  let m = 0
+  const s1 = arg1.toString()
+  const s2 = arg2.toString()
+  try { m += s1.split('.')[1].length} catch (e) { }
+  try { m += s2.split('.')[1].length} catch (e) { }
+  return Number(s1.replace('.', '')) * Number(s1.replace('.', '')) / Math.pow(10, m)
+}
+```
+
+```js [除法]
+const div = (arg1, arg2) => {
+  let t1 = 0
+  let t2 = 0
+  let r1, r2
+  try { t1 = arg1.toString().split('.')[1].length } catch (e) { }
+  try { t2 = arg2.toString().split('.')[1].length } catch (e) { }
+  r1 = Number(arg1.toString().replace('.', ''))
+  r2 = Number(arg2.toString().replace('.', ''))
+  let intDiv = r1 / r2
+  let pow = Math.pow(10, t2 - t1)
+  return mul(intDiv, pow)  // 这里用定义好的 mul 乘法方法
 }
 ```
 :::
