@@ -12,6 +12,18 @@ hero:
       text: 在 Github 上查看
       link: https://github.com/mopsite/mopsite.github.io
 features:
+  - title: JS 中的 this 关键字
+    icon: '<i class="fa-duotone fa-eclipse"></i>'
+    link: '/pages/posts/js-this'
+    details: 'this 关键字是 JavaScript 中一个非常重要的语法点，不理解它的含义，大部分开发任务都无法完成。'
+  - title: JS 的错误处理机制
+    icon: '<i class="fa-duotone fa-globe-snow"></i>'
+    link: '/pages/posts/js-error'
+    details: 'JS 解析或运行时，一旦发生错误，引擎就会抛出一个错误对象。JS 原生提供 Error 构造函数，所有抛出的错误都是这个构造函数的实例。'
+  - title: valueOf 和 toString 方法
+    icon: '<i class="fa-alarm-clock fa-duotone"></i>'
+    link: '/pages/posts/valueof-tostring'
+    details: 'valueOf 和 toString 是定义在 Object.prototype 对象上的，称为实例方法，所有 Object 的实例对象都继承了它们。'
   - title: JS 数据类型的转换
     icon: '<i class="fa-alicorn fa-duotone"></i>'
     link: '/pages/posts/js-coversion'
@@ -24,16 +36,4 @@ features:
     icon: '<i class="fa-duotone fa-moped"></i>'
     link: '/pages/posts/import-json-to-esm'
     details: '有时候，我们需要在 Node.js 的 ES 模块中处理 JSON 文件。目前有两种常规方案，和一种实验性方案。'
-  - title: JS 模块导入的不同方式和区别
-    icon: '<i class="fa-duotone fa-eclipse"></i>'
-    link: '/pages/posts/import-require'
-    details: 'JavaScript 中，模块是一种可重用的代码块，它将一些代码打包成一个单独的单元，并且可以在其他代码中进行导入和使用。'
-  - title: 使用 Rollup 打包 JS 模块
-    icon: '<i class="fa-duotone fa-globe-snow"></i>'
-    link: '/pages/posts/rollup-tutorial'
-    details: 'Rollup 是一个用于 JavaScript 的模块打包工具，它将小的代码片段编译成更大、更复杂的代码，例如库或应用程序。'
-  - title: packages.json 配置字段详解
-    icon: '<i class="fa-alarm-clock fa-duotone"></i>'
-    link: '/pages/posts/packages-json'
-    details: '在每个前端项目中，都有 packages.json 文件，它是项目的配置文件，常见的配置有配置项目启动、打包命令、声明依赖包等。'
 ---

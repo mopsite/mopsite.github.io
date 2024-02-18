@@ -8,6 +8,18 @@ export function sidebar() {
       text: '最近更新',
       items: [
         {
+          text: 'JS 中的 this 关键字',
+          link: '/pages/posts/js-this'
+        },
+        {
+          text: 'JS 的错误处理机制',
+          link: '/pages/posts/js-error'
+        },
+        {
+          text: 'valueOf 和 toString 方法',
+          link: '/pages/posts/valueof-tostring'
+        },
+        {
           text: 'JS 数据类型的转换',
           link: '/pages/posts/js-coversion'
         },
