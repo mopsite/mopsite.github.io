@@ -13,13 +13,13 @@ export default defineConfig({
     [
       'script',
       {
-        src: 'https://cdn.jsdelivr.net/gh/xlovet/assets/fontawesome/v6/js/fontawesome.js'
+        src: 'https://cdn.jsdelivr.net/gh/xlovet/fa/6/js/fontawesome.js'
       }
     ],
     [
       'script',
       {
-        src: 'https://cdn.jsdelivr.net/gh/xlovet/assets/fontawesome/v6/js/duotone.js'
+        src: 'https://cdn.jsdelivr.net/gh/xlovet/fa/6/js/duotone.js'
       }
     ]
   ],
