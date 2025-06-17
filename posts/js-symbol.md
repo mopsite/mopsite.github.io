@@ -3,7 +3,7 @@ title: 'ES6 中 的 Symbol 数据类型'
 date: '2024-7-25'
 category: '前端'
 tags: ['javascript']
-detail: 'ES6 引入一种新的原始数据类型 Symbol，表示独一无二的值，该值通过 Symbol() 函数生成。'
+detail: 'ES6 引入了一种新的原始数据类型 Symbol，表示独一无二的值，该值通过 Symbol() 函数生成。'
 ---
 
 # ES6 中 的 Symbol 数据类型
