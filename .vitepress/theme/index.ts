@@ -3,6 +3,7 @@ import 'vitepress-markdown-timeline/dist/theme/index.css'
 import './styles/vars.css'
 import Timeline from './components/Timeline.vue'
 import Labels from './components/Labels.vue'
+import 'virtual:group-icons.css'
 
 export default {
   extends: DefaultTheme,
