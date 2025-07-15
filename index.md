@@ -3,14 +3,14 @@
 layout: home
 
 hero:
-  name: Hello World
-  text: A blog of Paul
+  name: 'Hello World'
+  text: 'A blog of Paul'
   tagline: 帅到无边心是岸，拽临绝顶我为峰
   image:
     src: /logo.svg
   actions:
     - theme: brand
-      text: 在 GitHub 上查看
+      text: '在 GitHub 上查看'
       link: https://github.com/mopsite/mopsite.github.io
 ---
 
