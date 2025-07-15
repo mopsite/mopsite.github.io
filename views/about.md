@@ -3,7 +3,7 @@ title: 关于
 aside: false
 ---
 
-# {{ $frontmatter.title }}
+# 关于
 
 ```js [aboutme.js]
 const Paul = {

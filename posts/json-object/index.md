@@ -6,7 +6,7 @@ tags: ['json', 'javascript']
 abstract: 'JSON 格式是一种用于数据交换的文本格式，目的是取代繁琐笨重的 XML 格式。'
 ---
 
-# {{ $frontmatter.title }}
+# JSON 对象
 
 ## JSON 格式
 
