@@ -3,7 +3,7 @@ title: '你不知道的 Markdown 知识'
 date: '2021-11-03'
 category: '排版'
 tags: ['markdown']
-detail: '介绍一些普通教程提及不多的知识。在阅读之前，应该掌握最基础的 Markdown 语法。'
+abstract: '介绍一些普通教程提及不多的知识。在阅读之前，应该掌握最基础的 Markdown 语法。'
 ---
 
 # 你不知道的 Markdown 知识
