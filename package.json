@@ -6,7 +6,7 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "push": "git push && git vitepress"
+    "push": "git push && git subtree push --prefix .vitepress/dist origin gh-pages"
   },
   "packageManager": "pnpm@10.12.3",
   "devDependencies": {
