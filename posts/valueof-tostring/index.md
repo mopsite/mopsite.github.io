@@ -6,6 +6,8 @@ tags: ['javascript']
 abstract: 'valueOf 和 toString 是定义在 Object.prototype 上的，所有 Object 的实例对象都继承了它们。'
 ---
 
+# valueOf 和 toString 方法
+
 `valueOf` 和 `toString` 方法是定义在 `Object.prototype` 对象上的，称为实例方法，所有 `Object` 的实例对象都继承了它们。
 
 ## valueOf()
