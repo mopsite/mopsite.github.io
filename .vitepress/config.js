@@ -3,7 +3,8 @@ import { defineConfig } from 'vitepress'
 import timeline from 'vitepress-markdown-timeline'
 import {
   groupIconMdPlugin,
-  groupIconVitePlugin
+  groupIconVitePlugin,
+  localIconLoader
 } from 'vitepress-plugin-group-icons'
 
 // https://vitepress.dev/zh/reference/site-config
@@ -66,7 +67,19 @@ export default defineConfig({
         }
       ]
     },
-    plugins: [groupIconVitePlugin()]
+    plugins: [
+      groupIconVitePlugin({
+        customIcon: {
+          '.mdx': 'vscode-icons:file-type-light-mdx',
+          babel: 'vscode-icons:file-type-babel',
+          vitepress: localIconLoader(
+            import.meta.url,
+            './theme/components/vitepress.svg'
+          ),
+          unplugin: 'https://unplugin.unjs.io/logo_light.svg'
+        }
+      })
+    ]
   }
 })
 
