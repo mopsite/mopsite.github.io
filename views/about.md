@@ -19,8 +19,8 @@ const Paul = {
     'Git',
     'PhotoShop/Illustrator'
   ],
-  blog: 'https://mop233.github.io',
-  github: 'https://github.com/mopsite',
+  blog: 'https://mopsite.github.io',
+  github: 'https://github.com/mop233',
   description: '知识改变命运，奋斗成就人生'
 }
 ```
