@@ -18,7 +18,8 @@ export default defineConfig({
     config: md => {
       md.use(timeline)
       md.use(groupIconMdPlugin)
-    }
+    },
+    math: true
   },
 
   themeConfig: {
