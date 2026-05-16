@@ -2,7 +2,7 @@
 title: '位运算经典案例'
 date: '2026-05-012'
 category: '算法'
-tags: ['javascript', '位运算']
+tags: ['javascript', '位运算', '二进制']
 abstract: 'JavaScript 中使用位运算的一些经典案例。包含了权限管理、加密解密、颜色处理。'
 ---
 

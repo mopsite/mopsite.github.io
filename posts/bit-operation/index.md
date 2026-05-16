@@ -2,7 +2,7 @@
 title: 'JavaScript 位运算详解'
 date: '2026-05-07'
 category: '算法'
-tags: ['javascript', '位运算']
+tags: ['javascript', '位运算', '二进制']
 abstract: '从底层基础到实战案例，通过理解核心底层知识，一步步吃透位运算的原理。'
 ---
 
